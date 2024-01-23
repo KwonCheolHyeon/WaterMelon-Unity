@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void InitializeSphere(int initCount)
+    private void InitializeSphere(int initCount)// 초기 설정 용
     {
         for (int i = 0; i < initCount; i++)
         {
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private SpherePrefabScript CreateNewObject(int _type,float _size)
+    private SpherePrefabScript CreateNewObject(int _type,float _size)//풀링 오브젝트 부족할시 생성 및 초기 설정
     {
         var newObj = Instantiate(sphereObjectPrefab).GetComponent<SpherePrefabScript>();
         newObj.GetComponent<SpherePrefabScript>().SettingSphere(_type, _size);
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         return newObj;
     }
 
-    public SpherePrefabScript GetObject(int _type)
+    public SpherePrefabScript GetObject(int _type)//오브젝트 불러오기
     {
         float _size = GameManager.instance.sizes[_type];
         if (Instance.poolingObjectQueue.Count > 0)
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ReturnObject(SpherePrefabScript obj)
+    public void ReturnObject(SpherePrefabScript obj)//오브젝트 회수
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);

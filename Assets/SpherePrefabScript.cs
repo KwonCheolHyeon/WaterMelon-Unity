@@ -9,6 +9,9 @@ public class SpherePrefabScript : MonoBehaviour
     private int type = 0;
     private bool isBottom = false;
     private Transform targetToFollow;
+    public bool isMerge;
+
+    public int GetSphereType() { return type; }
     public void SetTarget(Transform target)
     {
         targetToFollow = target;
@@ -45,6 +48,19 @@ public class SpherePrefabScript : MonoBehaviour
             isBottom = true;
             GameManager.Instance.SphereBottomTrue();
         }
+
+        //SpherePrefabScript otherSphere = collision.gameObject.GetComponent<SpherePrefabScript>();
+
+        //if (otherSphere != null &&  !isMerge &&otherSphere.tag == this.tag )
+        //{
+        //    Vector3 spawnPosition = (this.transform.position + otherSphere.transform.position) / 2;
+           
+
+            
+        //    Destroy(this.gameObject);
+        //    Destroy(otherSphere.gameObject);
+        //}
+
     }
 
 
