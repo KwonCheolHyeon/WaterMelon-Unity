@@ -31,7 +31,11 @@ public class TongsMoveScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && heldSphere != null)
         {
-            // Release the sphere
+            float offsetX = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
+            float offsetZ = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
+            Vector3 newPosition = this.transform.position + new Vector3(offsetX, 0, offsetZ);
+            heldSphere.transform.position = newPosition;
+
             heldSphere.SetTarget(null);
             Rigidbody sphereRb = heldSphere.GetComponent<Rigidbody>();
             if (sphereRb != null)
@@ -57,6 +61,8 @@ public class TongsMoveScript : MonoBehaviour
                 // Clamp position
                 float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
                 float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
+               
+
                 transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
             }
         }
