@@ -22,6 +22,7 @@ public class SpherePrefabScript : MonoBehaviour
     private void OnDisable()
     {
         isBottom = false;
+        targetToFollow = null;
     }
     private void OnEnable()
     {
@@ -42,7 +43,7 @@ public class SpherePrefabScript : MonoBehaviour
         if (isBottom == false && (collision.gameObject.CompareTag("Case") || tagsToCheck.Contains(collision.gameObject.tag)))
         { 
             isBottom = true;
-            GameManager.Instance.SphereTriggerTrue();
+            GameManager.Instance.SphereBottomTrue();
         }
     }
 
@@ -54,7 +55,40 @@ public class SpherePrefabScript : MonoBehaviour
 
     public void SettingSphere(int _index,float _size) 
     {
-        
+        type = _index;
+        transform.localScale = new Vector3(_size, _size, _size);
+
+        switch (type) //타입 별로 세팅 해준다.(스킨 예상)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            default:
+                Debug.LogError("SettingSphere type 오류");
+                break;
+        }
+
     }
 
     public void SettingChangeSphere() 

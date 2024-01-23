@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
         Instance.poolingObjectQueue.Enqueue(obj);
     }
 
-    public void SphereTriggerTrue() 
+    public void SphereBottomTrue()//¹Ù´Ú¿¡ ´ê¾ÒÀ» ¶§
     {
         TongsMove.GetComponent<TongsMoveScript>().SettingSphereMove();
     }
