@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TongsMoveScript : MonoBehaviour
 {
+    public Camera mainCamera;
     private bool _isMoving = true;
     private float moveSpeed = 4.0f;
     private float minX, maxX, minZ, maxZ;
@@ -68,24 +69,30 @@ public class TongsMoveScript : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (_isMoving)
+        if (_isMoving && mainCamera != null)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
-             x += variableJoystick.Horizontal;
-             z += variableJoystick.Vertical;
+            x += variableJoystick.Horizontal;
+            z += variableJoystick.Vertical;
 
             if (x != 0 || z != 0)
             {
-                Vector3 movement = new Vector3(x, 0, z) * moveSpeed * Time.deltaTime;
+                Vector3 forward = mainCamera.transform.forward;
+                Vector3 right = mainCamera.transform.right;
+                forward.y = 0; // Keep the movement horizontal
+                right.y = 0;
+                forward.Normalize();
+                right.Normalize();
+
+                Vector3 movement = (forward * z + right * x) * moveSpeed * Time.deltaTime;
+
                 // Apply movement
                 transform.Translate(movement, Space.World);
 
                 // Clamp position
                 float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
                 float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
-
-
                 transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
             }
         }
