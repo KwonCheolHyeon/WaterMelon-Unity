@@ -15,6 +15,10 @@ public class TongsMoveScript : MonoBehaviour
     private System.Random random = new System.Random();
     //랜덤 시스템 관련
 
+    //라인 보여주는 함수
+    public LineRenderer lineRenderer;
+    public float rayLength = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +27,17 @@ public class TongsMoveScript : MonoBehaviour
         minZ = -1.9f;
         maxZ = 1.9f;
         rb = GetComponent<Rigidbody>();
-
+        lineRenderer = GetComponent<LineRenderer>();
         FirstSettingSphereMove();
     }
 
     private void Update()
     {
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = (heldSphere != null);
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && heldSphere != null)
         {
             float offsetX = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
@@ -44,11 +53,18 @@ public class TongsMoveScript : MonoBehaviour
             }
             heldSphere = null; // Clear the reference
         }
+
+        if (lineRenderer != null && lineRenderer.enabled)
+        {
+            DrawTrajectory();
+        }
+
     }
     void FixedUpdate()
     {
         if (_isMoving)
         {
+           
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
@@ -156,6 +172,23 @@ public class TongsMoveScript : MonoBehaviour
                 return 4;
             }
         }
-        
+    }
+
+    void DrawTrajectory()
+    {
+        RaycastHit hit;
+        Vector3 start = transform.position;
+        Vector3 direction = Vector3.down;  // Pointing the ray downwards
+
+        lineRenderer.SetPosition(0, start);
+
+        if (Physics.Raycast(start, direction, out hit, rayLength))
+        {
+            lineRenderer.SetPosition(1, hit.point);
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, start + direction * rayLength);
+        }
     }
 }
