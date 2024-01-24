@@ -1,0 +1,9 @@
+lastUpgrade=01014
+proj.pluginVersion=0.10.14
+proj.AppId=501469828736
+and.BundleId=com.waterdeerfactory.watermelon3d
+proj.classDir=Assets
+proj.ConstantsClassName=GPGSIds
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e501469828736%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.waterdeerfactory.watermelon3d%3c%2fstring%3e%0d%0a++%3c%21--achievement+score--%3e%0d%0a++%3cstring+name%3d%22achievement_score%22+translatable%3d%22false%22%3eCgkIgK25j8wOEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--achievement+two--%3e%0d%0a++%3cstring+name%3d%22achievement_two%22+translatable%3d%22false%22%3eCgkIgK25j8wOEAIQBA%3c%2fstring%3e%0d%0a++%3c%21--achievement+three--%3e%0d%0a++%3cstring+name%3d%22achievement_three%22+translatable%3d%22false%22%3eCgkIgK25j8wOEAIQBQ%3c%2fstring%3e%0d%0a++%3c%21--event+event--%3e%0d%0a++%3cstring+name%3d%22event_event%22+translatable%3d%22false%22%3eCgkIgK25j8wOEAIQBw%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+num--%3e%0d%0a++%3cstring+name%3d%22leaderboard_num%22+translatable%3d%22false%22%3eCgkIgK25j8wOEAIQBg%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=501469828736-uldqc0otb5vpl0tu0m8kff2ia7adv3qb.apps.googleusercontent.com
+android.SetupDone=true
