@@ -110,6 +110,25 @@ public class TongsMoveScript : MonoBehaviour
         }
     }
 
+    public void DropSphere() 
+    {
+        if (heldSphere != null)
+        {
+            float offsetX = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
+            float offsetZ = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
+            Vector3 newPosition = this.transform.position + new Vector3(offsetX, 0, offsetZ);
+            heldSphere.transform.position = newPosition;
+
+            heldSphere.SetTarget(null);
+            Rigidbody sphereRb = heldSphere.GetComponent<Rigidbody>();
+            if (sphereRb != null)
+            {
+                sphereRb.isKinematic = false; // Enable gravity (if Rigidbody is used)
+            }
+            heldSphere = null; // Clear the reference
+        }
+    }
+
     public void HoldSphere(SpherePrefabScript sphere)
     {
         if (heldSphere != null)
