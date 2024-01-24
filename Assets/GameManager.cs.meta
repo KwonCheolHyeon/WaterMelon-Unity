@@ -3,7 +3,10 @@ guid: 23f1deb2b4bfe72479840587f16f29db
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sphereObjectPrefab: {fileID: 7244257550385959477, guid: e38a39a26cc7cf246bd2b5a89786cfda,
+      type: 3}
+  - TongsMove: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

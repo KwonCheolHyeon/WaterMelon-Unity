@@ -15,6 +15,10 @@ public class TongsMoveScript : MonoBehaviour
     private System.Random random = new System.Random();
     //랜덤 시스템 관련
 
+    //라인 보여주는 함수
+    public LineRenderer lineRenderer;
+    public float rayLength = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +69,8 @@ public class TongsMoveScript : MonoBehaviour
 
                 transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
             }
+
+            DrawTrajectory();
         }
     }
 
@@ -156,6 +162,23 @@ public class TongsMoveScript : MonoBehaviour
                 return 4;
             }
         }
-        
+    }
+
+    void DrawTrajectory()
+    {
+        RaycastHit hit;
+        Vector3 start = transform.position;
+        Vector3 direction = transform.forward;
+
+        lineRenderer.SetPosition(0, start);
+
+        if (Physics.Raycast(start, direction, out hit, rayLength))
+        {
+            lineRenderer.SetPosition(1, hit.point);
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, start + direction * rayLength);
+        }
     }
 }

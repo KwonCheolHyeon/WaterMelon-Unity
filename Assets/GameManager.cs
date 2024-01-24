@@ -63,14 +63,13 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        float prevSize = 0.05f;
-        for (int index = 0; index < 9; index++)
+        float prevSize = 0.8f;
+        for (int index = 0; index < 11; index++)
         {
-            sizes[index] = prevSize + 0.25f;
+            sizes[index] = prevSize + 0.2f;
             prevSize = sizes[index];
         }
-        sizes[9] = 2.6f;
-        sizes[10] = 3.0f;
+
 
         InitializeSphere(10);
     }
@@ -105,6 +104,27 @@ public class GameManager : MonoBehaviour
 
     public SpherePrefabScript GetObject(int _type)//오브젝트 불러오기
     {
+
+        float _size = GameManager.instance.sizes[_type];
+        if (Instance.poolingObjectQueue.Count > 0)
+        {
+            var obj = Instance.poolingObjectQueue.Dequeue();
+            obj.GetComponent<SpherePrefabScript>().SettingSphere(_type, _size);
+            obj.transform.SetParent(null);
+            obj.gameObject.SetActive(true);
+            return obj;
+        }
+        else
+        {
+            var newObj = Instance.CreateNewObject(_type, _size);
+            newObj.gameObject.SetActive(true);
+            newObj.transform.SetParent(null);
+            return newObj;
+        }
+    }
+
+    public SpherePrefabScript GetLevelUpObject(int _type)//레벨업시에만 불러옴
+    {
         float _size = GameManager.instance.sizes[_type];
         if (Instance.poolingObjectQueue.Count > 0)
         {
@@ -125,6 +145,8 @@ public class GameManager : MonoBehaviour
 
     public void ReturnObject(SpherePrefabScript obj)//오브젝트 회수
     {
+        obj.GetComponent<Rigidbody>().useGravity = true; //HideSphereObject 꺼준 2개의 컴포넌트들을 다시 켜주고 active를 끔
+        obj.GetComponent<SphereCollider>().enabled = true;
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);
         Instance.poolingObjectQueue.Enqueue(obj);
