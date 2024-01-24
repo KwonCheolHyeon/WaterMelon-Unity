@@ -91,16 +91,16 @@ public class TongsMoveScript : MonoBehaviour
         }
 
     }
-
-        public void SettingSphereMove()
+    public void SettingSphereMove()
     {
-        if (heldSphere == null) 
+        if (heldSphere == null)
         {
             int type = GetRandomNumber();
             SpherePrefabScript sphere = GameManager.Instance.GetObject(type);
             HoldSphere(sphere);
         }
     }
+
     public void FirstSettingSphereMove()//첫번째만 쓰이는 용도
     {
         if (heldSphere == null)
