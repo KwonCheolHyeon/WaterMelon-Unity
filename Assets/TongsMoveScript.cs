@@ -10,14 +10,20 @@ public class TongsMoveScript : MonoBehaviour
     private float minX, maxX, minZ, maxZ;
     private Rigidbody rb;
     private SpherePrefabScript heldSphere = null;
+   
 
     //랜덤 시스템관련
     private System.Random random = new System.Random();
     //랜덤 시스템 관련
 
     //라인 보여주는 함수
-    public LineRenderer lineRenderer;
+    private LineRenderer lineRenderer;
     public float rayLength = 10f;
+    //라인을 보여주는 관련
+
+    //조이스틱 관련
+    public VariableJoystick variableJoystick;
+    //조이스틱 관련
 
     // Start is called before the first frame update
     void Start()
@@ -64,9 +70,10 @@ public class TongsMoveScript : MonoBehaviour
     {
         if (_isMoving)
         {
-           
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
+             x += variableJoystick.Horizontal;
+             z += variableJoystick.Vertical;
 
             if (x != 0 || z != 0)
             {
@@ -77,28 +84,48 @@ public class TongsMoveScript : MonoBehaviour
                 // Clamp position
                 float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
                 float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
-               
+
 
                 transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
             }
         }
-    }
 
+    }
     public void SettingSphereMove()
     {
-        if (heldSphere == null) 
+        if (heldSphere == null)
         {
             int type = GetRandomNumber();
             SpherePrefabScript sphere = GameManager.Instance.GetObject(type);
             HoldSphere(sphere);
         }
     }
+
     public void FirstSettingSphereMove()//첫번째만 쓰이는 용도
     {
         if (heldSphere == null)
         {
             SpherePrefabScript sphere = GameManager.Instance.GetObject(0);
             HoldSphere(sphere);
+        }
+    }
+
+    public void DropSphere() 
+    {
+        if (heldSphere != null)
+        {
+            float offsetX = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
+            float offsetZ = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
+            Vector3 newPosition = this.transform.position + new Vector3(offsetX, 0, offsetZ);
+            heldSphere.transform.position = newPosition;
+
+            heldSphere.SetTarget(null);
+            Rigidbody sphereRb = heldSphere.GetComponent<Rigidbody>();
+            if (sphereRb != null)
+            {
+                sphereRb.isKinematic = false; // Enable gravity (if Rigidbody is used)
+            }
+            heldSphere = null; // Clear the reference
         }
     }
 
