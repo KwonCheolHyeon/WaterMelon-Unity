@@ -27,12 +27,17 @@ public class TongsMoveScript : MonoBehaviour
         minZ = -1.9f;
         maxZ = 1.9f;
         rb = GetComponent<Rigidbody>();
-
+        lineRenderer = GetComponent<LineRenderer>();
         FirstSettingSphereMove();
     }
 
     private void Update()
     {
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = (heldSphere != null);
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && heldSphere != null)
         {
             float offsetX = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
@@ -48,11 +53,18 @@ public class TongsMoveScript : MonoBehaviour
             }
             heldSphere = null; // Clear the reference
         }
+
+        if (lineRenderer != null && lineRenderer.enabled)
+        {
+            DrawTrajectory();
+        }
+
     }
     void FixedUpdate()
     {
         if (_isMoving)
         {
+           
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
@@ -69,8 +81,6 @@ public class TongsMoveScript : MonoBehaviour
 
                 transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
             }
-
-            DrawTrajectory();
         }
     }
 
@@ -168,7 +178,7 @@ public class TongsMoveScript : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 start = transform.position;
-        Vector3 direction = transform.forward;
+        Vector3 direction = Vector3.down;  // Pointing the ray downwards
 
         lineRenderer.SetPosition(0, start);
 
