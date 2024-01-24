@@ -16,44 +16,44 @@ public class Test : MonoBehaviour
             log = "";
 
         if (GUILayout.Button("Login"))
-            GPGSBinder.Inst.Login((success, localUser) =>
+            GPGSBinderScript.Instance.Login((success, localUser) =>
             log = $"{success}, {localUser.userName}, {localUser.id}, {localUser.state}, {localUser.underage}");
 
         if (GUILayout.Button("Logout"))
-            GPGSBinder.Inst.Logout();
+            GPGSBinderScript.Instance.Logout();
 
         if (GUILayout.Button("SaveCloud"))
-            GPGSBinder.Inst.SaveCloud("mysave", "want data", success => log = $"{success}");
+            GPGSBinderScript.Instance.SaveCloud("mysave", "want data", success => log = $"{success}");
 
         if (GUILayout.Button("LoadCloud"))
-            GPGSBinder.Inst.LoadCloud("mysave", (success, data) => log = $"{success}, {data}");
+            GPGSBinderScript.Instance.LoadCloud("mysave", (success, data) => log = $"{success}, {data}");
 
         if (GUILayout.Button("DeleteCloud"))
-            GPGSBinder.Inst.DeleteCloud("mysave", success => log = $"{success}");
+            GPGSBinderScript.Instance.DeleteCloud("mysave", success => log = $"{success}");
 
         if (GUILayout.Button("ShowAchievementUI"))
-            GPGSBinder.Inst.ShowAchievementUI();
+            GPGSBinderScript.Instance.ShowAchievementUI();
 
         if (GUILayout.Button("UnlockAchievement_one"))
-            GPGSBinder.Inst.UnlockAchievement(GPGSIds.achievement_score, success => log = $"{success}");
+            GPGSBinderScript.Instance.UnlockAchievement(GPGSIds.achievement_score, success => log = $"{success}");
 
         if (GUILayout.Button("UnlockAchievement_two"))
-            GPGSBinder.Inst.UnlockAchievement(GPGSIds.achievement_two, success => log = $"{success}");
+            GPGSBinderScript.Instance.UnlockAchievement(GPGSIds.achievement_two, success => log = $"{success}");
 
         if (GUILayout.Button("IncrementAchievement_three"))
-            GPGSBinder.Inst.IncrementAchievement(GPGSIds.achievement_three, 1, success => log = $"{success}");
+            GPGSBinderScript.Instance.IncrementAchievement(GPGSIds.achievement_three, 1, success => log = $"{success}");
 
         if (GUILayout.Button("ShowAllLeaderboardUI"))
-            GPGSBinder.Inst.ShowAllLeaderboardUI();
+            GPGSBinderScript.Instance.ShowAllLeaderboardUI();
 
         if (GUILayout.Button("ShowTargetLeaderboardUI_num"))
-            GPGSBinder.Inst.ShowTargetLeaderboardUI(GPGSIds.leaderboard_num);
+            GPGSBinderScript.Instance.ShowTargetLeaderboardUI(GPGSIds.leaderboard_num);
 
         if (GUILayout.Button("ReportLeaderboard_num"))
-            GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard_num, 1000, success => log = $"{success}");
+            GPGSBinderScript.Instance.ReportLeaderboard(GPGSIds.leaderboard_num, 1000, success => log = $"{success}");
 
         if (GUILayout.Button("LoadAllLeaderboardArray_num"))
-            GPGSBinder.Inst.LoadAllLeaderboardArray(GPGSIds.leaderboard_num, scores =>
+            GPGSBinderScript.Instance.LoadAllLeaderboardArray(GPGSIds.leaderboard_num, scores =>
             {
                 log = "";
                 for (int i = 0; i < scores.Length; i++)
@@ -61,7 +61,7 @@ public class Test : MonoBehaviour
             });
 
         if (GUILayout.Button("LoadCustomLeaderboardArray_num"))
-            GPGSBinder.Inst.LoadCustomLeaderboardArray(GPGSIds.leaderboard_num, 10,
+            GPGSBinderScript.Instance.LoadCustomLeaderboardArray(GPGSIds.leaderboard_num, 10,
                 GooglePlayGames.BasicApi.LeaderboardStart.PlayerCentered, GooglePlayGames.BasicApi.LeaderboardTimeSpan.Daily, (success, scoreData) =>
                 {
                     log = $"{success}\n";
@@ -71,16 +71,16 @@ public class Test : MonoBehaviour
                 });
 
         if (GUILayout.Button("IncrementEvent_event"))
-            GPGSBinder.Inst.IncrementEvent(GPGSIds.event_event, 1);
+            GPGSBinderScript.Instance.IncrementEvent(GPGSIds.event_event, 1);
 
         if (GUILayout.Button("LoadEvent_event"))
-            GPGSBinder.Inst.LoadEvent(GPGSIds.event_event, (success, iEvent) =>
+            GPGSBinderScript.Instance.LoadEvent(GPGSIds.event_event, (success, iEvent) =>
             {
                 log = $"{success}, {iEvent.Name}, {iEvent.CurrentCount}";
             });
 
         if (GUILayout.Button("LoadAllEvent"))
-            GPGSBinder.Inst.LoadAllEvent((success, iEvents) =>
+            GPGSBinderScript.Instance.LoadAllEvent((success, iEvents) =>
             {
                 log = $"{success}\n";
                 foreach (var iEvent in iEvents)
