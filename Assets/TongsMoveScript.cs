@@ -210,19 +210,40 @@ public class TongsMoveScript : MonoBehaviour
 
     void DrawTrajectory()
     {
-        RaycastHit hit;
         Vector3 start = transform.position;
-        Vector3 direction = Vector3.down;  // Pointing the ray downwards
-
+        Vector3 direction = Vector3.down;
         lineRenderer.SetPosition(0, start);
 
-        if (Physics.Raycast(start, direction, out hit, rayLength))
+        if (Physics.Raycast(start, direction, out RaycastHit hit, rayLength))
         {
+            SetLineRendererGradientAtPoint(hit.distance / rayLength);
             lineRenderer.SetPosition(1, hit.point);
         }
         else
         {
+            ResetLineRendererGradient();
             lineRenderer.SetPosition(1, start + direction * rayLength);
         }
     }
+
+    void SetLineRendererGradientAtPoint(float relativePoint)
+    {
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.red, relativePoint), new GradientColorKey(Color.red, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, relativePoint), new GradientAlphaKey(1.0f, 1.0f) }
+        );
+        lineRenderer.colorGradient = gradient;
+    }
+
+    void ResetLineRendererGradient()
+    {
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+        );
+        lineRenderer.colorGradient = gradient;
+    }
+
 }
