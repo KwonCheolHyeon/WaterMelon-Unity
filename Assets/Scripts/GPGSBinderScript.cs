@@ -6,44 +6,23 @@ using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
 using GooglePlayGames.BasicApi.Events;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 
-public class GPGSBinderScript : MonoBehaviour
+
+
+public class GPGSBinderScript
 {
-    private static GPGSBinderScript instance;
-   
+    private static GPGSBinderScript instance = new GPGSBinderScript();
+    public static GPGSBinderScript Instance => instance;
+
+
     ISavedGameClient SavedGame =>
         PlayGamesPlatform.Instance.SavedGame;
 
     IEventsClient Events =>
         PlayGamesPlatform.Instance.Events;
 
-    public static GPGSBinderScript Instance
-    {
-        get
-        {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
-        }
-    }
-
-    private void Awake()
-    {
-        if (null == instance)
-        {
-            instance = this;
-
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
 
     void Init()
     {
@@ -57,10 +36,14 @@ public class GPGSBinderScript : MonoBehaviour
     public void Login(Action<bool, UnityEngine.SocialPlatforms.ILocalUser> onLoginSuccess = null)
     {
         Init();
+
         PlayGamesPlatform.Instance.Authenticate(SignInInteractivity.CanPromptAlways, (success) =>
         {
             onLoginSuccess?.Invoke(success == SignInStatus.Success, Social.localUser);
         });
+
+        // 로그인 후 플레이 화면을 씬 전환
+        SceneManager.LoadScene(1);
     }
 
     public void Logout()
@@ -71,7 +54,7 @@ public class GPGSBinderScript : MonoBehaviour
 
     public void SaveCloud(string fileName, string saveData, Action<bool> onCloudSaved = null)
     {
-        SavedGame.OpenWithAutomaticConflictResolution(fileName, DataSource.ReadCacheOrNetwork,
+        PlayGamesPlatform.Instance.SavedGame.OpenWithAutomaticConflictResolution(fileName, DataSource.ReadCacheOrNetwork,
             ConflictResolutionStrategy.UseLastKnownGood, (status, game) =>
             {
                 if (status == SavedGameRequestStatus.Success)
@@ -123,8 +106,11 @@ public class GPGSBinderScript : MonoBehaviour
     }
 
 
-    public void ShowAchievementUI() =>
+    public void ShowAchievementUI()
+    {
         Social.ShowAchievementsUI();
+
+    }
 
     public void UnlockAchievement(string gpgsId, Action<bool> onUnlocked = null) =>
         Social.ReportProgress(gpgsId, 100, success => onUnlocked?.Invoke(success));
@@ -176,4 +162,24 @@ public class GPGSBinderScript : MonoBehaviour
         });
     }
 
+    //public void AddScore()
+    //{
+    //    score += 1;
+    //    scoreText.text = score.ToString();
+
+    //    // 리더보드 추가
+    //    PlayGamesPlatform.Instance.ReportScore(score,GPGSIds.achievement_score,(bool success) => { });
+    //}
+
+    //public void IncrementGPGSAchievement()
+    //{
+    //    // 단계별 업적 증가
+    //    PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_two, 1, (bool success) => { });
+    //}
+
+    //public void UnlockingGPGSAchievement()
+    //{
+    //    // 업적 잠금 해제 및 공개
+    //    PlayGamesPlatform.Instance.UnlockAchievement(GPGSIds.achievement_three, (bool success) => { });
+    //}
 }

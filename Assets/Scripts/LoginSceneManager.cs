@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
-public class Test : MonoBehaviour
+public class LoginSceneManager : MonoBehaviour
 {
     string log;
+
+    int score = 0;
 
 
     void OnGUI()
@@ -15,21 +18,21 @@ public class Test : MonoBehaviour
         if (GUILayout.Button("ClearLog"))
             log = "";
 
-        if (GUILayout.Button("Login"))
-            GPGSBinderScript.Instance.Login((success, localUser) =>
-            log = $"{success}, {localUser.userName}, {localUser.id}, {localUser.state}, {localUser.underage}");
+        //if (GUILayout.Button("Login"))
+        //    GPGSBinderScript.Instance.Login((success, localUser) =>
+        //    log = $"{success}, {localUser.userName}, {localUser.id}, {localUser.state}, {localUser.underage}");
 
-        if (GUILayout.Button("Logout"))
-            GPGSBinderScript.Instance.Logout();
+        //if (GUILayout.Button("Logout"))
+        //    GPGSBinderScript.Instance.Logout();
 
-        if (GUILayout.Button("SaveCloud"))
-            GPGSBinderScript.Instance.SaveCloud("mysave", "want data", success => log = $"{success}");
+        //if (GUILayout.Button("SaveCloud"))
+        //    GPGSBinderScript.Instance.SaveCloud("mysave", "want data", success => log = $"{success}");
 
-        if (GUILayout.Button("LoadCloud"))
-            GPGSBinderScript.Instance.LoadCloud("mysave", (success, data) => log = $"{success}, {data}");
+        //if (GUILayout.Button("LoadCloud"))
+        //    GPGSBinderScript.Instance.LoadCloud("mysave", (success, data) => log = $"{success}, {data}");
 
-        if (GUILayout.Button("DeleteCloud"))
-            GPGSBinderScript.Instance.DeleteCloud("mysave", success => log = $"{success}");
+        //if (GUILayout.Button("DeleteCloud"))
+        //    GPGSBinderScript.Instance.DeleteCloud("mysave", success => log = $"{success}");
 
         if (GUILayout.Button("ShowAchievementUI"))
             GPGSBinderScript.Instance.ShowAchievementUI();
@@ -88,5 +91,25 @@ public class Test : MonoBehaviour
             });
 
         GUILayout.Label(log);
+    }
+
+    // Login_Button OnClick에서 참조
+    public void ClickLogIn()
+    {
+        GPGSBinderScript.Instance.Login((success, localUser) =>
+            log = $"{success}, {localUser.userName}, {localUser.id}, {localUser.state}, {localUser.underage}");
+    }
+
+    // Logout_Button OnClick에서 참조
+    public void ClickLogOut()
+    {
+        GPGSBinderScript.Instance.Logout();
+    }
+
+    public void AddScore()
+    {
+        score += 1;
+        // 리더보드 추가
+        GPGSBinderScript.Instance.ReportLeaderboard(GPGSIds.leaderboard_num, score, (bool success) => { });
     }
 }
