@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SpherePrefabScript : MonoBehaviour
 {
-    private List<string> tagsToCheck = new List<string> { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven" };
+    private List<string> tagsToCheck = new List<string> { "zero","one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
     private int type = 0;
     private bool isBottom = false;
     private Transform targetToFollow;
@@ -78,7 +78,7 @@ public class SpherePrefabScript : MonoBehaviour
         {
             SpherePrefabScript otherSphere = collision.gameObject.GetComponent<SpherePrefabScript>();
 
-            if (otherSphere != null && otherSphere.tag == this.tag && !isMerge && !otherSphere.isMerge && this.tag != "eleven")
+            if (otherSphere != null && otherSphere.tag == this.tag && !isMerge && !otherSphere.isMerge && this.tag != "ten")
             {
                 float meX = transform.position.x;
                 float meY = transform.position.y;
@@ -89,10 +89,8 @@ public class SpherePrefabScript : MonoBehaviour
 
                 if (meY < otherY || (meY == otherY && meX > otherX) || (meY == otherY && meZ > otherZ)) //y축이 다를때 , y축이 같으면 x축이 다를때,y축이 같고 x축도 같으면 z축이 다를때
                 {
-
                     otherSphere.HideSphereObject(transform.position);
                     SettingChangeSphere();
-
                 }
 
             }
@@ -137,8 +135,6 @@ public class SpherePrefabScript : MonoBehaviour
                 break;
             case 10:
                 break;
-            case 11:
-                break;
             default:
                 Debug.LogError("SettingSphere type 오류");
                 break;
@@ -149,6 +145,8 @@ public class SpherePrefabScript : MonoBehaviour
     public void SettingChangeSphere() 
     {
         isMerge = true;
+
+        GameManager.Instance.SetGameScore(type);
 
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
@@ -181,8 +179,6 @@ public class SpherePrefabScript : MonoBehaviour
             case 9:
                 break;
             case 10:
-                break;
-            case 11:
                 break;
             default:
                 Debug.LogError("SettingSphere type 오류");

@@ -16,6 +16,7 @@ TagManager:
   - ten
   - eleven
   - Case
+  - zero
   layers:
   - Default
   - TransparentFX
