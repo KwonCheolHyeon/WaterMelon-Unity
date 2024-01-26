@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TongsMoveScript : MonoBehaviour
 {
@@ -25,6 +27,12 @@ public class TongsMoveScript : MonoBehaviour
     //조이스틱 관련
     public VariableJoystick variableJoystick;
     //조이스틱 관련
+
+    //다음 나올 과일을 보여주는 관련
+    [SerializeField]
+    private TextMeshProUGUI textMeshProUGUI;
+    private int nextTypeSphere;
+    //다음 나올 과일을 보여주는 관련
 
     // Start is called before the first frame update
     void Start()
@@ -98,13 +106,16 @@ public class TongsMoveScript : MonoBehaviour
         }
 
     }
-    public void SettingSphereMove()
+    private void SettingSphereMove()
     {
         if (heldSphere == null)
         {
-            int type = GetRandomNumber();
-            SpherePrefabScript sphere = GameManager.Instance.GetObject(type);
+            SpherePrefabScript sphere = GameManager.Instance.GetObject(nextTypeSphere);
             HoldSphere(sphere);
+        }
+        else 
+        {
+            Debug.Log("GAMEOVER?");
         }
     }
 
@@ -244,6 +255,14 @@ public class TongsMoveScript : MonoBehaviour
             new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
         );
         lineRenderer.colorGradient = gradient;
+    }
+
+    public void NextSphererInforMation() // 다음 구체에 대한 정보
+    {
+        SettingSphereMove();
+
+        nextTypeSphere = GetRandomNumber();
+        textMeshProUGUI.text = nextTypeSphere + ": Next";
     }
 
 }
