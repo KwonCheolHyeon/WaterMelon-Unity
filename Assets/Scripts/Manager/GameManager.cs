@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     //게임 오버 관련
     private bool gameoverState = false;
+    [SerializeField]
+    private GameObject gameOverPanel;
     //
 
     //저장관련
@@ -345,6 +347,7 @@ public class GameManager : MonoBehaviour
         if(gameoverState == false) 
         {
             gameoverState = true;
+            gameOverPanel.SetActive(true);
         }
     }
 }
