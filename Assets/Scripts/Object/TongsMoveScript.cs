@@ -13,7 +13,9 @@ public class TongsMoveScript : MonoBehaviour
     private float minX, maxX, minZ, maxZ;
     private Rigidbody rb;
     private SpherePrefabScript heldSphere = null;
-   
+
+    //연속 떨구는거 딜레이 주기 위한 bool값
+    private bool isReleasing = false;
 
     //랜덤 시스템관련
     private System.Random random = new System.Random();
@@ -37,10 +39,10 @@ public class TongsMoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        minX = -1.9f;
-        maxX = 1.9f;
-        minZ = -1.9f;
-        maxZ = 1.9f;
+        minX = -1.8f;
+        maxX = 1.8f;
+        minZ = -1.8f;
+        maxZ = 1.8f;
         rb = GetComponent<Rigidbody>();
         lineRenderer = GetComponent<LineRenderer>();
         FirstSettingSphereMove();
@@ -53,20 +55,9 @@ public class TongsMoveScript : MonoBehaviour
             lineRenderer.enabled = (heldSphere != null);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && heldSphere != null)
+        if (Input.GetKeyDown(KeyCode.Space) && heldSphere != null && !isReleasing)
         {
-            float offsetX = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
-            float offsetZ = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
-            Vector3 newPosition = this.transform.position + new Vector3(offsetX, 0, offsetZ);
-            heldSphere.transform.position = newPosition;
-
-            heldSphere.SetTarget(null);
-            Rigidbody sphereRb = heldSphere.GetComponent<Rigidbody>();
-            if (sphereRb != null)
-            {
-                sphereRb.isKinematic = false; // Enable gravity (if Rigidbody is used)
-            }
-            heldSphere = null; // Clear the reference
+            StartCoroutine(ReleaseSphereWithDelay());
         }
 
         if (lineRenderer != null && lineRenderer.enabled)
@@ -106,16 +97,34 @@ public class TongsMoveScript : MonoBehaviour
         }
 
     }
+
+    void OnCollisionEnter(Collision collision) 
+    {
+        if (collision.gameObject != null && heldSphere != null && collision.gameObject != heldSphere.gameObject)
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
+
+
+    private IEnumerator SettingSphereMoveWithDelay()
+    {
+        yield return new WaitForSeconds(0.2f); // Delay of 0.2 seconds
+
+        SpherePrefabScript sphere = GameManager.Instance.GetObject(nextTypeSphere);
+        HoldSphere(sphere);
+
+    }
     private void SettingSphereMove()
     {
         if (heldSphere == null)
         {
-            SpherePrefabScript sphere = GameManager.Instance.GetObject(nextTypeSphere);
+            SpherePrefabScript sphere = GameManager.Instance.GetObject(4);
             HoldSphere(sphere);
         }
-        else 
+        else
         {
-            Debug.Log("GAMEOVER?");
+            GameManager.Instance.GameOver();
         }
     }
 
@@ -143,6 +152,13 @@ public class TongsMoveScript : MonoBehaviour
             {
                 sphereRb.isKinematic = false; // Enable gravity (if Rigidbody is used)
             }
+
+            SphereCollider sphereCollider = heldSphere.GetComponent<SphereCollider>();
+            if (sphereCollider != null)
+            {
+                sphereCollider.enabled = true;
+            }
+
             heldSphere = null; // Clear the reference
         }
     }
@@ -263,6 +279,34 @@ public class TongsMoveScript : MonoBehaviour
 
         nextTypeSphere = GetRandomNumber();
         textMeshProUGUI.text = nextTypeSphere + ": Next";
+    }
+
+    private IEnumerator ReleaseSphereWithDelay()
+    {
+        isReleasing = true;
+        yield return new WaitForSeconds(0.1f); // Delay of 0.2 seconds
+
+        // Existing logic for releasing the sphere
+        float offsetX = (float)(random.NextDouble() * 0.02 - 0.01);
+        float offsetZ = (float)(random.NextDouble() * 0.02 - 0.01);
+        Vector3 newPosition = this.transform.position + new Vector3(offsetX, 0, offsetZ);
+        heldSphere.transform.position = newPosition;
+
+        heldSphere.SetTarget(null);
+        Rigidbody sphereRb = heldSphere.GetComponent<Rigidbody>();
+        if (sphereRb != null)
+        {
+            sphereRb.isKinematic = false;
+        }
+        SphereCollider sphereCollider = heldSphere.GetComponent<SphereCollider>();
+        if (sphereCollider != null)
+        {
+            sphereCollider.enabled = true;
+        }
+
+        heldSphere = null;
+
+        isReleasing = false; // Reset the flag
     }
 
 }

@@ -17,6 +17,7 @@ TagManager:
   - eleven
   - Case
   - zero
+  - GameOverTag
   layers:
   - Default
   - TransparentFX
