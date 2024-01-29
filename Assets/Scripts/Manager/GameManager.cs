@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 using System.Text;
 
 public class GameManager : MonoBehaviour
@@ -36,11 +37,16 @@ public class GameManager : MonoBehaviour
     private int gameScore = 0;
     //게임 점수 관련
 
+    //게임 오버 관련
+    private bool gameoverState = false;
+    [SerializeField]
+    private GameObject gameOverPanel;
+    //
+
     //저장관련
     public int score;
     private string filePath;
     private string encryKey = "qlalfqjsgh";
-
     //저장 관련
 
     public int Score // Property
@@ -53,6 +59,12 @@ public class GameManager : MonoBehaviour
     {
         get { return isTongs; }
         set { isTongs = value; }
+    }
+
+    public bool GameOverState
+    {
+        get { return gameoverState; }
+        set { gameoverState = value; }
     }
 
     public static GameManager Instance
@@ -219,11 +231,14 @@ public class GameManager : MonoBehaviour
         newObj.GetComponent<SpherePrefabScript>().SettingSphere(_type, _size);
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform);
+        newObj.GetComponent<SphereCollider>().enabled = false;
         return newObj;
     }
 
     public SpherePrefabScript GetObject(int _type)//오브젝트 불러오기
     {
+        if (gameoverState)
+            return null;
 
         float _size = GameManager.instance.sizes[_type];
         if (Instance.poolingObjectQueue.Count > 0)
@@ -266,7 +281,8 @@ public class GameManager : MonoBehaviour
     public void ReturnObject(SpherePrefabScript obj)//오브젝트 회수
     {
         obj.GetComponent<Rigidbody>().useGravity = true; //HideSphereObject 꺼준 2개의 컴포넌트들을 다시 켜주고 active를 끔
-        obj.GetComponent<SphereCollider>().enabled = true;
+       
+        obj.GetComponent<SphereCollider>().enabled = false;
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);
         Instance.poolingObjectQueue.Enqueue(obj);
@@ -324,4 +340,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void GameOver() 
+    {
+        if(gameoverState == false) 
+        {
+            gameoverState = true;
+            gameOverPanel.SetActive(true);
+        }
+    }
 }

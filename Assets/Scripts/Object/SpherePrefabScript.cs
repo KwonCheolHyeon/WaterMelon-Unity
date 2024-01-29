@@ -15,6 +15,7 @@ public class SpherePrefabScript : MonoBehaviour
     private Vector3 nextScale = new Vector3(0.2f,0.2f,0.2f);
     private Rigidbody rigid;
     private SphereCollider sphereCol;
+    private bool gameOverRun = false;
     public bool isMerge
     {
         get
@@ -68,6 +69,11 @@ public class SpherePrefabScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (GameManager.Instance.GameOverState)
+        {
+            return;
+        }
+
         if (isBottom == false && (collision.gameObject.CompareTag("Case") || tagsToCheck.Contains(collision.gameObject.tag)))
         {
             isBottom = true;
@@ -92,10 +98,16 @@ public class SpherePrefabScript : MonoBehaviour
                     otherSphere.HideSphereObject(transform.position);
                     SettingChangeSphere();
                 }
-
             }
         }
-       
+
+        if ((collision.gameObject.CompareTag("GameOverTag")))
+        {
+            GameManager.Instance.GameOver();
+            GameOverState();
+            Debug.Log("GAMEover");
+        }
+
 
     }
 
@@ -195,21 +207,32 @@ public class SpherePrefabScript : MonoBehaviour
 
         StartCoroutine(HideRoutine(targetPos));
     }
-
-    IEnumerator HideRoutine(Vector3 targetPos) 
+    IEnumerator HideRoutine(Vector3 targetPos)
     {
-        int frameCount = 0;
-        while (frameCount< 30) //흡수 하는 느낌을 주기 위해
+        float duration = 0.1f; // Adjust this value to control the duration of the lerping
+        float elapsedTime = 0.0f;
+
+        Vector3 startPosition = transform.position;
+
+        while (elapsedTime < duration)
         {
-            frameCount++;
-            transform.position = Vector3.Lerp(transform.position, targetPos, 0.2f);
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration); // Ensure t stays within [0, 1]
+
+            transform.position = Vector3.Lerp(startPosition, targetPos, t);
             yield return null;
         }
-        
+
         isMerge = false;
         GameManager.Instance.ReturnObject(this);
     }
 
+    private void GameOverState()
+    {
+        // Stop all collision by disabling the Rigidbody and Collider
+        rigid.isKinematic = true;
+        sphereCol.enabled = false;
+    }
 
 
 
