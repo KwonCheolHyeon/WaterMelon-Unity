@@ -23,7 +23,6 @@ public class GPGSBinderScript
     IEventsClient Events =>
         PlayGamesPlatform.Instance.Events;
 
-
     void Init()
     {
         var config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
@@ -43,7 +42,7 @@ public class GPGSBinderScript
         });
 
         // 로그인 후 플레이 화면을 씬 전환
-        SceneManager.LoadScene(1);
+        UtisScript.LoadScene(SceneNames.GameScene);
     }
 
     public void Logout()

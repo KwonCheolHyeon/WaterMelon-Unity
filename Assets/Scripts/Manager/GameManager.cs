@@ -4,11 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
-using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
-using static UnityEditor.Progress;
 using System.IO;
-using UnityEngine.UI;
-using System.Security.Cryptography;
 using System.Text;
 
 public class GameManager : MonoBehaviour
