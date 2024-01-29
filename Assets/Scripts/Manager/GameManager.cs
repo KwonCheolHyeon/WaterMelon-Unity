@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     private bool gameoverState = false;
     [SerializeField]
     private GameObject gameOverPanel;
+    [SerializeField]
+    private Camera camera;
     //
 
     //저장관련
@@ -347,6 +349,7 @@ public class GameManager : MonoBehaviour
         {
             gameoverState = true;
             gameOverPanel.SetActive(true);
+            camera.GetComponent<CameraMoveScript>().GameOverCameraMove();
         }
     }
 }
