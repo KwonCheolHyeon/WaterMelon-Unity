@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
             prevSize = sizes[index];
         }
 
+        gameOverPanel.SetActive(false);
 
         InitializeSphere(100);
     }
