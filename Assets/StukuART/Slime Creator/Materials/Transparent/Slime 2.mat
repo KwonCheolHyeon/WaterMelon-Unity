@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7378889088338450388
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Slime 2
+  m_Shader: {fileID: -6465566751694194690, guid: 9f90127af20138b4bb838e9e601d6a93, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Eyes_Texture:
+        m_Texture: {fileID: 2800000, guid: 95a4407af9e56224a95b4628bfaf8b2c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_0355cbc84e18449bbbc704c42968b0a7_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_25d3d6f53a724b5fb839ec3e2de6c81d_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 4351fc2059a640d4384d7d59b2679a88, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_bb0b1e46948443b984d97b83fc1ae66f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 3cb922779ae05d144a5a61a8d74b5544, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _Bubbles_Alpha: 0.762
+    - _Bubbles_Power: 0.82
+    - _Bubbles_Speed: 0.08
+    - _BumpScale: 1
+    - _Contrast_of_Contrast: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _Dirt_Alpha: 0
+    - _DstBlend: 0
+    - _Emission_Power: 1
+    - _Eyes_Alpha: 0
+    - _Fresnel: 1.6
+    - _Fresnel_Contrast: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Mask_Alpha: 1
+    - _Mask_Invert: 0
+    - _Mask_Power: 0.334
+    - _Metallic: 0
+    - _Mode: 0
+    - _Noise_Power: 0.541
+    - _Noise_Scale: 11.9
+    - _Noise_Speed: 0.58
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Smoothness: 0.815
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Transparent_Outer: 1
+    - _Transparrent_Inner: 0
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0, g: 0.4908738, b: 1, a: 1}
+    - _Dirt_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Eyes_Color: {r: 0, g: 0.04706648, b: 0.24528301, a: 0}
+    - _Fresnel_Color: {r: 0, g: 0.07450986, b: 1, a: 0}
+    - _Mask_Color: {r: 0.011055946, g: 0, b: 1, a: 0}
+  m_BuildTextureStacks: []
