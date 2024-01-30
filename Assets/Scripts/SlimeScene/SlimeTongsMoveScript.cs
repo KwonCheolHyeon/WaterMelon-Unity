@@ -16,24 +16,19 @@ public class SlimeTongsMoveScript : MonoBehaviour
 
     //랜덤 시스템관련
     private System.Random random = new System.Random();
-    //랜덤 시스템 관련
 
     //라인 보여주는 함수
     private LineRenderer lineRenderer;
     public float rayLength = 10f;
-    //라인을 보여주는 관련
 
     //조이스틱 관련
     public VariableJoystick variableJoystick;
-    //조이스틱 관련
 
     //다음 나올 과일을 보여주는 관련
     [SerializeField]
     private TextMeshProUGUI textMeshProUGUI;
     private int nextTypeSlime;
-    //다음 나올 과일을 보여주는 관련
 
-    // Start is called before the first frame update
     void Start()
     {
         minX = -1.8f;

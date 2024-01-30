@@ -15,18 +15,14 @@ public class SlimeGameManager : MonoBehaviour
     [SerializeField]
     private GameObject slimePrefab;
     Queue<SlimePrefabScript> poolingObjectQueue = new Queue<SlimePrefabScript>();
-    //풀링 오브젝트 관련
 
     //오브젝트 세팅 관련
     private float[] sizes = new float[11];
-
-    //오브젝트 세팅 관련
 
     //집게 세팅 관련
     [SerializeField]
     private GameObject TongsMove;
     private bool isTongs = false;
-    //집게 세팅 관련
 
     //게임 점수 관련
     [SerializeField]
@@ -34,7 +30,6 @@ public class SlimeGameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI hightScroreText;
     private int gameScore = 0;
-    //게임 점수 관련
 
     //게임 오버 관련
     private bool gameoverState = false;
