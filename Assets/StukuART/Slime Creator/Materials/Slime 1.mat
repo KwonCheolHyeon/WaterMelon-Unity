@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Slime 1
-  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,7 +30,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1950
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -91,35 +92,35 @@ Material:
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _Bubbles_Alpha: 0.746
-    - _Bubbles_Power: 0.77
-    - _Bubbles_Speed: 0.032
+    - _BUILTIN_QueueOffset: -50
+    - _Bubbles_Alpha: 0.612
+    - _Bubbles_Power: 0
+    - _Bubbles_Speed: 0.0261
     - _BumpScale: 1
     - _Contrast_of_Contrast: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Dirt_Alpha: 0
+    - _Dirt_Alpha: 0.549
     - _DstBlend: 0
-    - _Emission_Power: 1
+    - _Emission_Power: 3
     - _Eyes_Alpha: 1
     - _Float: 1
-    - _Fresnel: 1.6
-    - _Fresnel_Contrast: 1
+    - _Fresnel: 0
+    - _Fresnel_Contrast: 20
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Mask_Alpha: 0
+    - _Mask_Alpha: 0.51
     - _Mask_Invert: 0
-    - _Mask_Power: 0.334
+    - _Mask_Power: 0.474
     - _Metallic: 0
     - _Mode: 0
-    - _Noise_Power: 0.541
-    - _Noise_Scale: 11.9
+    - _Noise_Power: 0.558
+    - _Noise_Scale: 45.5
     - _Noise_Speed: 0.58
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Smoothness: 0.815
+    - _Smoothness: 0.485
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
