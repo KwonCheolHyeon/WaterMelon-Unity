@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SlimeScene.unity
     guid: 09c261bb3ffced445a9e56d296b8223d
+  - enabled: 1
+    path: Assets/Scenes/SpaceGameScene.unity
+    guid: a00aee201d8a09245b832f4e5f598b3d
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 5490ebe80343d7043bce58b08631c35d,
       type: 2}

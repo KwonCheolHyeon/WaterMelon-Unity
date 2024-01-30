@@ -40,8 +40,7 @@ public class GameManager : MonoBehaviour
     private bool gameoverState = false;
     [SerializeField]
     private GameObject gameOverPanel;
-    [SerializeField]
-    private Camera camera;
+
     private CameraMoveScript cameraScr;
     //
 
@@ -100,7 +99,7 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverPanel.SetActive(false);
-        cameraScr = camera.GetComponent<CameraMoveScript>();
+        cameraScr = Camera.main.GetComponent<CameraMoveScript>();
         InitializeSphere(100);
     }
 

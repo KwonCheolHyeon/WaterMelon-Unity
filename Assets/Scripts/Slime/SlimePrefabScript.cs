@@ -13,6 +13,7 @@ public class SlimePrefabScript : MonoBehaviour
     private Rigidbody rigid;
     private MeshCollider meshColl;
 
+    // 단계별 머티리얼을 저장하는 List 변수
     [SerializeField]
     private List<Material> materials;
 
@@ -118,7 +119,9 @@ public class SlimePrefabScript : MonoBehaviour
         this.tag = tagsToCheck[_index];
         transform.localScale = new Vector3(_size, _size, _size);
 
+        // type 값에 맞는 머티리얼 적용
         GetComponent<MeshRenderer>().material = materials[type];
+
         switch (type) //타입 별로 세팅 해준다.(스킨 예상)
         {
             case 0:
@@ -163,7 +166,10 @@ public class SlimePrefabScript : MonoBehaviour
         this.tag = tagsToCheck[type];
 
         transform.localScale += nextScale;
+
+        // type 값에 맞는 머티리얼 적용
         GetComponent<MeshRenderer>().material = materials[type];
+
         switch (type) //타입 별로 세팅 해준다.(스킨 예상)
         {
             case 0:

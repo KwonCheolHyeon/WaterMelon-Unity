@@ -55,7 +55,7 @@ public class CameraMoveScript : MonoBehaviour
     }
     public IEnumerator CameraShake(float duration, float magnitude)
     {
-        Vector3 originalPos = camera.transform.position;
+        Vector3 originalPos = GetComponent<Camera>().transform.position;
         float elapsed = 0.0f;
 
         while (elapsed < duration)
@@ -64,13 +64,13 @@ public class CameraMoveScript : MonoBehaviour
             float y = Random.Range(-1f, 1f) * magnitude;
           
 
-            camera.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+            GetComponent<Camera>().transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        camera.transform.position = vectors[currentIndex];
+        GetComponent<Camera>().transform.position = vectors[currentIndex];
     }
 
 }
