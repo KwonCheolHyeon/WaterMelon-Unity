@@ -21,7 +21,6 @@ public class SlimePrefabScript : MonoBehaviour
     private bool _isMerge = false;
     private bool isBottom = false;
 
-
     public bool isMerge
     {
         get
@@ -51,6 +50,12 @@ public class SlimePrefabScript : MonoBehaviour
 
     private void Start()
     {
+        // 랜덤한 회전 값을 생성합니다.
+        Vector3 randomRotation = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+
+        // 게임 오브젝트의 회전 값을 설정합니다.
+        transform.rotation = Quaternion.Euler(randomRotation);
+
         rigid.mass = 5f;
     }
 
@@ -110,7 +115,7 @@ public class SlimePrefabScript : MonoBehaviour
             Debug.Log("GAMEover");
         }
 
-        rigid.mass = 0.1f;
+        rigid.mass = 1.0f;
     }
 
     private void OnCollisionStay(Collision collision)
