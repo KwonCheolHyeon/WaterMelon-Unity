@@ -16,6 +16,7 @@ public class SpherePrefabScript : MonoBehaviour
     private Rigidbody rigid;
     private SphereCollider sphereCol;
     private bool gameOverRun = false;
+
     public bool isMerge
     {
         get

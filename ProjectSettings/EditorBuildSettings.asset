@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/LoginScene.unity
     guid: b741488e7ca2338498e7eaae7f07ef26
   - enabled: 1
+    path: Assets/Scenes/SelectScene.unity
+    guid: 0ae9f320b5274f84d92491b518c85745
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 8dce581bef5818d49b32a01e65f3f61c
+  - enabled: 1
+    path: Assets/Scenes/SlimeScene.unity
+    guid: 09c261bb3ffced445a9e56d296b8223d
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 5490ebe80343d7043bce58b08631c35d,
       type: 2}

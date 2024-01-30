@@ -41,11 +41,8 @@ public class SlimeGameManager : MonoBehaviour
     [SerializeField]
     private GameObject gameOverPanel;
 
-    //历厘包访
     public int score;
-    private string filePath;
-    private string encryKey = "qlalfqjsgh";
-    //历厘 包访
+
 
     public int Score // Property
     {

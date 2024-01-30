@@ -5,8 +5,6 @@ using UnityEngine.UIElements;
 
 public class CameraMoveScript : MonoBehaviour
 {
-    private Camera camera;
-
     private Vector3[] vectors = new Vector3[4];
     private Quaternion[] rotates = new Quaternion[4];
 
@@ -17,8 +15,6 @@ public class CameraMoveScript : MonoBehaviour
 
     void Start()
     {
-        camera = GetComponent<Camera>();
-
         vectors[0] = new Vector3(0,10,-10);  // Set position
         rotates[0] = Quaternion.Euler(30,0,0);  // Set rotation
 
@@ -35,27 +31,21 @@ public class CameraMoveScript : MonoBehaviour
         gameoverRot = Quaternion.Euler(0, 270, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public  void MoveToNextPosition()
     {
         if (vectors.Length == 0 || rotates.Length == 0)
             return;
 
         // Set camera position and rotation
-        camera.transform.position = vectors[currentIndex];
-        camera.transform.rotation = rotates[currentIndex];
+        Camera.main.transform.position = vectors[currentIndex];
+        Camera.main.transform.rotation = rotates[currentIndex];
         currentIndex = (currentIndex + 1) % vectors.Length;
     }
 
     public void GameOverCameraMove() 
     {
-        camera.transform.position = gameoverVec;
-        camera.transform.rotation = gameoverRot;
+        Camera.main.transform.position = gameoverVec;
+        Camera.main.transform.rotation = gameoverRot;
     }
 
 }
