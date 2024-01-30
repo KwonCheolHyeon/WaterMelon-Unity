@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Slime 9
-  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -101,7 +102,7 @@ Material:
     - _Dirt_Alpha: 0.302
     - _DstBlend: 0
     - _Emission_Power: 1
-    - _Eyes_Alpha: 0
+    - _Eyes_Alpha: 1
     - _Fresnel: 1.3
     - _Fresnel_Contrast: 1
     - _GlossMapScale: 1

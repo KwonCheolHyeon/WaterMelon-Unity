@@ -1872,9 +1872,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1605685328}
-        m_TargetAssemblyTypeName: TongsMoveScript, Assembly-CSharp
-        m_MethodName: DropSphere
+      - m_Target: {fileID: 1605685335}
+        m_TargetAssemblyTypeName: SlimeTongsMoveScript, Assembly-CSharp
+        m_MethodName: DropSlime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1931,7 +1931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 668860515}
-  - component: {fileID: 668860514}
+  - component: {fileID: 668860516}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1939,26 +1939,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &668860514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668860513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f1deb2b4bfe72479840587f16f29db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereObjectPrefab: {fileID: 7244257550385959477, guid: e38a39a26cc7cf246bd2b5a89786cfda,
-    type: 3}
-  TongsMove: {fileID: 1605685327}
-  nowScoreText: {fileID: 932553770}
-  hightScroreText: {fileID: 1537987931}
-  gameOverPanel: {fileID: 1635115190}
-  camera: {fileID: 339273210}
-  score: 0
 --- !u!4 &668860515
 Transform:
   m_ObjectHideFlags: 0
@@ -1974,6 +1954,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &668860516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668860513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e43e8d2763a6248a00b639bdfc8d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefab: {fileID: 7244257550385959477, guid: e662f3b4670caac449d1f34992ccf6c8,
+    type: 3}
+  TongsMove: {fileID: 1605685327}
+  nowScoreText: {fileID: 932553770}
+  hightScroreText: {fileID: 1537987931}
+  gameOverPanel: {fileID: 1635115190}
+  score: 0
 --- !u!1 &705447392
 GameObject:
   m_ObjectHideFlags: 0
@@ -4912,7 +4911,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1605685329}
-  - component: {fileID: 1605685328}
+  - component: {fileID: 1605685335}
   - component: {fileID: 1605685331}
   - component: {fileID: 1605685330}
   - component: {fileID: 1605685332}
@@ -4925,22 +4924,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1605685328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605685327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ac5d69edf2cf04e9110199334af267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 339273210}
-  rayLength: 10
-  variableJoystick: {fileID: 806205646}
-  textMeshProUGUI: {fileID: 1693893794}
 --- !u!4 &1605685329
 Transform:
   m_ObjectHideFlags: 0
@@ -5159,6 +5142,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1605685335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605685327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7016b6e01e43743b51d3dd6a62775a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayLength: 10
+  variableJoystick: {fileID: 806205646}
+  textMeshProUGUI: {fileID: 1693893794}
 --- !u!1 &1634248984
 GameObject:
   m_ObjectHideFlags: 0

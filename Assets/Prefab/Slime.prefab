@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3650347722878876787}
   - component: {fileID: 382229521245455631}
   - component: {fileID: 5075319194077440661}
-  - component: {fileID: 3697103318042438323}
   - component: {fileID: 7028018625182287772}
+  - component: {fileID: -7651594315097005215}
   m_Layer: 0
   m_Name: Slime
   m_TagString: four
@@ -94,7 +94,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7244257550385959477}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -113,18 +113,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3697103318042438323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7244257550385959477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acf02d73956975c47b764cd47e8290cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &7028018625182287772
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -147,3 +135,27 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7113620311128232067, guid: 05e6753b30062224f8c6e52210af18fa, type: 3}
+--- !u!114 &-7651594315097005215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244257550385959477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55cb2127214c05c4b8b1b12b0ebd3bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: b32049c5986d47944bddb84b47ab09dc, type: 2}
+  - {fileID: 2100000, guid: a4be28d1c010abb4fab6abef17337214, type: 2}
+  - {fileID: 2100000, guid: 2f3be6bfcf49d7e40958e42f9d6b4724, type: 2}
+  - {fileID: 2100000, guid: 35f0a675a4b449748bc922182ee7a5ae, type: 2}
+  - {fileID: 2100000, guid: 0e482d71e0a95eb4eaad34fca5ea1244, type: 2}
+  - {fileID: 2100000, guid: f3f3538da3ff4ab419838945af4be32f, type: 2}
+  - {fileID: 2100000, guid: d096a468baf53744aac41de9c8666d37, type: 2}
+  - {fileID: 2100000, guid: 808f4afb2ec872549b79cb9a4c3dc050, type: 2}
+  - {fileID: 2100000, guid: 9b942cb684b38c442ab05a45437762d4, type: 2}
+  - {fileID: 2100000, guid: b57752ea2bf4ba74097fb06113a24871, type: 2}
+  - {fileID: 2100000, guid: a02de2f7594a843409280382edc3a150, type: 2}
