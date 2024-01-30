@@ -41,8 +41,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject gameOverPanel;
 
+    //카메라 관련
     private CameraMoveScript cameraScr;
     //
+
+    //스테이지 흔들기
+    [SerializeField]
+    private GameObject stage;
+    //스테이지 흔들기
 
     //저장관련
     public int score;
@@ -115,9 +121,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.S)) 
+        if(Input.GetKeyDown(KeyCode.F)) 
         {
-            Save();
+            TriggerStageShake();
+            //Save();
         }
     }
 
@@ -356,5 +363,32 @@ public class GameManager : MonoBehaviour
     public void CameraShake() 
     {
         cameraScr.TriggerCameraShake();
+    }
+
+    public void TriggerStageShake()
+    {
+        float duration = 0.3f;
+        float magnitude = 0.2f;
+        StartCoroutine(ShakeObject(duration, magnitude));
+    }
+
+    public IEnumerator ShakeObject(float duration, float magnitude)
+    {
+        Vector3 originalPos = stage.transform.localPosition;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+            float y = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+            float z = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+
+            stage.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z + z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        stage.transform.localPosition = originalPos;
     }
 }
