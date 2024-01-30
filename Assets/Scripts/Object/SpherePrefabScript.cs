@@ -103,9 +103,10 @@ public class SpherePrefabScript : MonoBehaviour
 
         if ((collision.gameObject.CompareTag("GameOverTag")))
         {
+            Debug.Log("GameOver SpherePrefabScript OnCollisionEnter() collision.gameObject.CompareTag");
             GameManager.Instance.GameOver();
             GameOverState();
-            Debug.Log("GAMEover");
+          
         }
 
 

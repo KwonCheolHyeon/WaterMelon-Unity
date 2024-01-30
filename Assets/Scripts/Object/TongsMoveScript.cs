@@ -11,12 +11,14 @@ public class TongsMoveScript : MonoBehaviour
     private bool _isMoving = true;
     private float moveSpeed = 4.0f;
     private float minX, maxX, minZ, maxZ;
-    private Rigidbody rb;
+    private Rigidbody _rigidbody;
+    private Transform _transform;
     private SpherePrefabScript heldSphere = null;
 
     //연속 떨구는거 딜레이 주기 위한 bool값
     private bool isReleasing = false;
-
+    private bool canDropSphere = true;
+    //연속 떨구는거 딜레이 주기
     //랜덤 시스템관련
     private System.Random random = new System.Random();
     //랜덤 시스템 관련
@@ -39,11 +41,12 @@ public class TongsMoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _transform = transform;
+        _rigidbody = GetComponent<Rigidbody>();
         minX = -1.8f;
         maxX = 1.8f;
         minZ = -1.8f;
         maxZ = 1.8f;
-        rb = GetComponent<Rigidbody>();
         lineRenderer = GetComponent<LineRenderer>();
         FirstSettingSphereMove();
     }
@@ -102,6 +105,7 @@ public class TongsMoveScript : MonoBehaviour
     {
         if (collision.gameObject != null && heldSphere != null && collision.gameObject != heldSphere.gameObject)
         {
+            Debug.Log("TongsMoveScript OnCollisionEnter(),collision.gameObject != null && heldSphere != null && collision.gameObject != heldSphere.gameObject ");
             GameManager.Instance.GameOver();
         }
     }
@@ -119,11 +123,12 @@ public class TongsMoveScript : MonoBehaviour
     {
         if (heldSphere == null)
         {
-            SpherePrefabScript sphere = GameManager.Instance.GetObject(4);
+            SpherePrefabScript sphere = GameManager.Instance.GetObject(nextTypeSphere);
             HoldSphere(sphere);
         }
         else
         {
+            Debug.Log("TongsMoveScript SettingSphereMove() heldSphere !=null");
             GameManager.Instance.GameOver();
         }
     }
@@ -139,8 +144,10 @@ public class TongsMoveScript : MonoBehaviour
 
     public void DropSphere() 
     {
-        if (heldSphere != null)
+        if (heldSphere != null && canDropSphere)
         {
+            canDropSphere = false;
+            StartCoroutine(ResetDropSphere());
             float offsetX = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
             float offsetZ = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
             Vector3 newPosition = this.transform.position + new Vector3(offsetX, 0, offsetZ);
@@ -162,7 +169,11 @@ public class TongsMoveScript : MonoBehaviour
             heldSphere = null; // Clear the reference
         }
     }
-
+    private IEnumerator ResetDropSphere()
+    {
+        yield return new WaitForSeconds(0.2f);
+        canDropSphere = true;
+    }
     public void HoldSphere(SpherePrefabScript sphere)
     {
         if (heldSphere != null)
