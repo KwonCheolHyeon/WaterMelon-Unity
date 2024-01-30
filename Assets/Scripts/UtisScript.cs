@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum SceneNames {LoginScene = 0, GameScene }
+public enum SceneNames {LoginScene = 0, SelectScene, SlimeScene, GameScene, SpaceGameScene }
 
 public static class UtisScript
 {

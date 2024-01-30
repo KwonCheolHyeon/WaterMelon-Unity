@@ -42,7 +42,7 @@ public class GPGSBinderScript
         });
 
         // 로그인 후 플레이 화면을 씬 전환
-        UtisScript.LoadScene(SceneNames.GameScene);
+        UtisScript.LoadScene(SceneNames.SelectScene);
     }
 
     public void Logout()

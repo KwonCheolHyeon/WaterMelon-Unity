@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Slime 1
-  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,7 +30,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1950
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -91,45 +92,45 @@ Material:
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _Bubbles_Alpha: 0.746
-    - _Bubbles_Power: 0.77
-    - _Bubbles_Speed: 0.032
+    - _BUILTIN_QueueOffset: -50
+    - _Bubbles_Alpha: 0
+    - _Bubbles_Power: 0
+    - _Bubbles_Speed: 0
     - _BumpScale: 1
     - _Contrast_of_Contrast: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _Dirt_Alpha: 0
     - _DstBlend: 0
-    - _Emission_Power: 1
-    - _Eyes_Alpha: 1
+    - _Emission_Power: 3
+    - _Eyes_Alpha: 0
     - _Float: 1
-    - _Fresnel: 1.6
-    - _Fresnel_Contrast: 1
+    - _Fresnel: 0
+    - _Fresnel_Contrast: 20
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Mask_Alpha: 0
     - _Mask_Invert: 0
-    - _Mask_Power: 0.334
+    - _Mask_Power: 0
     - _Metallic: 0
     - _Mode: 0
-    - _Noise_Power: 0.541
-    - _Noise_Scale: 11.9
+    - _Noise_Power: 0.5
+    - _Noise_Scale: 50
     - _Noise_Speed: 0.58
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Smoothness: 0.815
+    - _Smoothness: 0.642
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.4908738, b: 1, a: 1}
+    - _Color: {r: 0.34709862, g: 0.65789944, b: 0.9811321, a: 1}
     - _Dirt_Color: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Eyes_Color: {r: 0, g: 0.06828383, b: 0.3584906, a: 0}
-    - _Fresnel_Color: {r: 0, g: 0.07450986, b: 1, a: 0}
-    - _Mask_Color: {r: 0.011055946, g: 0, b: 1, a: 0}
+    - _Fresnel_Color: {r: 0.2688679, g: 0.32334447, b: 1, a: 0}
+    - _Mask_Color: {r: 0.39644408, g: 0.38959593, b: 0.9716981, a: 0}
   m_BuildTextureStacks: []

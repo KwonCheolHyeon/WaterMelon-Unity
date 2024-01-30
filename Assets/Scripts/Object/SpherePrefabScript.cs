@@ -16,6 +16,7 @@ public class SpherePrefabScript : MonoBehaviour
     private Rigidbody rigid;
     private SphereCollider sphereCol;
     private bool gameOverRun = false;
+
     public bool isMerge
     {
         get
@@ -108,14 +109,35 @@ public class SpherePrefabScript : MonoBehaviour
             GameOverState();
           
         }
-
-
     }
 
-
-    void OnTriggerEnter(Collider other)
+    private void OnCollisionStay(Collision collision)
     {
-       
+        if (GameManager.Instance.GameOverState)
+        {
+            return;
+        }
+
+        if (tagsToCheck.Contains(collision.gameObject.tag))
+        {
+            SpherePrefabScript otherSphere = collision.gameObject.GetComponent<SpherePrefabScript>();
+
+            if (otherSphere != null && otherSphere.tag == this.tag && !isMerge && !otherSphere.isMerge && this.tag != "ten")
+            {
+                float meX = transform.position.x;
+                float meY = transform.position.y;
+                float meZ = transform.position.z;
+                float otherX = otherSphere.transform.position.x;
+                float otherY = otherSphere.transform.position.y;
+                float otherZ = otherSphere.transform.position.z;
+
+                if (meY < otherY || (meY == otherY && meX > otherX) || (meY == otherY && meZ > otherZ)) //y축이 다를때 , y축이 같으면 x축이 다를때,y축이 같고 x축도 같으면 z축이 다를때
+                {
+                    otherSphere.HideSphereObject(transform.position);
+                    SettingChangeSphere();
+                }
+            }
+        }
     }
 
     public void SettingSphere(int _index,float _size) 

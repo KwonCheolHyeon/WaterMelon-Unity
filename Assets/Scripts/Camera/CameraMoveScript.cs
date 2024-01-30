@@ -15,7 +15,6 @@ public class CameraMoveScript : MonoBehaviour
 
     void Start()
     {
-
         vectors[0] = new Vector3(0,10,-10);  // Set position
         rotates[0] = Quaternion.Euler(30,0,0);  // Set rotation
 
@@ -30,12 +29,6 @@ public class CameraMoveScript : MonoBehaviour
 
         gameoverVec = new Vector3(12, 2.5f, 0);
         gameoverRot = Quaternion.Euler(0, 270, 0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public  void MoveToNextPosition()

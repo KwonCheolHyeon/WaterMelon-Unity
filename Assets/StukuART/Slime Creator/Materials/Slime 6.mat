@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Slime 6
-  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -124,10 +125,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.4528302, g: 0.05252395, b: 0, a: 1}
+    - _Color: {r: 0.8113208, g: 0.28910992, b: 0.24110004, a: 1}
     - _Dirt_Color: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Eyes_Color: {r: 0.23584908, g: 0, b: 0.0062614125, a: 0}
-    - _Fresnel_Color: {r: 0.4245283, g: 0, b: 0, a: 0}
-    - _Mask_Color: {r: 1, g: 0.96567404, b: 0, a: 0}
+    - _Fresnel_Color: {r: 0.8301887, g: 0.5324122, b: 0.254539, a: 0}
+    - _Mask_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

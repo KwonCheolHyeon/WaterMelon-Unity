@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Slime 4
-  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 006cfe803c76067439c54b210a1d50fe,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -101,7 +102,7 @@ Material:
     - _Dirt_Alpha: 0.339
     - _DstBlend: 0
     - _Emission_Power: 1
-    - _Eyes_Alpha: 0
+    - _Eyes_Alpha: 1
     - _Fresnel: 0.8
     - _Fresnel_Contrast: 1
     - _GlossMapScale: 1
@@ -124,10 +125,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.7999997, b: 1, a: 1}
-    - _Dirt_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.8684912, g: 0, b: 1, a: 1}
+    - _Dirt_Color: {r: 0.7612462, g: 0, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Eyes_Color: {r: 0, g: 0.04706648, b: 0.24528301, a: 0}
-    - _Fresnel_Color: {r: 0, g: 0.07450986, b: 1, a: 0}
+    - _Eyes_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Fresnel_Color: {r: 0.61539125, g: 0, b: 1, a: 0}
     - _Mask_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
