@@ -113,14 +113,14 @@ public class SpherePrefabScript : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (SlimeGameManager.Instance.GameOverState)
+        if (GameManager.Instance.GameOverState)
         {
             return;
         }
 
         if (tagsToCheck.Contains(collision.gameObject.tag))
         {
-            SlimePrefabScript otherSphere = collision.gameObject.GetComponent<SlimePrefabScript>();
+            SpherePrefabScript otherSphere = collision.gameObject.GetComponent<SpherePrefabScript>();
 
             if (otherSphere != null && otherSphere.tag == this.tag && !isMerge && !otherSphere.isMerge && this.tag != "ten")
             {
