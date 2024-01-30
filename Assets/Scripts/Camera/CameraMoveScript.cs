@@ -57,5 +57,30 @@ public class CameraMoveScript : MonoBehaviour
         camera.transform.position = gameoverVec;
         camera.transform.rotation = gameoverRot;
     }
+    public void TriggerCameraShake()
+    {
+        float duration = 0.2f;
+        float magnitude = 0.1f;
+        StartCoroutine(CameraShake(duration, magnitude));
+    }
+    public IEnumerator CameraShake(float duration, float magnitude)
+    {
+        Vector3 originalPos = camera.transform.position;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+          
+
+            camera.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        camera.transform.position = vectors[currentIndex];
+    }
 
 }

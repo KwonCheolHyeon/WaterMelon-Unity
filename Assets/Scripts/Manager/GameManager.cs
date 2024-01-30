@@ -11,7 +11,6 @@ using System.Text;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
-
     //풀링 오브젝트 관련
     [SerializeField]
     private GameObject sphereObjectPrefab;
@@ -43,6 +42,7 @@ public class GameManager : MonoBehaviour
     private GameObject gameOverPanel;
     [SerializeField]
     private Camera camera;
+    private CameraMoveScript cameraScr;
     //
 
     //저장관련
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverPanel.SetActive(false);
-
+        cameraScr = camera.GetComponent<CameraMoveScript>();
         InitializeSphere(100);
     }
 
@@ -283,6 +283,7 @@ public class GameManager : MonoBehaviour
 
     public void ReturnObject(SpherePrefabScript obj)//오브젝트 회수
     {
+        CameraShake();
         obj.GetComponent<Rigidbody>().useGravity = true; //HideSphereObject 꺼준 2개의 컴포넌트들을 다시 켜주고 active를 끔
        
         obj.GetComponent<SphereCollider>().enabled = false;
@@ -349,7 +350,12 @@ public class GameManager : MonoBehaviour
         {
             gameoverState = true;
             gameOverPanel.SetActive(true);
-            camera.GetComponent<CameraMoveScript>().GameOverCameraMove();
+            cameraScr.GameOverCameraMove();
         }
+    }
+
+    public void CameraShake() 
+    {
+        cameraScr.TriggerCameraShake();
     }
 }
