@@ -5,6 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class SlimeGameManager : MonoBehaviour
@@ -35,6 +36,10 @@ public class SlimeGameManager : MonoBehaviour
     private bool gameoverState = false;
     [SerializeField]
     private GameObject gameOverPanel;
+
+    //스테이지 흔들기
+    [SerializeField]
+    private GameObject stage;
 
     public int score;
 
@@ -213,6 +218,33 @@ public class SlimeGameManager : MonoBehaviour
 
         nowScoreText.text = gameScore + "";
 
+    }
+
+    public void TriggerStageShake()
+    {
+        float duration = 0.3f;
+        float magnitude = 0.2f;
+        StartCoroutine(ShakeObject(duration, magnitude));
+    }
+
+    public IEnumerator ShakeObject(float duration, float magnitude)
+    {
+        Vector3 originalPos = stage.transform.localPosition;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+            float y = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+            float z = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+
+            stage.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z + z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        stage.transform.localPosition = originalPos;
     }
 
     public void GameOver()
