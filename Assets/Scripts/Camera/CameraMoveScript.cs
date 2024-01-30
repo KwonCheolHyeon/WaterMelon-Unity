@@ -5,8 +5,6 @@ using UnityEngine.UIElements;
 
 public class CameraMoveScript : MonoBehaviour
 {
-    private Camera camera;
-
     private Vector3[] vectors = new Vector3[4];
     private Quaternion[] rotates = new Quaternion[4];
 
@@ -17,7 +15,6 @@ public class CameraMoveScript : MonoBehaviour
 
     void Start()
     {
-        camera = GetComponent<Camera>();
 
         vectors[0] = new Vector3(0,10,-10);  // Set position
         rotates[0] = Quaternion.Euler(30,0,0);  // Set rotation
@@ -47,15 +44,15 @@ public class CameraMoveScript : MonoBehaviour
             return;
 
         // Set camera position and rotation
-        camera.transform.position = vectors[currentIndex];
-        camera.transform.rotation = rotates[currentIndex];
+        Camera.main.transform.position = vectors[currentIndex];
+        Camera.main.transform.rotation = rotates[currentIndex];
         currentIndex = (currentIndex + 1) % vectors.Length;
     }
 
     public void GameOverCameraMove() 
     {
-        camera.transform.position = gameoverVec;
-        camera.transform.rotation = gameoverRot;
+        Camera.main.transform.position = gameoverVec;
+        Camera.main.transform.rotation = gameoverRot;
     }
     public void TriggerCameraShake()
     {
@@ -65,22 +62,23 @@ public class CameraMoveScript : MonoBehaviour
     }
     public IEnumerator CameraShake(float duration, float magnitude)
     {
-        Vector3 originalPos = camera.transform.position;
+        Vector3 originalPos = Camera.main.transform.position;
         float elapsed = 0.0f;
 
         while (elapsed < duration)
         {
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
-          
 
-            camera.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+
+            Camera.main.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        camera.transform.position = vectors[currentIndex];
+        Camera.main.transform.position = vectors[currentIndex];
+        Camera.main.transform.rotation = rotates[currentIndex];
     }
 
 }

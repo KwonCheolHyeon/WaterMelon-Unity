@@ -1957,7 +1957,7 @@ MonoBehaviour:
   nowScoreText: {fileID: 932553770}
   hightScroreText: {fileID: 1537987931}
   gameOverPanel: {fileID: 1635115190}
-  camera: {fileID: 339273210}
+  stage: {fileID: 1417830021}
   score: 0
 --- !u!4 &668860515
 Transform:
