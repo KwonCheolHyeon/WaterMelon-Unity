@@ -61,13 +61,16 @@ public class SpherePrefabScript : MonoBehaviour
 
     void Update()
     {
+        
+    }
+    void FixedUpdate()
+    {
         if (targetToFollow != null)
         {
             // Follow the target's position
             transform.position = targetToFollow.position;
         }
     }
-
     void OnCollisionEnter(Collision collision)
     {
         if (GameManager.Instance.GameOverState)
@@ -81,7 +84,7 @@ public class SpherePrefabScript : MonoBehaviour
             GameManager.Instance.SphereBottomTrue();
         }
 
-        if (tagsToCheck.Contains(collision.gameObject.tag)) 
+        if (tagsToCheck.Contains(collision.gameObject.tag))
         {
             SpherePrefabScript otherSphere = collision.gameObject.GetComponent<SpherePrefabScript>();
 
@@ -107,7 +110,7 @@ public class SpherePrefabScript : MonoBehaviour
             Debug.Log("GameOver SpherePrefabScript OnCollisionEnter() collision.gameObject.CompareTag");
             GameManager.Instance.GameOver();
             GameOverState();
-          
+
         }
     }
 
