@@ -5,31 +5,43 @@ using UnityEngine.UIElements;
 
 public class CameraMoveScript : MonoBehaviour
 {
-    private Vector3[] vectors = new Vector3[4];
-    private Quaternion[] rotates = new Quaternion[4];
+    private Vector3[] vectors = new Vector3[5];
+    private Quaternion[] rotates = new Quaternion[5];
 
     private Vector3 gameoverVec = Vector3.zero;
     private Quaternion gameoverRot = Quaternion.identity;
 
-    private int currentIndex = 0;
+    private int currentIndex = 1;
+    private Camera mainCamera;
 
+    public int GetCurrentCameraIndex() 
+    {
+        return currentIndex;
+    }
     void Start()
     {
+        mainCamera = Camera.main;
 
-        vectors[0] = new Vector3(0,10,-10);  // Set position
-        rotates[0] = Quaternion.Euler(30,0,0);  // Set rotation
+        vectors[0] = new Vector3(0, 9.2f, 0);  // Set position
+        rotates[0] = Quaternion.Euler(90, 0, 0);  // Set rotation
 
-        vectors[1] = new Vector3(-10, 10, 0);  
-        rotates[1] = Quaternion.Euler(30, 90, 0);
+        vectors[1] = new Vector3(0,10,-10);  // Set position
+        rotates[1] = Quaternion.Euler(30,0,0);  // Set rotation
 
-        vectors[2] = new Vector3(0, 10, 10);  
-        rotates[2] = Quaternion.Euler(30, 180, 0);
+        vectors[2] = new Vector3(-10, 10, 0);  
+        rotates[2] = Quaternion.Euler(30, 90, 0);
 
-        vectors[3] = new Vector3(10, 10, 0);  
-        rotates[3] = Quaternion.Euler(30, 270, 0);
+        vectors[3] = new Vector3(0, 10, 10);  
+        rotates[3] = Quaternion.Euler(30, 180, 0);
+
+        vectors[4] = new Vector3(10, 10, 0);  
+        rotates[4] = Quaternion.Euler(30, 270, 0);
 
         gameoverVec = new Vector3(12, 2.5f, 0);
         gameoverRot = Quaternion.Euler(0, 270, 0);
+
+        mainCamera.transform.position = vectors[currentIndex];
+        mainCamera.transform.rotation = rotates[currentIndex];
     }
 
     // Update is called once per frame
@@ -42,17 +54,17 @@ public class CameraMoveScript : MonoBehaviour
     {
         if (vectors.Length == 0 || rotates.Length == 0)
             return;
-
-        // Set camera position and rotation
-        Camera.main.transform.position = vectors[currentIndex];
-        Camera.main.transform.rotation = rotates[currentIndex];
         currentIndex = (currentIndex + 1) % vectors.Length;
+        // Set camera position and rotation
+        mainCamera.transform.position = vectors[currentIndex];
+        mainCamera.transform.rotation = rotates[currentIndex];
+        
     }
 
     public void GameOverCameraMove() 
     {
-        Camera.main.transform.position = gameoverVec;
-        Camera.main.transform.rotation = gameoverRot;
+        mainCamera.transform.position = gameoverVec;
+        mainCamera.transform.rotation = gameoverRot;
     }
     public void TriggerCameraShake()
     {
@@ -62,7 +74,8 @@ public class CameraMoveScript : MonoBehaviour
     }
     public IEnumerator CameraShake(float duration, float magnitude)
     {
-        Vector3 originalPos = Camera.main.transform.position;
+        Vector3 originalPos = mainCamera.transform.position;
+        Quaternion originalRot = mainCamera.transform.rotation;
         float elapsed = 0.0f;
 
         while (elapsed < duration)
@@ -71,14 +84,14 @@ public class CameraMoveScript : MonoBehaviour
             float y = Random.Range(-1f, 1f) * magnitude;
 
 
-            Camera.main.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+            mainCamera.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        Camera.main.transform.position = vectors[currentIndex];
-        Camera.main.transform.rotation = rotates[currentIndex];
+       mainCamera.transform.position = originalPos;
+       mainCamera.transform.rotation = originalRot;
     }
 
 }

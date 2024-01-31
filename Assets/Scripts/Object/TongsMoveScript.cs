@@ -7,7 +7,8 @@ using UnityEngine.AI;
 
 public class TongsMoveScript : MonoBehaviour
 {
-    public Camera mainCamera;
+    private Camera mainCamera;
+    private CameraMoveScript mCameraScript;
     private bool _isMoving = true;
     private float moveSpeed = 4.0f;
     private float minX, maxX, minZ, maxZ;
@@ -26,6 +27,8 @@ public class TongsMoveScript : MonoBehaviour
     //라인 보여주는 함수
     private LineRenderer lineRenderer;
     public float rayLength = 10f;
+    [SerializeField]
+    private GameObject targetObject;
     //라인을 보여주는 관련
 
     //조이스틱 관련
@@ -41,6 +44,8 @@ public class TongsMoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = Camera.main;
+        mCameraScript = mainCamera.GetComponent<CameraMoveScript>();
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody>();
         minX = -1.8f;
@@ -56,6 +61,7 @@ public class TongsMoveScript : MonoBehaviour
         if (lineRenderer != null)
         {
             lineRenderer.enabled = (heldSphere != null);
+            targetObject.SetActive((heldSphere != null));
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && heldSphere != null && !isReleasing)
@@ -80,22 +86,34 @@ public class TongsMoveScript : MonoBehaviour
 
             if (x != 0 || z != 0)
             {
-                Vector3 forward = mainCamera.transform.forward;
-                Vector3 right = mainCamera.transform.right;
-                forward.y = 0; // Keep the movement horizontal
-                right.y = 0;
-                forward.Normalize();
-                right.Normalize();
+                if (mCameraScript.GetCurrentCameraIndex() == 0)
+                {
+                    Vector3 movement = new Vector3(x, 0, z) * moveSpeed * Time.deltaTime;
+                    transform.Translate(movement, Space.World);
+                    float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+                    float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
+                    transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
+                }
+                else 
+                {
+                    Vector3 forward = mainCamera.transform.forward;
+                    Vector3 right = mainCamera.transform.right;
+                    forward.y = 0; // Keep the movement horizontal
+                    right.y = 0;
+                    forward.Normalize();
+                    right.Normalize();
 
-                Vector3 movement = (forward * z + right * x) * moveSpeed * Time.deltaTime;
+                    Vector3 movement = (forward * z + right * x) * moveSpeed * Time.deltaTime;
 
-                // Apply movement
-                transform.Translate(movement, Space.World);
+                    // Apply movement
+                    transform.Translate(movement, Space.World);
 
-                // Clamp position
-                float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-                float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
-                transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
+                    // Clamp position
+                    float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+                    float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
+                    transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
+                }
+              
             }
         }
 
@@ -251,6 +269,14 @@ public class TongsMoveScript : MonoBehaviour
         Vector3 start = transform.position;
         Vector3 direction = Vector3.down;
         lineRenderer.SetPosition(0, start);
+
+        if (Physics.Raycast(start, direction, out RaycastHit hit2, rayLength))
+        {
+            // Ray hit an object, access the hit point
+            Vector3 hitPoint = hit2.point;
+
+            targetObject.transform.position = hitPoint;
+        }
 
         if (Physics.Raycast(start, direction, out RaycastHit hit, rayLength))
         {

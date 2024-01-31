@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject sphereObjectPrefab;
     Queue<SpherePrefabScript> poolingObjectQueue = new Queue<SpherePrefabScript>();
+    private Vector3 initSphereVec3 = new Vector3(0,16,0);
     //풀링 오브젝트 관련
 
     //오브젝트 세팅 관련
@@ -239,6 +240,7 @@ public class GameManager : MonoBehaviour
         var newObj = Instantiate(sphereObjectPrefab).GetComponent<SpherePrefabScript>();
         newObj.GetComponent<SpherePrefabScript>().SettingSphere(_type, _size);
         newObj.gameObject.SetActive(false);
+        newObj.transform.position = initSphereVec3;
         newObj.transform.SetParent(transform);
         newObj.GetComponent<SphereCollider>().enabled = false;
         return newObj;
@@ -289,7 +291,7 @@ public class GameManager : MonoBehaviour
 
     public void ReturnObject(SpherePrefabScript obj)//오브젝트 회수
     {
-        CameraShake();
+        
         obj.GetComponent<Rigidbody>().useGravity = true; //HideSphereObject 꺼준 2개의 컴포넌트들을 다시 켜주고 active를 끔
        
         obj.GetComponent<SphereCollider>().enabled = false;
