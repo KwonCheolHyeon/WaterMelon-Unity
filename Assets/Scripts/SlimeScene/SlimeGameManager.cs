@@ -16,7 +16,7 @@ public class SlimeGameManager : MonoBehaviour
     [SerializeField]
     private GameObject slimePrefab;
     Queue<SlimePrefabScript> poolingObjectQueue = new Queue<SlimePrefabScript>();
-
+    private Vector3 initSphereVec3 = new Vector3(0, 16, 0);
     //오브젝트 세팅 관련
     private float[] sizes = new float[11];
 
@@ -110,6 +110,7 @@ public class SlimeGameManager : MonoBehaviour
         var newObj = Instantiate(slimePrefab).GetComponent<SlimePrefabScript>();
         newObj.GetComponent<SlimePrefabScript>().SettingSphere(_type, _size);
         newObj.gameObject.SetActive(false);
+        newObj.transform.position = initSphereVec3;
         newObj.transform.SetParent(transform);
         newObj.GetComponent<MeshCollider>().enabled = false;
         return newObj;

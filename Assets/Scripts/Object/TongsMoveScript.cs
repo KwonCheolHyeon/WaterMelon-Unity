@@ -270,16 +270,12 @@ public class TongsMoveScript : MonoBehaviour
         Vector3 direction = Vector3.down;
         lineRenderer.SetPosition(0, start);
 
-        if (Physics.Raycast(start, direction, out RaycastHit hit2, rayLength))
-        {
-            // Ray hit an object, access the hit point
-            Vector3 hitPoint = hit2.point;
-
-            targetObject.transform.position = hitPoint;
-        }
-
         if (Physics.Raycast(start, direction, out RaycastHit hit, rayLength))
         {
+            Vector3 hitPoint = hit.point;
+
+            targetObject.transform.position = hitPoint;
+
             SetLineRendererGradientAtPoint(hit.distance / rayLength);
             lineRenderer.SetPosition(1, hit.point);
         }

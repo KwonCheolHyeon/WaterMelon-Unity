@@ -67,6 +67,11 @@ public class SlimePrefabScript : MonoBehaviour
 
     void Update()
     {
+        
+    }
+
+    void FixedUpdate()
+    {
         if (targetToFollow != null)
         {
             // Follow the target's position
