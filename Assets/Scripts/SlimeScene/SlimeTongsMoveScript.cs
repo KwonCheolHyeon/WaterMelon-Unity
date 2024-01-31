@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlimeTongsMoveScript : MonoBehaviour
 {
@@ -28,9 +29,13 @@ public class SlimeTongsMoveScript : MonoBehaviour
     //조이스틱 관련
     public VariableJoystick variableJoystick;
 
+    //단계별 슬라임 이미지
+    [SerializeField]
+    private List<Sprite> slimeImageList = new List<Sprite>();
+
     //다음 나올 과일을 보여주는 관련
     [SerializeField]
-    private TextMeshProUGUI textMeshProUGUI;
+    private Image nextSlimeImage;
     private int nextTypeSlime;
 
     void Start()
@@ -143,6 +148,10 @@ public class SlimeTongsMoveScript : MonoBehaviour
         {
             SlimePrefabScript sphere = SlimeGameManager.Instance.GetObject(0);
             HoldSlime(sphere);
+
+            //처음 시작시 다음에 나올 슬라임 nextSlimeImage에 표시
+            nextTypeSlime = GetRandomNumber();
+            nextSlimeImage.sprite = slimeImageList[nextTypeSlime];
         }
     }
 
@@ -292,7 +301,7 @@ public class SlimeTongsMoveScript : MonoBehaviour
         SettingSphereMove();
 
         nextTypeSlime = GetRandomNumber();
-        textMeshProUGUI.text = nextTypeSlime + ": Next";
+        nextSlimeImage.sprite = slimeImageList[nextTypeSlime];
     }
 
     private IEnumerator ReleaseSlimeWithDelay()

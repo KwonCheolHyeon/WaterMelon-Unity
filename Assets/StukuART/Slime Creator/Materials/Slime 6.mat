@@ -125,10 +125,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8113208, g: 0.28910992, b: 0.24110004, a: 1}
+    - _Color: {r: 0.4528302, g: 0, b: 0.04084353, a: 1}
     - _Dirt_Color: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Eyes_Color: {r: 0.23584908, g: 0, b: 0.0062614125, a: 0}
-    - _Fresnel_Color: {r: 0.8301887, g: 0.5324122, b: 0.254539, a: 0}
-    - _Mask_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Fresnel_Color: {r: 1, g: 0, b: 0.08909035, a: 0}
+    - _Mask_Color: {r: 1, g: 0, b: 0.17356348, a: 0}
   m_BuildTextureStacks: []
