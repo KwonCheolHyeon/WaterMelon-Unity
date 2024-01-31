@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     //스테이지 흔들기
     [SerializeField]
     private GameObject stage;
-    //스테이지 흔들기
+
 
     //저장관련
     public int score;

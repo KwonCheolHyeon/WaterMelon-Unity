@@ -44,12 +44,6 @@ public class CameraMoveScript : MonoBehaviour
         mainCamera.transform.rotation = rotates[currentIndex];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public  void MoveToNextPosition()
     {
         if (vectors.Length == 0 || rotates.Length == 0)
