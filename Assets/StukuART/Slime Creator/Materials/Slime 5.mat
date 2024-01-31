@@ -105,14 +105,14 @@ Material:
     - _Emission_Power: 1
     - _Eyes_Alpha: 1
     - _Float: 1
-    - _Fresnel: 1.3
-    - _Fresnel_Contrast: 1
+    - _Fresnel: 1.8
+    - _Fresnel_Contrast: 0.9
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Mask_Alpha: 1
     - _Mask_Invert: 1
-    - _Mask_Power: 0.344
+    - _Mask_Power: 0.445
     - _Metallic: 0
     - _Mode: 0
     - _Noise_Power: 0.367
@@ -120,17 +120,17 @@ Material:
     - _Noise_Speed: 0.58
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Smoothness: 0.762
+    - _Smoothness: 0.163
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0.2712016, a: 1}
+    - _Color: {r: 0, g: 0.15980244, b: 1, a: 1}
     - _Dirt_Color: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Eyes_Color: {r: 0, g: 0.3490566, b: 0.040587995, a: 0}
-    - _Fresnel_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Fresnel_Color: {r: 0, g: 1, b: 0.95121956, a: 0}
     - _Mask_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
