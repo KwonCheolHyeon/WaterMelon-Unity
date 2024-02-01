@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -9,11 +10,8 @@ using UnityEngine.UI;
 
 public class SoundDatas
 {
-    public float masterSoundValue;
-    public float BGMSoundValue;
-    public float SFXSoundValue;
-
-    public bool isCompleteTutorial;
+    public bool BGMPlay;
+    public bool SFXPlay;
 }
 
 public class SoundManagerScript : MonoBehaviour
@@ -22,22 +20,25 @@ public class SoundManagerScript : MonoBehaviour
     private SoundDatas soundDatas;
     public SoundDatas GetSoundDatas() { return soundDatas; }
 
-    //private string datakey = "SoundDatas";
-    //private string saveFileName = "SaveSoundFile.es3";
+    private string datakey = "SoundDatas";
+    private string saveFileName = "SaveSoundFile.es3";
 
     public AudioMixer audioMixer;
 
-    public Slider MasterSlider;
-    public Slider BGMSlider;
-    public Slider SFXSlider;
+    private bool isBGMplay = true;
+    private bool isSFXplay = true;
+
+    private Button BGMButton;
+    private Button SFXButton;
 
     [SerializeField]
-    private GameObject slider;
-
-    GameObject tabObj;
-
-    // ===========================================
-    // 사운드 리소스 관련
+    private Sprite playBGMSprite;
+    [SerializeField]
+    private Sprite playNotBGMSprite;
+    [SerializeField]
+    private Sprite playSFXSprite;
+    [SerializeField]
+    private Sprite playNotSFXSprite;
 
     [SerializeField]
     private GameObject SFXAudioresource;
@@ -49,8 +50,8 @@ public class SoundManagerScript : MonoBehaviour
     [SerializeField]
     public BGMResource[] BGM;
 
-    private AudioSource SFXFromChild;
     private AudioSource BGMFromChild;
+    private AudioSource SFXFromChild;
 
     void GetSFXresource()
     {
@@ -150,7 +151,6 @@ public class SoundManagerScript : MonoBehaviour
         {
             if (null == instance)
             {
-                //Debug.Log("컨테이너 매니저가 Null입니다.");
                 return null;
             }
             return instance;
@@ -175,6 +175,10 @@ public class SoundManagerScript : MonoBehaviour
 
     private void Start()
     {
+        PlayBGMSound("TestBGM");
+
+        SetSliderObject();
+
         DataLoad();
 
         //시작 시 이벤트를 등록해 줍니다.
@@ -183,108 +187,126 @@ public class SoundManagerScript : MonoBehaviour
 
     void Update()
     {
-        SetSound(MasterSlider, "Master");
-        SetSound(BGMSlider, "BGM");
-        SetSound(SFXSlider, "SFX");
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SoundDataSave();
-        }
     }
 
     // 씬 변경 시 실행
-    private void LoadedsceneEvent(Scene _scene, LoadSceneMode _mode)
+    private void LoadedsceneEvent(UnityEngine.SceneManagement.Scene _scene, LoadSceneMode _mode)
     {
         Debug.Log(_scene.name + "으로 변경되었습니다.");
 
-        SetSliderObject(_scene);
-
-        // 저장에 필요한 데이터 불러오기
-        MasterSlider = slider.transform.GetChild(0).GetComponent<Slider>();
-        BGMSlider = slider.transform.GetChild(1).GetComponent<Slider>();
-        SFXSlider = slider.transform.GetChild(2).GetComponent<Slider>();
+        SetSliderObject();
 
         DataLoad();
     }
 
     public void DataLoad()
     {
-        //if (ES3.FileExists(saveFileName) && ES3.KeyExists(datakey, saveFileName))
-        //{
+        if (ES3.FileExists(saveFileName) && ES3.KeyExists(datakey, saveFileName))
+        {
 
-        //    soundDatas = ES3.Load<SoundDatas>(datakey, saveFileName);
-        //    MasterSlider.value = soundDatas.masterSoundValue;
-        //    SFXSlider.value = soundDatas.SFXSoundValue;
-        //    BGMSlider.value = soundDatas.BGMSoundValue;
-        //    Debug.Log("사운드 데이터 로드 완료");
-        //}
-        //else
-        //{
-        //    soundDatas = new SoundDatas();
+            soundDatas = ES3.Load<SoundDatas>(datakey, saveFileName);
+            isSFXplay = soundDatas.SFXPlay;
+            isBGMplay = soundDatas.BGMPlay;
 
-        //    InitializeDefaultData();
-        //    SoundDataSave();
+            if (isBGMplay)
+            {
+                BGMFromChild.volume = 1;
+                BGMButton.GetComponent<Image>().sprite = playBGMSprite;
+            }
+            else if (!isBGMplay)
+            {
+                BGMFromChild.volume = 0;
+                BGMButton.GetComponent<Image>().sprite = playNotBGMSprite;
+            }
 
-        //    soundDatas = ES3.Load<SoundDatas>(datakey, saveFileName);
-        //    Debug.Log("사운드 데이터 로드 완료");
-        //}
+            if (isSFXplay)
+            {
+                SFXFromChild.volume = 1;
+                SFXButton.GetComponent<Image>().sprite = playSFXSprite;
+            }
+            else if (!isSFXplay)
+            {
+                SFXFromChild.volume = 0;
+                SFXButton.GetComponent<Image>().sprite = playNotSFXSprite;
+            }
+
+            Debug.Log("사운드 설정 데이터 로드 완료");
+        }
+        else
+        {
+            soundDatas = new SoundDatas();
+
+            InitializeDefaultData();
+            SoundDataSave();
+
+            soundDatas = ES3.Load<SoundDatas>(datakey, saveFileName);
+            Debug.Log("사운드 설정 데이터 로드 완료");
+        }
     }
 
     private void InitializeDefaultData()
     {
-        soundDatas.masterSoundValue = MasterSlider.value;
-        soundDatas.SFXSoundValue = SFXSlider.value;
-        soundDatas.BGMSoundValue = BGMSlider.value;
-
-        soundDatas.isCompleteTutorial = false;
+        soundDatas.SFXPlay = isSFXplay;
+        soundDatas.BGMPlay = isBGMplay;
     }
 
     public void SoundDataSave()
     {
-        soundDatas.masterSoundValue = MasterSlider.value;
-        soundDatas.SFXSoundValue = SFXSlider.value;
-        soundDatas.BGMSoundValue = BGMSlider.value;
+        soundDatas.SFXPlay = isSFXplay;
+        soundDatas.BGMPlay = isBGMplay;
 
-        //ES3.Save(datakey, soundDatas, saveFileName);
+        ES3.Save(datakey, soundDatas, saveFileName);
+
+        Debug.Log("사운드 설정 데이터 저장 완료");
     }
 
-    private void SetSliderObject(UnityEngine.SceneManagement.Scene _scene)
+    private void SetSliderObject()
     {
-        if (_scene.name == "StoreScene")
-        {
-            slider = GameObject.Find("Canvas").transform.Find("Setting_Tab").
-                transform.Find("SettingPage").transform.Find("Slider").gameObject;
-        }
-        else if (_scene.name == "TitleScene")
-        {
-            slider = GameObject.Find("Title_Canvas").transform.Find("SettingTab").
-                transform.Find("SettingPage").transform.Find("Slider").gameObject;
-        }
-        else if (_scene.name == "ItemStoreScene")
-        {
-            slider = GameObject.Find("Canvas").transform.Find("Setting_Tab").
-                transform.Find("SettingPage").transform.Find("Slider").gameObject;
-        }
-        else if (_scene.name == "TutorialStoreScene")
-        {
-            slider = GameObject.Find("Canvas").transform.Find("Setting_Tab").
-                transform.Find("SettingPage").transform.Find("Slider").gameObject;
-        }
+
+        BGMButton = GameObject.Find("Canvas").transform.Find("Menu_Obj").
+            transform.Find("Setting_Image").transform.Find("SoundGroup").transform.Find("BGM_Button").GetComponent<Button>();
+
+        BGMButton.onClick.AddListener(() => SetSound(BGMButton.name));
+
+        SFXButton = GameObject.Find("Canvas").transform.Find("Menu_Obj").
+            transform.Find("Setting_Image").transform.Find("SoundGroup").transform.Find("SFX_Button").GetComponent<Button>();
+
+        SFXButton.onClick.AddListener(() => SetSound(SFXButton.name));
     }
 
-    public void SetSound(Slider slider, string mixerGroup)
+    public void SetSound(string _buttonName)
     {
-        float sound = slider.value;
+        if(_buttonName == "BGM_Button")
+        {
+            if (isBGMplay)
+            {
+                isBGMplay = false;
+                BGMFromChild.volume = 0;
+                BGMButton.GetComponent<Image>().sprite = playNotBGMSprite;
+            }
+            else if (!isBGMplay)
+            { 
+                isBGMplay = true;
+                BGMFromChild.volume = 1;
+                BGMButton.GetComponent<Image>().sprite = playBGMSprite;
+            }
+        }
+        else if(_buttonName == "SFX_Button")
+        {
+            if (isSFXplay)
+            {
+                isSFXplay = false;
+                SFXFromChild.volume = 0;
+                SFXButton.GetComponent<Image>().sprite = playNotSFXSprite;
+            }
+            else if (!isSFXplay)
+            {
+                isSFXplay = true;
+                SFXFromChild.volume = 1;
+                SFXButton.GetComponent<Image>().sprite = playSFXSprite;
+            }
+        }
 
-        // Slider최소값으로 내리면 음소거로 설정
-        if (sound == -40.0f)
-        {
-            audioMixer.SetFloat(mixerGroup, -80);
-        }
-        else
-        {
-            audioMixer.SetFloat(mixerGroup, sound);
-        }
+        SoundDataSave();
     }
 }
