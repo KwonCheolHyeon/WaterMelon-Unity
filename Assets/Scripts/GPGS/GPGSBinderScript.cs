@@ -40,9 +40,6 @@ public class GPGSBinderScript
         {
             onLoginSuccess?.Invoke(success == SignInStatus.Success, Social.localUser);
         });
-
-        // 로그인 후 플레이 화면을 씬 전환
-        UtisScript.LoadScene(SceneNames.SelectScene);
     }
 
     public void Logout()
@@ -108,7 +105,6 @@ public class GPGSBinderScript
     public void ShowAchievementUI()
     {
         Social.ShowAchievementsUI();
-
     }
 
     public void UnlockAchievement(string gpgsId, Action<bool> onUnlocked = null) =>
