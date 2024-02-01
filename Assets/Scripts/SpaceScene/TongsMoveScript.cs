@@ -146,8 +146,7 @@ public class TongsMoveScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("TongsMoveScript SettingSphereMove() heldSphere !=null");
-            GameManager.Instance.GameOver();
+            
         }
     }
 
@@ -158,6 +157,7 @@ public class TongsMoveScript : MonoBehaviour
             SpherePrefabScript sphere = GameManager.Instance.GetObject(0);
             HoldSphere(sphere);
         }
+        NextSphererInforMation();
     }
 
     public void DropSphere() 
