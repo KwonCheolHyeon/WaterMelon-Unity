@@ -3210,7 +3210,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3239,7 +3239,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140608246}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 7113620311128232067, guid: 05e6753b30062224f8c6e52210af18fa, type: 3}
 --- !u!4 &1140608249
 Transform:
   m_ObjectHideFlags: 0
@@ -3250,8 +3250,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.285, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4948,7 +4948,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5018,7 +5018,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1b7ab69c763f5854d875e8fc8d1d4fac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5049,8 +5049,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.9857143
-        value: 0.12941241
+        time: 0.98852193
+        value: 0.35725665
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -5062,8 +5062,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 0.39607844}
-      key1: {r: 1, g: 0, b: 0, a: 0.39607844}
+      key0: {r: 0.24038802, g: 0.6981132, b: 0.56078434, a: 0.49019608}
+      key1: {r: 1, g: 0, b: 0, a: 0.88235295}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 1}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5120,7 +5120,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1605685335
 MonoBehaviour:
@@ -5150,6 +5150,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a483d2ff623dd1641aebe585de776eea, type: 3}
   - {fileID: 21300000, guid: a516da6fa7328e7449597e01c40d11d5, type: 3}
   nextSlimeImage: {fileID: 1848303703}
+  dotSpacing: 0.2
+  lineWidth: 0.1
 --- !u!1 &1634248984
 GameObject:
   m_ObjectHideFlags: 0
