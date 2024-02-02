@@ -42,7 +42,7 @@ public class SpaceTongsMoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextTypeSphere = 10;
+        nextTypeSphere = 0;
         mainCamera = Camera.main;
         mCameraScript = mainCamera.GetComponent<SpaceCameraMoveScript>();
         _transform = transform;
@@ -52,7 +52,8 @@ public class SpaceTongsMoveScript : MonoBehaviour
         minZ = -1.8f;
         maxZ = 1.8f;
         lineRenderer = GetComponent<LineRenderer>();
-        //FirstSettingSphereMove();
+        FirstSettingSphereMove();
+        //SettingSphereMove();
     }
 
     private void Update()
@@ -144,7 +145,7 @@ public class SpaceTongsMoveScript : MonoBehaviour
     {
         if (heldSphere == null)
         {
-            SpaceSphereScript sphere = SpaceGameManager.Instance.GetObject(0);
+            SpaceSphereScript sphere = SpaceGameManager.Instance.GetObject(nextTypeSphere);
             HoldSphere(sphere);
         }
         NextSphererInforMation();
@@ -300,8 +301,8 @@ public class SpaceTongsMoveScript : MonoBehaviour
     {
         SettingSphereMove();
 
-        //nextTypeSphere = GetRandomNumber();
-        nextTypeSphere -= 1;
+        nextTypeSphere = GetRandomNumber();
+
         textMeshProUGUI.text = nextTypeSphere + ": Next";
     }
 

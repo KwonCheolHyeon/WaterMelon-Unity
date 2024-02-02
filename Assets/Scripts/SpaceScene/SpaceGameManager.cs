@@ -100,7 +100,7 @@ public class SpaceGameManager : MonoBehaviour
         float prevSize = 0.1f;
         for (int index = 0; index < 11; index++)
         {
-            sizes[index] = prevSize + 0.01f;
+            sizes[index] = prevSize + 0.0225f;//space sphere이랑 연동 되어야 함
             prevSize = sizes[index];
         }
 
@@ -136,12 +136,13 @@ public class SpaceGameManager : MonoBehaviour
     private SpaceSphereScript CreateNewObject(int _type, float _size)
     {
         SpaceSphereScript newObj = Instantiate(spaceObjects).AddComponent<SpaceSphereScript>();
+        newObj.SpaceMeshSetting();
         newObj.SettingSphere(_type, _size);
         newObj.gameObject.SetActive(false);
         newObj.transform.position = initSphereVec3;
         newObj.transform.SetParent(transform);
         newObj.GetComponent<SphereCollider>().enabled = false;
-        newObj.SpaceMeshSetting();
+        
 
         return newObj;
     }

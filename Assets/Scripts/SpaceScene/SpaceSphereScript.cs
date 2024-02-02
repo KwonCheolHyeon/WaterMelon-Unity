@@ -10,9 +10,10 @@ public class SpaceSphereScript : MonoBehaviour
     private Transform targetToFollow;
     private bool _isMerge = false;
 
-    private Vector3 nextScale = new Vector3(0.01f, 0.01f, 0.01f);
+    private Vector3 nextScale = new Vector3(0.0225f, 0.0225f, 0.0225f);
     private Rigidbody rigid;
     private SphereCollider sphereCol;
+    private float originalRadius;
     private MeshFilter thisMesh;
     private bool gameOverRun = false;
 
@@ -55,9 +56,10 @@ public class SpaceSphereScript : MonoBehaviour
         thisMesh = GetComponent<MeshFilter>();
     }
 
+
     void Start()
     {
-
+        originalRadius = sphereCol.radius;
     }
 
     private void OnDisable()
@@ -167,6 +169,21 @@ public class SpaceSphereScript : MonoBehaviour
         else
         {
             Debug.LogError("스페이스 구 스크립트 SettingSphere 오류");
+
+            if (meshes == null) 
+            {
+                Debug.LogError("meshes null 에러");
+            }
+            if (_index < 0) 
+            {
+                Debug.LogError("_index 에러");
+            }
+            if (_index >= meshes.Length)
+            {
+                Debug.LogError("meshes.Length");
+            }
+
+           
         }
 
 
@@ -190,6 +207,16 @@ public class SpaceSphereScript : MonoBehaviour
         if (meshes != null && type >= 0 && type < meshes.Length)
         {
             thisMesh.mesh = meshes[type];
+
+            // Check if the type is 7 to adjust the SphereCollider's radius
+            if (type == 7)
+            {
+                sphereCol.radius = 4.86f;
+            }
+            else
+            {
+                sphereCol.radius = originalRadius;
+            }
         }
         else
         {
