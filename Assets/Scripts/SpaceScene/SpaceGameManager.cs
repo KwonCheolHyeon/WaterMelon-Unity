@@ -50,6 +50,10 @@ public class SpaceGameManager : MonoBehaviour
     //스테이지 흔들기
     [SerializeField]
     private GameObject stage;
+    [SerializeField]
+    private TextMeshProUGUI textShakeCount;
+    private int shakeCount;
+    //
 
     public int Score // Property
     {
@@ -111,6 +115,7 @@ public class SpaceGameManager : MonoBehaviour
 
     void Start()
     {
+        shakeCount = 2;
         nowScoreText.text = 0 + "";
 
     }
@@ -118,10 +123,7 @@ public class SpaceGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            TriggerStageShake();
-        }
+
     }
 
     private void InitializeSphere(int initCount)
@@ -269,6 +271,13 @@ public class SpaceGameManager : MonoBehaviour
 
     public void TriggerStageShake()
     {
+        if(shakeCount == 0) 
+        {
+            return;
+        }
+        shakeCount--;
+        textShakeCount.text = shakeCount.ToString();
+
         float duration = 0.3f;
         float magnitude = 0.2f;
         StartCoroutine(ShakeObject(duration, magnitude));
