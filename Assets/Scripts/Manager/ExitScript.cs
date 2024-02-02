@@ -8,7 +8,7 @@ public class ExitScript : MonoBehaviour
     [SerializeField]
     SceneNames sceneName;
 
-    // 3개의 GamePlayScene - Exit_Button에서 참조
+    // 3개의 GamePlayScene의 Menu_Obj.ButtonGroupExit_Button에서 참조
     public void FromSelectScene()
     {
         UtisScript.LoadScene(sceneName);
@@ -24,8 +24,10 @@ public class ExitScript : MonoBehaviour
 #endif
     }
 
+    // Menu_Obj.ButtonGroup.Replay_Button에서 참조
     public void RePlay()
     {
-        UtisScript.LoadScene("SlimeScene");
+        Scene scene = SceneManager.GetActiveScene();
+        UtisScript.LoadScene(scene.name);
     }
 }
