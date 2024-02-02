@@ -38,6 +38,9 @@ public class SlimeTongsMoveScript : MonoBehaviour
     private Image nextSlimeImage;
     private int nextTypeSlime;
 
+    public float dotSpacing = 0.2f; // 점과 점 사이의 간격
+    public float lineWidth = 0.1f; // 선의 너비
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -49,6 +52,8 @@ public class SlimeTongsMoveScript : MonoBehaviour
 
         lineRenderer = GetComponent<LineRenderer>();
         FirstSettingSphereMove();
+
+
     }
 
     private void Update()
@@ -68,7 +73,6 @@ public class SlimeTongsMoveScript : MonoBehaviour
         {
             DrawTrajectory();
         }
-
     }
     void FixedUpdate()
     {
@@ -263,38 +267,39 @@ public class SlimeTongsMoveScript : MonoBehaviour
         if (Physics.Raycast(start, direction, out RaycastHit hit, rayLength))
         {
             Vector3 hitPoint = hit.point;
-
+            hitPoint.y += 0.3f;
             targetObject.transform.position = hitPoint;
+            targetObject.transform.rotation = heldSlime.transform.rotation;
 
-            SetLineRendererGradientAtPoint(hit.distance / rayLength);
+            //SetLineRendererGradientAtPoint(hit.distance / rayLength);
             lineRenderer.SetPosition(1, hit.point);
         }
         else
         {
-            ResetLineRendererGradient();
+            //ResetLineRendererGradient();
             lineRenderer.SetPosition(1, start + direction * rayLength);
         }
     }
 
-    void SetLineRendererGradientAtPoint(float relativePoint)
-    {
-        Gradient gradient = new Gradient();
-        gradient.SetKeys(
-            new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.red, relativePoint), new GradientColorKey(Color.red, 1.0f) },
-            new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, relativePoint), new GradientAlphaKey(1.0f, 1.0f) }
-        );
-        lineRenderer.colorGradient = gradient;
-    }
+    //void SetLineRendererGradientAtPoint(float relativePoint)
+    //{
+    //    Gradient gradient = new Gradient();
+    //    gradient.SetKeys(
+    //        new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.red, relativePoint), new GradientColorKey(Color.red, 1.0f) },
+    //        new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, relativePoint), new GradientAlphaKey(1.0f, 1.0f) }
+    //    );
+    //    lineRenderer.colorGradient = gradient;
+    //}
 
-    void ResetLineRendererGradient()
-    {
-        Gradient gradient = new Gradient();
-        gradient.SetKeys(
-            new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
-            new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
-        );
-        lineRenderer.colorGradient = gradient;
-    }
+    //void ResetLineRendererGradient()
+    //{
+    //    Gradient gradient = new Gradient();
+    //    gradient.SetKeys(
+    //        new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
+    //        new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+    //    );
+    //    lineRenderer.colorGradient = gradient;
+    //}
 
     public void NextSphererInforMation() // 다음 구체에 대한 정보
     {

@@ -22,7 +22,7 @@ public class CameraMoveScript : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        vectors[0] = new Vector3(0, 9.2f, 0);  // Set position
+        vectors[0] = new Vector3(0, 14.0f, 0);  // Set position
         rotates[0] = Quaternion.Euler(90, 0, 0);  // Set rotation
 
         vectors[1] = new Vector3(0,10,-10);  // Set position
