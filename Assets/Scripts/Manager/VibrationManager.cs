@@ -165,6 +165,12 @@ public class VibrationManager : MonoBehaviour
 
         // 가져온 버튼의 onClick 이벤트에 VibrationOptionChange() 함수 생성
         vibrationOptionButton.onClick.AddListener(VibrationOptionChange);
+
+        if (isVir)
+            vibrationOptionButton.GetComponent<Image>().sprite = vibTrueSprite;
+        else
+            vibrationOptionButton.GetComponent<Image>().sprite = vibFalseSprite;
+
     }
 
     //Works on API > 25
