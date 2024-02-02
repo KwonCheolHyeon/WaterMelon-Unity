@@ -93,7 +93,7 @@ public class SlimeGameManager : MonoBehaviour
         InitializeSphere(100);
     }
 
-    private void InitializeSphere(int initCount)// 초기 설정 용
+    public void InitializeSphere(int initCount)// 초기 설정 용
     {
         for (int i = 0; i < initCount; i++)
         {

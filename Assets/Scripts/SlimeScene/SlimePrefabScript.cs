@@ -95,9 +95,11 @@ public class SlimePrefabScript : MonoBehaviour
         if (tagsToCheck.Contains(collision.gameObject.tag))
         {
             SlimePrefabScript otherSphere = collision.gameObject.GetComponent<SlimePrefabScript>();
-
             if (otherSphere != null && otherSphere.tag == this.tag && !isMerge && !otherSphere.isMerge && this.tag != "ten")
             {
+                // 합쳐질때 진동 생성
+                VibrationManager.Instance.CreateOneShot(20);
+
                 float meX = transform.position.x;
                 float meY = transform.position.y;
                 float meZ = transform.position.z;
@@ -133,7 +135,6 @@ public class SlimePrefabScript : MonoBehaviour
         if (tagsToCheck.Contains(collision.gameObject.tag))
         {
             SlimePrefabScript otherSphere = collision.gameObject.GetComponent<SlimePrefabScript>();
-
             if (otherSphere != null && otherSphere.tag == this.tag && !isMerge && !otherSphere.isMerge && this.tag != "ten")
             {
                 float meX = transform.position.x;
