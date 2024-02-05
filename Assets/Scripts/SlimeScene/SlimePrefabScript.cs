@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class SlimePrefabScript : MonoBehaviour
 {
@@ -16,6 +19,8 @@ public class SlimePrefabScript : MonoBehaviour
     // 단계별 머티리얼을 저장하는 List 변수
     [SerializeField]
     private List<Material> materials;
+    [SerializeField]
+    private GameObject collEffect;
 
     private bool gameOverRun = false;
     private bool _isMerge = false;
@@ -63,11 +68,6 @@ public class SlimePrefabScript : MonoBehaviour
     {
         isBottom = false;
         targetToFollow = null;
-    }
-
-    void Update()
-    {
-        
     }
 
     void FixedUpdate()
@@ -247,6 +247,8 @@ public class SlimePrefabScript : MonoBehaviour
         rigid.useGravity = false;
         meshColl.enabled = false;
 
+        CreateCollisionEffect();
+
         StartCoroutine(HideRoutine(targetPos));
     }
     IEnumerator HideRoutine(Vector3 targetPos)
@@ -274,5 +276,19 @@ public class SlimePrefabScript : MonoBehaviour
         // Stop all collision by disabling the Rigidbody and Collider
         rigid.isKinematic = true;
         meshColl.enabled = false;
+    }
+
+    private void CreateCollisionEffect()
+    {
+        GameObject effect = GameObject.Instantiate(collEffect);
+
+        // 파티클의 시작색상을 SlimePrefab의 색상과 같도록 변경
+        var ma = effect.GetComponent<ParticleSystem>().main;
+        Color color = materials[type].GetColor("_Fresnel_Color");
+        color.a = 1f;
+        ma.startColor = color;
+
+        effect.transform.position = this.transform.position;
+        effect.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
     }
 }
