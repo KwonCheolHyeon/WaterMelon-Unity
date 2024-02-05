@@ -159,3 +159,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9b942cb684b38c442ab05a45437762d4, type: 2}
   - {fileID: 2100000, guid: b57752ea2bf4ba74097fb06113a24871, type: 2}
   - {fileID: 2100000, guid: a02de2f7594a843409280382edc3a150, type: 2}
+  collEffect: {fileID: 1901858458647210, guid: 0426e3d6996937045b977f3a66e95ee4, type: 3}

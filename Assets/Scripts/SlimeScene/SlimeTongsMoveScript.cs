@@ -287,26 +287,6 @@ public class SlimeTongsMoveScript : MonoBehaviour
         }
     }
 
-    //void SetLineRendererGradientAtPoint(float relativePoint)
-    //{
-    //    Gradient gradient = new Gradient();
-    //    gradient.SetKeys(
-    //        new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.red, relativePoint), new GradientColorKey(Color.red, 1.0f) },
-    //        new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, relativePoint), new GradientAlphaKey(1.0f, 1.0f) }
-    //    );
-    //    lineRenderer.colorGradient = gradient;
-    //}
-
-    //void ResetLineRendererGradient()
-    //{
-    //    Gradient gradient = new Gradient();
-    //    gradient.SetKeys(
-    //        new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
-    //        new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
-    //    );
-    //    lineRenderer.colorGradient = gradient;
-    //}
-
     public void NextSphererInforMation() // 다음 구체에 대한 정보
     {
         SettingSphereMove();
