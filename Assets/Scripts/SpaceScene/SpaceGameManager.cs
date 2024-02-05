@@ -7,6 +7,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using System.Text;
+using GooglePlayGames;
 
 public class SpaceGameManager : MonoBehaviour
 {
@@ -330,6 +331,9 @@ public class SpaceGameManager : MonoBehaviour
             gameoverState = true;
             gameOverPanel.SetActive(true);
             cameraScr.GameOverCameraMove();
+
+            // PlayGamesPlatform 리더보드에 점수 추가
+            PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
         }
     }
 

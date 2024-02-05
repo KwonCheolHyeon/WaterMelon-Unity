@@ -185,11 +185,7 @@ public class SpaceSphereScript : MonoBehaviour
             {
                 Debug.LogError("meshes.Length");
             }
-
-           
         }
-
-
     }
 
     public void SettingChangeSphere()
