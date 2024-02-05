@@ -36,6 +36,15 @@ public class SlimeGameManager : MonoBehaviour
     //스테이지 흔들기
     [SerializeField]
     private GameObject stage;
+    [SerializeField]
+    private TextMeshProUGUI textShakeCount;
+    private int shakeCount;
+
+    //콤보 시스템 관련
+    private float comboTime;
+    private int comboCount;
+    private bool isComboState;
+    //콤보 시스템 관련
 
     public int score;
 
@@ -92,7 +101,30 @@ public class SlimeGameManager : MonoBehaviour
 
         InitializeSphere(100);
     }
+    void Start()
+    {
+        comboCount = 1;
+        comboTime = 0;
+        isComboState = false;
+        shakeCount = 2;
+        nowScoreText.text = 0 + "";
 
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (isComboState)
+        {
+            // 콤보 상태일 때, comboTime을 감소
+            comboTime -= Time.deltaTime;
+            // comboTime이 0 이하가 되면, 콤보를 초기화
+            if (comboTime <= 0)
+            {
+                InItCombo();
+            }
+        }
+    }
     public void InitializeSphere(int initCount)// 초기 설정 용
     {
         for (int i = 0; i < initCount; i++)
@@ -172,53 +204,104 @@ public class SlimeGameManager : MonoBehaviour
 
     public void SetGameScore(int type)
     {
+        if (isComboState)
+        {
+            comboTime = 3.0f;
 
-        switch (type)
+            if (comboCount > 4)
+            {
+                gameScore += GameScoreUp(type) * 5;
+            }
+            else if (comboCount == 4)
+            {
+                gameScore += GameScoreUp(type) * 4;
+            }
+            else if (comboCount == 3)
+            {
+                gameScore += GameScoreUp(type) * 3;
+            }
+            else if (comboCount == 2)
+            {
+                gameScore += GameScoreUp(type) * 2;
+            }
+            else
+            {
+                Debug.LogError("ComBoCount 가 0입니다.");
+            }
+            comboCount += 1;
+        }
+        else
+        {
+            gameScore += GameScoreUp(type); // 콤보 상태가 아닐 때는 기본 점수를 추가
+            comboCount += 1; // 콤보 카운트를 1로 시작
+            isComboState = true; // 콤보 상태를 활성
+            comboTime = 3.0f; // 콤보 타이머를 3초로 설정
+        }
+
+
+        nowScoreText.text = gameScore + "";
+    }
+
+    private void InItCombo()
+    {
+        isComboState = false;
+        comboCount = 1;
+        comboTime = 3.0f;
+    }
+    private int GameScoreUp(int _type)
+    {
+        int gameScoreUp = 0;
+        switch (_type)
         {
             case 0:
-                gameScore += 2;
+                gameScoreUp += 2;
                 break;
             case 1:
-                gameScore += 6;
+                gameScoreUp += 6;
                 break;
             case 2:
-                gameScore += 12;
+                gameScoreUp += 12;
                 break;
             case 3:
-                gameScore += 20;
+                gameScoreUp += 20;
                 break;
             case 4:
-                gameScore += 30;
+                gameScoreUp += 30;
                 break;
             case 5:
-                gameScore += 42;
+                gameScoreUp += 42;
                 break;
             case 6:
-                gameScore += 56;
+                gameScoreUp += 56;
                 break;
             case 7:
-                gameScore += 72;
+                gameScoreUp += 72;
                 break;
             case 8:
-                gameScore += 90;
+                gameScoreUp += 90;
                 break;
             case 9:
-                gameScore += 110;
+                gameScoreUp += 110;
                 break;
             case 10:
-                gameScore += 132;
+                gameScoreUp += 132;
                 break;
             default:
                 Debug.LogError("Game Manager SetGameScore type 오류");
                 break;
         }
-
-        nowScoreText.text = gameScore + "";
-
+        return gameScoreUp;
     }
 
     public void TriggerStageShake()
     {
+        if (shakeCount == 0)
+        {
+            return;
+        }
+        shakeCount--;
+        textShakeCount.text = shakeCount.ToString();
+
         float duration = 0.3f;
         float magnitude = 0.2f;
         StartCoroutine(ShakeObject(duration, magnitude));

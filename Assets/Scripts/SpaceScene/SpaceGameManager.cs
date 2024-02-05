@@ -59,8 +59,6 @@ public class SpaceGameManager : MonoBehaviour
     private float comboTime;
     private int comboCount;
     private bool isComboState;
-
-
     //콤보 시스템 관련
 
 
@@ -240,15 +238,15 @@ public class SpaceGameManager : MonoBehaviour
             }
             else if (comboCount == 4)
             {
-                gameScore += GameScoreUp(type) * 4;
+                gameScore += GameScoreUp(type) * comboCount;
             }
             else if (comboCount == 3)
             {
-                gameScore += GameScoreUp(type) * 3;
+                gameScore += GameScoreUp(type) * comboCount;
             }
             else if (comboCount == 2)
             {
-                gameScore += GameScoreUp(type) * 2;
+                gameScore += GameScoreUp(type) * comboCount;
             }
             else 
             {
