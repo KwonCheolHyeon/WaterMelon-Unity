@@ -37,11 +37,18 @@ public class SpaceTongsMoveScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textMeshProUGUI;
     private int nextTypeSphere;
+    [SerializeField]
+    private TextMeshProUGUI textChangeCount;
+    private int changeCount;
+
     //다음 나올 과일을 보여주는 관련
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        changeCount = 2;
         nextTypeSphere = 0;
         mainCamera = Camera.main;
         mCameraScript = mainCamera.GetComponent<SpaceCameraMoveScript>();
@@ -303,6 +310,26 @@ public class SpaceTongsMoveScript : MonoBehaviour
 
         nextTypeSphere = GetRandomNumber();
 
+        textMeshProUGUI.text = nextTypeSphere + ": Next";
+    }
+
+    public void ChangeNextSphereType() 
+    {
+        if (changeCount == 0)//남은 갯수 없으면 거부
+        {
+            return;
+        }
+
+        int nowType = nextTypeSphere;
+
+        while (nowType == nextTypeSphere) 
+        {
+            nextTypeSphere = GetRandomNumber();
+        }
+        
+        changeCount -= 1;
+     
+        textChangeCount.text = changeCount + "";
         textMeshProUGUI.text = nextTypeSphere + ": Next";
     }
 

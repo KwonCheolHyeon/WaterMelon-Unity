@@ -38,11 +38,17 @@ public class SlimeTongsMoveScript : MonoBehaviour
     private Image nextSlimeImage;
     private int nextTypeSlime;
 
+    [SerializeField]
+    private TextMeshProUGUI textChangeCount;
+    private int changeCount;
+
     public float dotSpacing = 0.2f; // 점과 점 사이의 간격
     public float lineWidth = 0.1f; // 선의 너비
 
     void Start()
     {
+        changeCount = 2;
+        nextTypeSlime = 0;
         mainCamera = Camera.main;
         mCameraScript = mainCamera.GetComponent<CameraMoveScript>();
         minX = -1.8f;
@@ -286,6 +292,25 @@ public class SlimeTongsMoveScript : MonoBehaviour
         SettingSphereMove();
 
         nextTypeSlime = GetRandomNumber();
+        nextSlimeImage.sprite = slimeImageList[nextTypeSlime];
+    }
+    public void ChangeNextSphereType()
+    {
+        if (changeCount == 0)//남은 갯수 없으면 거부
+        {
+            return;
+        }
+
+        int nowType = nextTypeSlime;
+
+        while (nowType == nextTypeSlime)
+        {
+            nextTypeSlime = GetRandomNumber();
+        }
+
+        changeCount -= 1;
+
+        textChangeCount.text = changeCount + "";
         nextSlimeImage.sprite = slimeImageList[nextTypeSlime];
     }
 
