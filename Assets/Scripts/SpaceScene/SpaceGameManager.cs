@@ -7,6 +7,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using System.Text;
+using GooglePlayGames;
 
 public class SpaceGameManager : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class SpaceGameManager : MonoBehaviour
     private float[] sizes = new float[11];
     [SerializeField]
     private Mesh[] meshes;
-    //오브젝트 세팅 관련
+    [SerializeField]
+    private GameObject collEffect;
 
     //집게 세팅 관련
     [SerializeField]
@@ -133,6 +135,9 @@ public class SpaceGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+            GameOver();
+
         if (isComboState)
         {
             // 콤보 상태일 때, comboTime을 감소
@@ -163,7 +168,7 @@ public class SpaceGameManager : MonoBehaviour
         newObj.transform.position = initSphereVec3;
         newObj.transform.SetParent(transform);
         newObj.GetComponent<SphereCollider>().enabled = false;
-        
+        newObj.SetCollEffect(collEffect);
 
         return newObj;
     }
@@ -321,9 +326,14 @@ public class SpaceGameManager : MonoBehaviour
     {
         if (gameoverState == false)
         {
+            GameObject.Find("Canvas").gameObject.SetActive(false);
+
             gameoverState = true;
             gameOverPanel.SetActive(true);
             cameraScr.GameOverCameraMove();
+
+            // PlayGamesPlatform 리더보드에 점수 추가
+            PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
         }
     }
 

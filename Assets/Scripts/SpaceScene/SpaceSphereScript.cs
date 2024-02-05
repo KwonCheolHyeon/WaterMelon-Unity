@@ -17,10 +17,13 @@ public class SpaceSphereScript : MonoBehaviour
     private MeshFilter thisMesh;
     private bool gameOverRun = false;
 
-
-
     [SerializeField]
     private Mesh[] meshes;
+
+    private GameObject collEffect;
+    public void SetCollEffect(GameObject _effect) { collEffect = _effect; }
+
+
 
     public void SpaceMeshSetting() 
     {
@@ -182,11 +185,7 @@ public class SpaceSphereScript : MonoBehaviour
             {
                 Debug.LogError("meshes.Length");
             }
-
-           
         }
-
-
     }
 
     public void SettingChangeSphere()
@@ -232,6 +231,8 @@ public class SpaceSphereScript : MonoBehaviour
         rigid.useGravity = false;
         sphereCol.enabled = false;
 
+        CreateCollisionEffect();
+
         StartCoroutine(HideRoutine(targetPos));
     }
     IEnumerator HideRoutine(Vector3 targetPos)
@@ -259,5 +260,12 @@ public class SpaceSphereScript : MonoBehaviour
         // Stop all collision by disabling the Rigidbody and Collider
         rigid.isKinematic = true;
         sphereCol.enabled = false;
+    }
+
+    private void CreateCollisionEffect()
+    {
+        GameObject effect = GameObject.Instantiate(collEffect);
+        effect.transform.position = this.transform.position;
+        effect.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
     }
 }

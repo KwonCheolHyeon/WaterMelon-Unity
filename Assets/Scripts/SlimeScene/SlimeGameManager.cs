@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,9 +46,6 @@ public class SlimeGameManager : MonoBehaviour
     private int comboCount;
     private bool isComboState;
     //콤보 시스템 관련
-
-    public int score;
-
 
     public int Score // Property
     {
@@ -114,6 +112,9 @@ public class SlimeGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+            GameOver();
+
         if (isComboState)
         {
             // 콤보 상태일 때, comboTime을 감소
@@ -332,9 +333,13 @@ public class SlimeGameManager : MonoBehaviour
         if (gameoverState == false)
         {
             gameoverState = true;
+
+            GameObject.Find("Canvas").gameObject.SetActive(false);
             gameOverPanel.SetActive(true);
 
             Camera.main.GetComponent<CameraMoveScript>().GameOverCameraMove();
+            // PlayGamesPlatform 리더보드에 점수 추가
+            PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
         }
     }
 }
