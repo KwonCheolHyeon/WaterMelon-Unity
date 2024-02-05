@@ -320,7 +320,13 @@ public class SpaceTongsMoveScript : MonoBehaviour
             return;
         }
 
-        nextTypeSphere = GetRandomNumber();
+        int nowType = nextTypeSphere;
+
+        while (nowType == nextTypeSphere) 
+        {
+            nextTypeSphere = GetRandomNumber();
+        }
+        
         changeCount -= 1;
      
         textChangeCount.text = changeCount + "";
