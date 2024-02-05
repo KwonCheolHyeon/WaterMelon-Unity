@@ -30,4 +30,9 @@ public class ExitScript : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         UtisScript.LoadScene(scene.name);
     }
+
+    public void ShowAllReaderBoard()
+    {
+        GPGSBinderScript.Instance.ShowAllLeaderboardUI();
+    }
 }
