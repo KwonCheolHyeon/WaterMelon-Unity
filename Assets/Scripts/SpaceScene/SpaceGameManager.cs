@@ -22,7 +22,8 @@ public class SpaceGameManager : MonoBehaviour
     private float[] sizes = new float[11];
     [SerializeField]
     private Mesh[] meshes;
-    //오브젝트 세팅 관련
+    [SerializeField]
+    private GameObject collEffect;
 
     //집게 세팅 관련
     [SerializeField]
@@ -166,7 +167,7 @@ public class SpaceGameManager : MonoBehaviour
         newObj.transform.position = initSphereVec3;
         newObj.transform.SetParent(transform);
         newObj.GetComponent<SphereCollider>().enabled = false;
-        
+        newObj.SetCollEffect(collEffect);
 
         return newObj;
     }

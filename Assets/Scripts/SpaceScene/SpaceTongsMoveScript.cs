@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpaceTongsMoveScript : MonoBehaviour
 {
@@ -31,11 +32,14 @@ public class SpaceTongsMoveScript : MonoBehaviour
 
     //조이스틱 관련
     public VariableJoystick variableJoystick;
-    //조이스틱 관련
+
+    //단계별 행성 이미지
+    [SerializeField]
+    private List<Sprite> planetImageList = new List<Sprite>();
 
     //다음 나올 과일을 보여주는 관련
     [SerializeField]
-    private TextMeshProUGUI textMeshProUGUI;
+    private Image nextPlanetImage;
     private int nextTypeSphere;
     [SerializeField]
     private TextMeshProUGUI textChangeCount;
@@ -154,6 +158,8 @@ public class SpaceTongsMoveScript : MonoBehaviour
         {
             SpaceSphereScript sphere = SpaceGameManager.Instance.GetObject(nextTypeSphere);
             HoldSphere(sphere);
+            // 다음 행성 이미지 설정
+            nextPlanetImage.sprite = planetImageList[nextTypeSphere];
         }
         NextSphererInforMation();
     }
@@ -309,8 +315,8 @@ public class SpaceTongsMoveScript : MonoBehaviour
         SettingSphereMove();
 
         nextTypeSphere = GetRandomNumber();
-
-        textMeshProUGUI.text = nextTypeSphere + ": Next";
+        // 다음 행성 이미지 설정
+        nextPlanetImage.sprite = planetImageList[nextTypeSphere];
     }
 
     public void ChangeNextSphereType() 
@@ -330,7 +336,8 @@ public class SpaceTongsMoveScript : MonoBehaviour
         changeCount -= 1;
      
         textChangeCount.text = changeCount + "";
-        textMeshProUGUI.text = nextTypeSphere + ": Next";
+        // 다음 행성 이미지 설정
+        nextPlanetImage.sprite = planetImageList[nextTypeSphere];
     }
 
     private IEnumerator ReleaseSphereWithDelay()
