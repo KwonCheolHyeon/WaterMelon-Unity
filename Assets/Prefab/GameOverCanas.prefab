@@ -225,7 +225,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 122835873801698553}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4059335252133189364}
+        m_TargetAssemblyTypeName: ExitScript, Assembly-CSharp
+        m_MethodName: ShowAllReaderBoard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1721436796184646108
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +612,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7193823783603198225}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4059335252133189364}
+        m_TargetAssemblyTypeName: ExitScript, Assembly-CSharp
+        m_MethodName: FromSelectScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5143146242509292903
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +982,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 319546655377970400}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4059335252133189364}
+        m_TargetAssemblyTypeName: ExitScript, Assembly-CSharp
+        m_MethodName: RePlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7963703459895822267
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +1007,7 @@ GameObject:
   - component: {fileID: 8964050757234535043}
   - component: {fileID: 5152798355100593421}
   - component: {fileID: 7779640794963457242}
+  - component: {fileID: 4059335252133189364}
   m_Layer: 5
   m_Name: GameOverCanas
   m_TagString: Untagged
@@ -1063,6 +1100,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4059335252133189364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963703459895822267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78065529255cf934d971c44572cc6e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: 1
 --- !u!1 &8828452055722485916
 GameObject:
   m_ObjectHideFlags: 0

@@ -133,6 +133,9 @@ public class SpaceGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+            GameOver();
+
         if (isComboState)
         {
             // 콤보 상태일 때, comboTime을 감소
@@ -321,6 +324,8 @@ public class SpaceGameManager : MonoBehaviour
     {
         if (gameoverState == false)
         {
+            GameObject.Find("Canvas").gameObject.SetActive(false);
+
             gameoverState = true;
             gameOverPanel.SetActive(true);
             cameraScr.GameOverCameraMove();
