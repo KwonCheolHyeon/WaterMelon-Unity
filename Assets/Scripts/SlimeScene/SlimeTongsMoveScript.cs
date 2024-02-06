@@ -41,6 +41,13 @@ public class SlimeTongsMoveScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textChangeCount;
     private int changeCount;
+    [SerializeField]
+    private GameObject adPannel;
+    public void SetChangeCount() 
+    {
+        changeCount = 1;
+        textChangeCount.text = changeCount + "";
+    }
 
     public float dotSpacing = 0.2f; // 점과 점 사이의 간격
     public float lineWidth = 0.1f; // 선의 너비
@@ -296,11 +303,20 @@ public class SlimeTongsMoveScript : MonoBehaviour
     }
     public void ChangeNextSphereType()
     {
-        if (changeCount == 0)//남은 갯수 없으면 거부
+        if (changeCount == 0 && adPannel.activeSelf == false)
         {
-            return;
+            SlimeGameManager.Instance.ChangeAdUiPanel();
+        }
+        else
+        {
+            TriggerChangeCardOn();
         }
 
+    
+    }
+
+    public void TriggerChangeCardOn() 
+    {
         int nowType = nextTypeSlime;
 
         while (nowType == nextTypeSlime)
@@ -313,6 +329,8 @@ public class SlimeTongsMoveScript : MonoBehaviour
         textChangeCount.text = changeCount + "";
         nextSlimeImage.sprite = slimeImageList[nextTypeSlime];
     }
+
+
 
     private IEnumerator ReleaseSlimeWithDelay()
     {
