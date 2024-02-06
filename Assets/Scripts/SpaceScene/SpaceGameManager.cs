@@ -344,6 +344,8 @@ public class SpaceGameManager : MonoBehaviour
 
     public void TriggerStageShake()
     {
+
+
         if(shakeCount == 0) 
         {
             return;

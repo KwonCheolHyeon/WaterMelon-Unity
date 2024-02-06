@@ -298,8 +298,17 @@ public class SlimeGameManager : MonoBehaviour
     {
         if (shakeCount == 0)
         {
-            return;
+            
+            
         }
+        else 
+        {
+            TriggerStageShakeOn();
+        }
+    }
+
+    private void TriggerStageShakeOn() 
+    {
         shakeCount--;
         textShakeCount.text = shakeCount.ToString();
 

@@ -6,7 +6,7 @@ using UnityEngine.Advertisements;
 
 public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] Button _showAdButton;
+    //[SerializeField] Button _showAdButton;
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
@@ -21,7 +21,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 #endif
 
         // Disable the button until the ad is ready to show:
-        _showAdButton.interactable = false;
+       // _showAdButton.interactable = false;
     }
 
     // Call this public method when you want to get an ad ready to show.
@@ -35,14 +35,11 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
-        Debug.Log("Ad Loaded: " + adUnitId);
-
+        Debug.Log("Rewarded Ad Loaded: " + adUnitId);
         if (adUnitId.Equals(_adUnitId))
         {
-            // Configure the button to call the ShowAd() method when clicked:
-            _showAdButton.onClick.AddListener(ShowAd);
-            // Enable the button for users to click:
-            _showAdButton.interactable = true;
+            // 광고가 성공적으로 로드되면 광고를 표시합니다.
+            ShowAd();
         }
     }
 
@@ -50,7 +47,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     public void ShowAd()
     {
         // Disable the button:
-        _showAdButton.interactable = false;
+        //_showAdButton.interactable = false;
         // Then show the ad:
         Advertisement.Show(_adUnitId, this);
     }
@@ -61,7 +58,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
-            // Grant a reward.
+            GrantReward();
         }
     }
 
@@ -84,6 +81,17 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     void OnDestroy()
     {
         // Clean up the button listeners:
-        _showAdButton.onClick.RemoveAllListeners();
+      //  _showAdButton.onClick.RemoveAllListeners();
+    }
+
+    public void StartRewardedAd()
+    {
+        // 광고 로드를 시작합니다.
+        Debug.Log("Loading Rewarded Ad: " + _adUnitId);
+        Advertisement.Load(_adUnitId, this);
+    }
+    private void GrantReward()
+    {
+        this.transform.parent.GetComponent<UnityAdsManager>().RewardOn();
     }
 }
