@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlimeGameManager : MonoBehaviour
 {
@@ -46,6 +47,14 @@ public class SlimeGameManager : MonoBehaviour
     private int comboCount;
     private bool isComboState;
     //콤보 시스템 관련
+
+    //광고 관련
+    [SerializeField]
+    private GameObject adPannel;
+    [SerializeField]
+    private Button adButton;
+    private int rewardType;
+    //광고 허가 버튼
 
     public int Score // Property
     {
@@ -106,7 +115,11 @@ public class SlimeGameManager : MonoBehaviour
         isComboState = false;
         shakeCount = 2;
         nowScoreText.text = 0 + "";
+        rewardType = 0;
 
+        adPannel.SetActive(false);
+        adButton.onClick.AddListener(UserAllowAd);
+        adButton.interactable = true;
     }
 
     // Update is called once per frame
@@ -296,10 +309,9 @@ public class SlimeGameManager : MonoBehaviour
 
     public void TriggerStageShake()
     {
-        if (shakeCount == 0)
+        if (shakeCount == 0 && adPannel.activeSelf == false)
         {
-            
-            
+            ShakeAdUiPanel();
         }
         else 
         {
@@ -316,6 +328,39 @@ public class SlimeGameManager : MonoBehaviour
         float magnitude = 0.2f;
         StartCoroutine(ShakeObject(duration, magnitude));
     }
+
+    public void ShakeAdUiPanel() //흔드는거 없을때
+    {
+        rewardType = 0;
+        adPannel.SetActive(true);
+    }
+
+    public void ChangeAdUiPanel()//바꾸는 거 없을때
+    {
+        rewardType = 1;
+        adPannel.SetActive(true);
+    }
+
+    public void UserAllowAd()//유저가 광고보는것을 허락 
+    {
+        UnityAdsManager.Instance.RewardType(rewardType);
+        UnityAdsManager.Instance.Request();
+    }
+
+    public void RewardShackStageCard() 
+    {
+        adPannel.SetActive(false);
+        shakeCount = 1;//어차피 0이기 때문에 1로 만든다.
+        textShakeCount.text = shakeCount.ToString();
+    }
+
+    public void RewardChangeCard()
+    {
+        adPannel.SetActive(false);
+        TongsMove.GetComponent<SlimeTongsMoveScript>().SetChangeCount();
+
+    }
+
 
     public IEnumerator ShakeObject(float duration, float magnitude)
     {

@@ -63,6 +63,14 @@ public class SpaceGameManager : MonoBehaviour
     private bool isComboState;
     //콤보 시스템 관련
 
+    //광고 관련
+    [SerializeField]
+    private Button adButton;
+    [SerializeField]
+    private GameObject adPannel;
+    [SerializeField]
+    private int rewardType;
+    //광고 허가 버튼
 
     public int Score // Property
     {
@@ -129,6 +137,12 @@ public class SpaceGameManager : MonoBehaviour
         isComboState = false;
         shakeCount = 2;
         nowScoreText.text = 0 + "";
+
+        rewardType = 0;
+
+        adPannel.SetActive(false);
+        adButton.onClick.AddListener(UserAllowAd);
+        adButton.interactable = true;
 
     }
 
@@ -344,18 +358,55 @@ public class SpaceGameManager : MonoBehaviour
 
     public void TriggerStageShake()
     {
-
-
-        if(shakeCount == 0) 
+        if (shakeCount == 0 && adPannel.activeSelf == false)
         {
-            return;
+            ShakeAdUiPanel();
         }
+        else
+        {
+            TriggerStageShakeOn();
+        }
+    }
+    private void TriggerStageShakeOn()
+    {
         shakeCount--;
         textShakeCount.text = shakeCount.ToString();
 
         float duration = 0.3f;
         float magnitude = 0.2f;
         StartCoroutine(ShakeObject(duration, magnitude));
+    }
+
+    public void ShakeAdUiPanel() //흔드는거 없을때
+    {
+        rewardType = 0;
+        adPannel.SetActive(true);
+    }
+
+    public void ChangeAdUiPanel()//바꾸는 거 없을때
+    {
+        rewardType = 1;
+        adPannel.SetActive(true);
+    }
+
+    public void UserAllowAd()//유저가 광고보는것을 허락 
+    {
+        UnityAdsManager.Instance.RewardType(rewardType);
+        UnityAdsManager.Instance.Request();
+    }
+
+    public void RewardShackStageCard()
+    {
+        adPannel.SetActive(false);
+        shakeCount = 1;//어차피 0이기 때문에 1로 만든다.
+        textShakeCount.text = shakeCount.ToString();
+    }
+
+    public void RewardChangeCard()
+    {
+        adPannel.SetActive(false);
+        TongsMove.GetComponent<SpaceTongsMoveScript>().SetChangeCount();
+
     }
 
     public IEnumerator ShakeObject(float duration, float magnitude)

@@ -97,15 +97,15 @@ public class UnityAdsManager : MonoBehaviour
 
     public void RewardOn() 
     {
-        if (sceneType == 0)
+        if (sceneType == 0)//ΩΩ∂Û¿”
         {
             if (rewardType == 0)
             {
-
+                SlimeGameManager.Instance.RewardShackStageCard();
             }
             else if (rewardType == 1)
             {
-
+                SlimeGameManager.Instance.RewardChangeCard();
             }
             else 
             {
@@ -116,11 +116,11 @@ public class UnityAdsManager : MonoBehaviour
         {
             if (rewardType == 0)
             {
-
+                SpaceGameManager.Instance.RewardShackStageCard();
             }
             else if (rewardType == 1)
             {
-
+                SpaceGameManager.Instance.RewardChangeCard();
             }
             else 
             {
