@@ -44,7 +44,13 @@ public class SpaceTongsMoveScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textChangeCount;
     private int changeCount;
-
+    [SerializeField]
+    private GameObject adPannel;
+    public void SetChangeCount()
+    {
+        changeCount = 1;
+        textChangeCount.text = changeCount + "";
+    }
     //다음 나올 과일을 보여주는 관련
 
 
@@ -321,25 +327,29 @@ public class SpaceTongsMoveScript : MonoBehaviour
 
     public void ChangeNextSphereType() 
     {
-        if (changeCount == 0)//남은 갯수 없으면 거부
+        if (changeCount == 0 && adPannel.activeSelf == false)
         {
-            return;
+            SpaceGameManager.Instance.ChangeAdUiPanel();
         }
-
+        else
+        {
+            TriggerChangeCardOn();
+        }
+    }
+    public void TriggerChangeCardOn()
+    {
         int nowType = nextTypeSphere;
 
-        while (nowType == nextTypeSphere) 
+        while (nowType == nextTypeSphere)
         {
             nextTypeSphere = GetRandomNumber();
         }
-        
+
         changeCount -= 1;
-     
+
         textChangeCount.text = changeCount + "";
-        // 다음 행성 이미지 설정
         nextPlanetImage.sprite = planetImageList[nextTypeSphere];
     }
-
     private IEnumerator ReleaseSphereWithDelay()
     {
         isReleasing = true;

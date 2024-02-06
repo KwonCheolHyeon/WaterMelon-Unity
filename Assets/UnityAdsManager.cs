@@ -53,15 +53,17 @@ public class UnityAdsManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Loaded new scene: " + scene.name);
-        if (scene.name == "SlimeScene")
+
+        if (scene.name == "SlimeScene" || scene.name == "SpaceGameScene")
         {
+            // GameManager를 찾습니다.
             gameManager = GameObject.Find("GameManager");
-            sceneType = 0;
-        }
-        else if (scene.name == "SpaceGameScene") 
-        {
-            gameManager = GameObject.Find("GameManager");
-            sceneType = 1;
+
+            // sceneType을 설정합니다. (0: 슬라임 씬, 1: 우주 씬)
+            sceneType = scene.name == "SlimeScene" ? 0 : 1;
+
+            // 배너 광고를 로드 및 표시합니다.
+            LoadAndShowBannerAd();
         }
     }
 
@@ -69,6 +71,23 @@ public class UnityAdsManager : MonoBehaviour
     {
         // 오브젝트가 파괴될 때 이벤트에서 함수를 제거하여 메모리 누수를 방지합니다.
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void LoadAndShowBannerAd()
+    {
+        if (bannerAd != null)
+        {
+            // 배너 광고 로드를 시작합니다.
+            bannerAd.LoadBanner();
+
+            // 주의: BannerAd 스크립트 내에서 OnBannerLoaded 콜백에서
+            // 광고가 로드되면 자동으로 표시되도록 구현해야 합니다.
+            // 즉, LoadBanner() 메서드 호출 이후에 별도로 ShowBannerAd()를 호출할 필요가 없어야 합니다.
+            // 광고 로드가 완료되면 OnBannerLoaded 내에서 광고가 표시되도록 하세요.
+        }
+        else
+        {
+            Debug.LogError("BannerAd 컴포넌트가 할당되지 않았습니다.");
+        }
     }
 
     public void Request()
@@ -78,15 +97,15 @@ public class UnityAdsManager : MonoBehaviour
 
     public void RewardOn() 
     {
-        if (sceneType == 0)
+        if (sceneType == 0)//슬라임
         {
             if (rewardType == 0)
             {
-
+                SlimeGameManager.Instance.RewardShackStageCard();
             }
             else if (rewardType == 1)
             {
-
+                SlimeGameManager.Instance.RewardChangeCard();
             }
             else 
             {
@@ -97,11 +116,11 @@ public class UnityAdsManager : MonoBehaviour
         {
             if (rewardType == 0)
             {
-
+                SpaceGameManager.Instance.RewardShackStageCard();
             }
             else if (rewardType == 1)
             {
-
+                SpaceGameManager.Instance.RewardChangeCard();
             }
             else 
             {
