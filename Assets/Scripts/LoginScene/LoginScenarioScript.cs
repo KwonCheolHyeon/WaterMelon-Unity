@@ -26,9 +26,9 @@ public class LoginScenarioScript : MonoBehaviour
         Application.runInBackground = true;
 
         // 해상도 설정 (9.16, 1440x2960)
-        int width = Screen.width;
-        int height = (int)(Screen.height * 16.0f / 9);
-        Screen.SetResolution(width, height, true);
+        //int width = Screen.width;
+        //int height = (int)(Screen.height * 16.0f / 9);
+        //Screen.SetResolution(width, height, true);
 
         // 화면이 꺼지지 않도록 설정
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
