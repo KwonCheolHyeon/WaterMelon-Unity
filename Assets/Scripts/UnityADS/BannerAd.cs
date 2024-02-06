@@ -3,108 +3,101 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 
 public class BannerAd : MonoBehaviour
 {
-    // For the purpose of this example, these buttons are for functionality testing:
-    [SerializeField] Button _loadBannerButton;
-    [SerializeField] Button _showBannerButton;
-    [SerializeField] Button _hideBannerButton;
-
     [SerializeField] BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
-
     [SerializeField] string _androidAdUnitId = "Banner_Android";
     [SerializeField] string _iOSAdUnitId = "Banner_iOS";
-    string _adUnitId = null; // This will remain null for unsupported platforms.
+    private string _adUnitId = null;
+    private RectTransform uiElement; // 조정하고자 하는 UI 요소
+    float bannerHeight = 140.0f; // 배너 높이를 가정한 값
 
-    void Start()
+    void Awake()
     {
-        // Get the Ad Unit ID for the current platform:
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "SlimeScene" || scene.name == "SpaceGameScene")
+        {
+            InitializeAds();
+            FindAndAdjustUI();
+        }
+        else
+        {
+            // 다른 씬에서는 배너 광고 숨기기
+            HideBannerAd();
+        }
+    }
+   
+    void InitializeAds()
+    {
+        // 현재 플랫폼에 맞는 Ad Unit ID 설정
 #if UNITY_IOS
         _adUnitId = _iOSAdUnitId;
 #elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
 #endif
 
-        // Disable the button until an ad is ready to show:
-        _showBannerButton.interactable = false;
-        _hideBannerButton.interactable = false;
 
-        // Set the banner position:
+        // Set banner position and load banner
         Advertisement.Banner.SetPosition(_bannerPosition);
-
-        // Configure the Load Banner button to call the LoadBanner() method when clicked:
-        _loadBannerButton.onClick.AddListener(LoadBanner);
-        _loadBannerButton.interactable = true;
+        LoadBanner();
     }
 
-    // Implement a method to call when the Load Banner button is clicked:
     public void LoadBanner()
     {
-        // Set up options to notify the SDK of load events:
+        Debug.Log("Loading Banner Ad");
         BannerLoadOptions options = new BannerLoadOptions
         {
             loadCallback = OnBannerLoaded,
             errorCallback = OnBannerError
         };
-
-        // Load the Ad Unit with banner content:
         Advertisement.Banner.Load(_adUnitId, options);
     }
 
-    // Implement code to execute when the loadCallback event triggers:
+    void AdjustUIForBanner()
+    {
+        if (uiElement != null)
+        {
+            // UI 요소의 현재 위치를 가져옵니다.
+            Vector3 currentPosition = uiElement.anchoredPosition;
+
+            // UI 요소를 배너 높이만큼 위로 이동시킵니다.
+            uiElement.anchoredPosition = new Vector3(currentPosition.x, currentPosition.y + bannerHeight, currentPosition.z);
+        }
+    }
+
     void OnBannerLoaded()
     {
-        Debug.Log("Banner loaded");
-
-        // Configure the Show Banner button to call the ShowBannerAd() method when clicked:
-        _showBannerButton.onClick.AddListener(ShowBannerAd);
-        // Configure the Hide Banner button to call the HideBannerAd() method when clicked:
-        _hideBannerButton.onClick.AddListener(HideBannerAd);
-
-        // Enable both buttons:
-        _showBannerButton.interactable = true;
-        _hideBannerButton.interactable = true;
+        Debug.Log("Banner Ad successfully loaded.");
+        Advertisement.Banner.Show(_adUnitId); // 배너 광고 표시
+        AdjustUIForBanner();
     }
 
-    // Implement code to execute when the load errorCallback event triggers:
     void OnBannerError(string message)
     {
-        Debug.Log($"Banner Error: {message}");
-        // Optionally execute additional code, such as attempting to load another ad.
+        Debug.LogError($"Banner Ad failed to load: {message}");
     }
-
-    // Implement a method to call when the Show Banner button is clicked:
-    void ShowBannerAd()
-    {
-        // Set up options to notify the SDK of show events:
-        BannerOptions options = new BannerOptions
-        {
-            clickCallback = OnBannerClicked,
-            hideCallback = OnBannerHidden,
-            showCallback = OnBannerShown
-        };
-
-        // Show the loaded Banner Ad Unit:
-        Advertisement.Banner.Show(_adUnitId, options);
-    }
-
-    // Implement a method to call when the Hide Banner button is clicked:
-    void HideBannerAd()
-    {
-        // Hide the banner:
-        Advertisement.Banner.Hide();
-    }
-
-    void OnBannerClicked() { }
-    void OnBannerShown() { }
-    void OnBannerHidden() { }
 
     void OnDestroy()
     {
-        // Clean up the listeners:
-        _loadBannerButton.onClick.RemoveAllListeners();
-        _showBannerButton.onClick.RemoveAllListeners();
-        _hideBannerButton.onClick.RemoveAllListeners();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    void FindAndAdjustUI()
+    {
+        GameObject moveUIObject = GameObject.Find("Canvas/MoveUI");
+        if (moveUIObject != null)
+        {
+            uiElement = moveUIObject.GetComponent<RectTransform>();
+        }
+    }
+    void HideBannerAd()
+    {
+        Advertisement.Banner.Hide();
+    }
+
 }
