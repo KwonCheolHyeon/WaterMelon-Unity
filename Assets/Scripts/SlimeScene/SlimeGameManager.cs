@@ -392,8 +392,16 @@ public class SlimeGameManager : MonoBehaviour
             gameOverPanel.SetActive(true);
 
             Camera.main.GetComponent<CameraMoveScript>().GameOverCameraMove();
-            // PlayGamesPlatform 리더보드에 점수 추가
-            PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
+            UnityAdsManager.Instance.GameOver();
+
+
+           
         }
+    }
+
+    public void SaveGameOverScore() 
+    {
+        // PlayGamesPlatform 리더보드에 점수 추가
+        PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
     }
 }

@@ -12,7 +12,7 @@ public class BannerAd : MonoBehaviour
     [SerializeField] string _iOSAdUnitId = "Banner_iOS";
     private string _adUnitId = null;
     private RectTransform uiElement; // 조정하고자 하는 UI 요소
-    float bannerHeight = 140.0f; // 배너 높이를 가정한 값
+    private float bannerHeight = 140.0f; // 배너 높이를 가정한 값
 
     void Awake()
     {
@@ -45,6 +45,7 @@ public class BannerAd : MonoBehaviour
 
         // Set banner position and load banner
         Advertisement.Banner.SetPosition(_bannerPosition);
+        
         LoadBanner();
     }
 
@@ -61,13 +62,35 @@ public class BannerAd : MonoBehaviour
 
     void AdjustUIForBanner()
     {
+        float currentAspectRatio = Screen.width / (float)Screen.height;
+
+        // Define aspect ratio thresholds
+        float aspectRatio18_9 = 18f / 9f;
+        float aspectRatio16_9 = 16f / 9f;
+
+        // Adjust estimatedBannerHeight based on aspect ratio
+        float estimatedBannerHeight;
+        if (currentAspectRatio >= aspectRatio18_9)
+        {
+            // For 18:9 screens, the banner might need to be relatively smaller
+            estimatedBannerHeight = Screen.height * 0.07f; // Adjust this value as needed
+        }
+        else if (currentAspectRatio >= aspectRatio16_9)
+        {
+            // For 16:9 screens, adjust the height appropriately
+            estimatedBannerHeight = Screen.height * 0.08f; // Adjust this value as needed
+        }
+        else
+        {
+            // Default or other aspect ratios
+            estimatedBannerHeight = Screen.height * 0.0f; // Adjust this value as needed
+        }
+
         if (uiElement != null)
         {
-            // UI 요소의 현재 위치를 가져옵니다.
+            // Adjust the UI element's position based on the calculated banner height
             Vector3 currentPosition = uiElement.anchoredPosition;
-
-            // UI 요소를 배너 높이만큼 위로 이동시킵니다.
-            uiElement.anchoredPosition = new Vector3(currentPosition.x, currentPosition.y + bannerHeight, currentPosition.z);
+            uiElement.anchoredPosition = new Vector3(currentPosition.x, currentPosition.y + estimatedBannerHeight, currentPosition.z);
         }
     }
 

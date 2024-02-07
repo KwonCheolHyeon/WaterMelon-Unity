@@ -127,4 +127,21 @@ public class UnityAdsManager : MonoBehaviour
             }
         }
     }
+
+    public void GameOver()
+    {
+        interstitialAd.ShowAdOnGameOver();
+    }
+
+    public void GameScoreSave() 
+    {
+        if (sceneType == 0)//ΩΩ∂Û¿”
+        {
+            SlimeGameManager.Instance.SaveGameOverScore();
+        }
+        else if (sceneType == 1)
+        {
+            SpaceGameManager.Instance.SaveGameOverScore();
+        }
+    }
 }
