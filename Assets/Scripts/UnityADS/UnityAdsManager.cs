@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 
 public class UnityAdsManager : MonoBehaviour
@@ -15,7 +17,7 @@ public class UnityAdsManager : MonoBehaviour
     private int sceneType = 0;//0 = 슬라임 , 1 = 우주
     private int rewardType = 0;
 
-    public void RewardType(int _type) 
+    public void RewardType(int _type)
     {
         rewardType = _type;
     }
@@ -63,6 +65,7 @@ public class UnityAdsManager : MonoBehaviour
 
             // 배너 광고를 로드 및 표시합니다.
             LoadAndShowBannerAd();
+            Advertisement.Banner.Hide();
         }
     }
 
@@ -75,13 +78,7 @@ public class UnityAdsManager : MonoBehaviour
     {
         if (bannerAd != null)
         {
-            // 배너 광고 로드를 시작합니다.
-            bannerAd.LoadBanner();
 
-            // 주의: BannerAd 스크립트 내에서 OnBannerLoaded 콜백에서
-            // 광고가 로드되면 자동으로 표시되도록 구현해야 합니다.
-            // 즉, LoadBanner() 메서드 호출 이후에 별도로 ShowBannerAd()를 호출할 필요가 없어야 합니다.
-            // 광고 로드가 완료되면 OnBannerLoaded 내에서 광고가 표시되도록 하세요.
         }
         else
         {
@@ -94,7 +91,7 @@ public class UnityAdsManager : MonoBehaviour
         rewardedAds.LoadAd();
     }
 
-    public void RewardOn() 
+    public void RewardOn()
     {
         if (sceneType == 0)//슬라임
         {
@@ -106,7 +103,7 @@ public class UnityAdsManager : MonoBehaviour
             {
                 SlimeGameManager.Instance.RewardChangeCard();
             }
-            else 
+            else
             {
                 Debug.LogError("보상 오류 RewardOn");
             }
@@ -121,7 +118,7 @@ public class UnityAdsManager : MonoBehaviour
             {
                 SpaceGameManager.Instance.RewardChangeCard();
             }
-            else 
+            else
             {
                 Debug.LogError("보상 오류 RewardOn");
             }
@@ -133,7 +130,7 @@ public class UnityAdsManager : MonoBehaviour
         interstitialAd.ShowAdOnGameOver();
     }
 
-    public void GameScoreSave() 
+    public void GameScoreSave()
     {
         if (sceneType == 0)//슬라임
         {
@@ -143,5 +140,10 @@ public class UnityAdsManager : MonoBehaviour
         {
             SpaceGameManager.Instance.SaveGameOverScore();
         }
+        BannerAdOn();
+    }
+    public void BannerAdOn()
+    {
+        bannerAd.OnAdButtonClicked();
     }
 }
