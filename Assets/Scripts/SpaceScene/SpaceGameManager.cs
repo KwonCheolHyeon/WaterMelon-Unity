@@ -340,21 +340,15 @@ public class SpaceGameManager : MonoBehaviour
     {
         if (gameoverState == false)
         {
-
             GameObject.Find("Canvas").gameObject.SetActive(false);
 
             gameoverState = true;
             gameOverPanel.SetActive(true);
             cameraScr.GameOverCameraMove();
-            UnityAdsManager.Instance.GameOver();
 
-           
+            // PlayGamesPlatform 리더보드에 점수 추가
+            PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
         }
-    }
-    public void SaveGameOverScore()
-    {
-        // PlayGamesPlatform 리더보드에 점수 추가
-        PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
     }
 
     public void CameraShake()
