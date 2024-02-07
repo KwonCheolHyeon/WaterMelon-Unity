@@ -53,5 +53,16 @@ public class InterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
 
     public void OnUnityAdsShowStart(string _adUnitId) { }
     public void OnUnityAdsShowClick(string _adUnitId) { }
-    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) { }
+    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) 
+    {
+        this.transform.parent.GetComponent<UnityAdsManager>().GameScoreSave();
+    }
+
+    public void ShowAdOnGameOver()
+    {
+        // Check if the ad is ready. If not, you may want to load it first (not shown here).
+        // This example directly attempts to show the ad, assuming it's already loaded.
+        ShowAd();
+    }
+
 }
