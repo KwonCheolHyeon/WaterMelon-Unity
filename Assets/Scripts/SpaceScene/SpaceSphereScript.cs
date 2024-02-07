@@ -231,6 +231,10 @@ public class SpaceSphereScript : MonoBehaviour
         rigid.useGravity = false;
         sphereCol.enabled = false;
 
+        // 面倒 荤款靛 积己
+        SoundManagerScript.Instance.PlaySFXSound("PlanetSFX", 0.5f);
+
+        // 面倒 捞棋飘 积己
         CreateCollisionEffect();
 
         StartCoroutine(HideRoutine(targetPos));

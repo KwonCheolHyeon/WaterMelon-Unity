@@ -31,6 +31,9 @@ public class CheckAppUpdate : MonoBehaviour
     // 업데이트 사용 가능 여부를 확인
     IEnumerator CheckForUpdate()
     {
+
+        yield return new WaitForSeconds(1.0f);
+
         appUpdateManager = new AppUpdateManager();
         PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> appUpdateInfoOperation;
         appUpdateInfoOperation = appUpdateManager.GetAppUpdateInfo();

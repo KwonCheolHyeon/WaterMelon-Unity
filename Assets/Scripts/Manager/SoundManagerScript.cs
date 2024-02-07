@@ -27,6 +27,8 @@ public class SoundManagerScript : MonoBehaviour
     private bool isBGMplay = true;
     private bool isSFXplay = true;
 
+    private float soundVolume = 0.7f;
+
     private Button BGMButton;
     private Button SFXButton;
 
@@ -113,13 +115,14 @@ public class SoundManagerScript : MonoBehaviour
     }
 
     // SFX 재생
-    public void PlaySFXSound(string _soundName)
+    public void PlaySFXSound(string _soundName, float _volume = 1.0f)
     {
         foreach (var sfx in SFX)
         {
             if (sfx.SoundName == _soundName)
             {
                 SFXFromChild.clip = sfx.audioClip;
+                SFXFromChild.volume = _volume;
                 SFXFromChild.Play();
                 return;
             }
@@ -176,7 +179,7 @@ public class SoundManagerScript : MonoBehaviour
     {
         PlayBGMSound("TestBGM");
 
-        SetSliderObject();
+        SetSoundUIObject();
 
         DataLoad();
 
@@ -184,16 +187,15 @@ public class SoundManagerScript : MonoBehaviour
         SceneManager.sceneLoaded += LoadedsceneEvent;
     }
 
-    void Update()
-    {
-    }
-
     // 씬 변경 시 실행
     private void LoadedsceneEvent(UnityEngine.SceneManagement.Scene _scene, LoadSceneMode _mode)
     {
         Debug.Log(_scene.name + "으로 변경되었습니다.");
 
-        SetSliderObject();
+        SetSoundUIObject();
+
+        // 각각의 씬에 맞는 BGM 재생
+        SetSceneSpecificBGM();
 
         DataLoad();
     }
@@ -209,7 +211,7 @@ public class SoundManagerScript : MonoBehaviour
 
             if (isBGMplay)
             {
-                BGMFromChild.volume = 1;
+                BGMFromChild.volume = soundVolume;
                 BGMButton.GetComponent<Image>().sprite = playBGMSprite;
             }
             else if (!isBGMplay)
@@ -259,9 +261,8 @@ public class SoundManagerScript : MonoBehaviour
         Debug.Log("사운드 설정 데이터 저장 완료");
     }
 
-    private void SetSliderObject()
+    private void SetSoundUIObject()
     {
-
         BGMButton = GameObject.Find("Canvas").transform.Find("Menu_Obj").
             transform.Find("Setting_Image").transform.Find("SoundGroup").transform.Find("BGM_Button").GetComponent<Button>();
 
@@ -271,6 +272,22 @@ public class SoundManagerScript : MonoBehaviour
             transform.Find("Setting_Image").transform.Find("SoundGroup").transform.Find("SFX_Button").GetComponent<Button>();
 
         SFXButton.onClick.AddListener(() => SetSound(SFXButton.name));
+    }
+
+    private void SetSceneSpecificBGM()
+    {
+        if(UtisScript.GetActiveScene() == SceneNames.SelectScene.ToString())
+        {
+            PlayBGMSound("TestBGM");
+        }
+        else if(UtisScript.GetActiveScene() == SceneNames.SlimeScene.ToString())
+        {
+            PlayBGMSound("SlimeBGM");
+        }
+        else if (UtisScript.GetActiveScene() == SceneNames.SpaceGameScene.ToString())
+        {
+            PlayBGMSound("SpaceBGM");
+        }
     }
 
     public void SetSound(string _buttonName)
@@ -286,7 +303,7 @@ public class SoundManagerScript : MonoBehaviour
             else if (!isBGMplay)
             { 
                 isBGMplay = true;
-                BGMFromChild.volume = 1;
+                BGMFromChild.volume = soundVolume;
                 BGMButton.GetComponent<Image>().sprite = playBGMSprite;
             }
         }
@@ -301,7 +318,7 @@ public class SoundManagerScript : MonoBehaviour
             else if (!isSFXplay)
             {
                 isSFXplay = true;
-                SFXFromChild.volume = 1;
+                SFXFromChild.volume = soundVolume;
                 SFXButton.GetComponent<Image>().sprite = playSFXSprite;
             }
         }

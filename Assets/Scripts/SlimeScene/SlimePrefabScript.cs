@@ -247,6 +247,10 @@ public class SlimePrefabScript : MonoBehaviour
         rigid.useGravity = false;
         meshColl.enabled = false;
 
+        // 충돌 사운드 재생
+        SoundManagerScript.Instance.PlaySFXSound("SlimeSFX");
+
+        // 충돌 이펙트 생성
         CreateCollisionEffect();
 
         StartCoroutine(HideRoutine(targetPos));

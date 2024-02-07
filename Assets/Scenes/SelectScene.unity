@@ -1346,7 +1346,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee176768f5507174a8516f267cea4cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showAdButton: {fileID: 0}
   _androidAdUnitId: Rewarded_Android
   _iOSAdUnitId: Rewarded_iOS
 --- !u!1 &848011765
@@ -1385,10 +1384,20 @@ MonoBehaviour:
   playNotSFXSprite: {fileID: 21300000, guid: 78757b0623f3b4309b7cc69c4769ae37, type: 3}
   SFXAudioresource: {fileID: 2037082292}
   BGMAudioresource: {fileID: 930326947}
-  SFX: []
+  SFX:
+  - SoundName: UISFX
+    audioClip: {fileID: 8300000, guid: 6afd08a26f00692478468fee0109406d, type: 3}
+  - SoundName: SlimeSFX
+    audioClip: {fileID: 8300000, guid: 957a979e27ddd5048be06f4aaa878c89, type: 3}
+  - SoundName: PlanetSFX
+    audioClip: {fileID: 8300000, guid: 37669bf495336504ca23a6708b9be90d, type: 3}
   BGM:
   - SoundName: TestBGM
     audioClip: {fileID: 8300000, guid: c62a4190883172f4283fae785da49d26, type: 3}
+  - SoundName: SpaceBGM
+    audioClip: {fileID: 8300000, guid: a5b0333935ef88e4ba850e5ab2742d97, type: 3}
+  - SoundName: SlimeBGM
+    audioClip: {fileID: 8300000, guid: 2cebe5ef59f447d4d803665e3ecf1a2f, type: 3}
 --- !u!4 &848011767
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,7 +1444,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1594,7 +1603,7 @@ MonoBehaviour:
   m_StartCorner: 2
   m_StartAxis: 1
   m_CellSize: {x: 50, y: 50}
-  m_Spacing: {x: 1, y: -300}
+  m_Spacing: {x: 1, y: -500}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!224 &1061456431 stripped
@@ -2060,7 +2069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1634062532
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2076,10 +2085,10 @@ RectTransform:
   - {fileID: 401583092}
   m_Father: {fileID: 943451877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1634062533
 MonoBehaviour:
@@ -2353,9 +2362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db857511eff78c84f80f420c6f4f9230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadBannerButton: {fileID: 0}
-  _showBannerButton: {fileID: 0}
-  _hideBannerButton: {fileID: 0}
   _bannerPosition: 4
   _androidAdUnitId: Banner_Android
   _iOSAdUnitId: Banner_iOS
