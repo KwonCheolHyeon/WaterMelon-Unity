@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 
 public class UnityAdsManager : MonoBehaviour
@@ -64,6 +65,7 @@ public class UnityAdsManager : MonoBehaviour
 
             // 배너 광고를 로드 및 표시합니다.
             LoadAndShowBannerAd();
+            Advertisement.Banner.Hide();
         }
     }
 
