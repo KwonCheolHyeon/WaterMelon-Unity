@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 7818398477248074205}
   m_Layer: 5
   m_Name: YesButton
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 8757165051659412019}
   m_Layer: 5
   m_Name: NoButton
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -18,6 +18,7 @@ TagManager:
   - Case
   - zero
   - GameOverTag
+  - Button
   layers:
   - Default
   - TransparentFX
