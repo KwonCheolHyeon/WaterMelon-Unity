@@ -1748,6 +1748,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3060975554516492533, guid: 8427b1aa1854eba44b5185613a98d9e3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2099047656}
+    - target: {fileID: 3060975554516492533, guid: 8427b1aa1854eba44b5185613a98d9e3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowAllReaderBoard
+      objectReference: {fileID: 0}
     - target: {fileID: 3350848444350797546, guid: 8427b1aa1854eba44b5185613a98d9e3,
         type: 3}
       propertyPath: m_AnchorMax.y

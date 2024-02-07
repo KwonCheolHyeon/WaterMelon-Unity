@@ -393,9 +393,6 @@ public class SlimeGameManager : MonoBehaviour
 
             Camera.main.GetComponent<CameraMoveScript>().GameOverCameraMove();
             UnityAdsManager.Instance.GameOver();
-
-
-           
         }
     }
 

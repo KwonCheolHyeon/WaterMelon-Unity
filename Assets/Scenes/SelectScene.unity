@@ -1058,6 +1058,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Button
       objectReference: {fileID: 0}
+    - target: {fileID: 3060975554516492533, guid: 8427b1aa1854eba44b5185613a98d9e3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1042158108}
+    - target: {fileID: 3060975554516492533, guid: 8427b1aa1854eba44b5185613a98d9e3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowAllReaderBoard
+      objectReference: {fileID: 0}
     - target: {fileID: 3350848444350797546, guid: 8427b1aa1854eba44b5185613a98d9e3,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1644,6 +1654,50 @@ MonoBehaviour:
   m_Spacing: {x: 1, y: -500}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &1042158107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1042158109}
+  - component: {fileID: 1042158108}
+  m_Layer: 0
+  m_Name: GPGS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1042158108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042158107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c766d9afb55f4e149877233e3b575786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1042158109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042158107}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.018659428, y: 6.4736786, z: 3.6111298}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1061456431 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5282028967879904641, guid: 8427b1aa1854eba44b5185613a98d9e3,
@@ -2745,3 +2799,4 @@ SceneRoots:
   - {fileID: 848011767}
   - {fileID: 1459021556}
   - {fileID: 254777861}
+  - {fileID: 1042158109}
