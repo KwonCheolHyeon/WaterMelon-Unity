@@ -62,11 +62,11 @@ public class SlimeTongsMoveScript : MonoBehaviour
         nowTypeSlime = nextTypeSlime;
         mainCamera = Camera.main;
         mCameraScript = mainCamera.GetComponent<CameraMoveScript>();
-        sizeXYZ[0] = 1.81f;
-        sizeXYZ[1] = 1.72f;
-        sizeXYZ[2] = 1.66f;
-        sizeXYZ[3] = 1.53f;
-        sizeXYZ[4] = 1.4f;
+        sizeXYZ[0] = 1.77f;
+        sizeXYZ[1] = 1.67f;
+        sizeXYZ[2] = 1.61f;
+        sizeXYZ[3] = 1.48f;
+        sizeXYZ[4] = 1.35f;
         minX = -sizeXYZ[nowTypeSlime];
         maxX = sizeXYZ[nowTypeSlime];
         minZ = -sizeXYZ[nowTypeSlime];
