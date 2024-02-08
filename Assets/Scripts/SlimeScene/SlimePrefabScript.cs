@@ -59,7 +59,7 @@ public class SlimePrefabScript : MonoBehaviour
         Vector3 randomRotation = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
 
         // 게임 오브젝트의 회전 값을 설정합니다.
-        //transform.rotation = Quaternion.Euler(randomRotation);
+        transform.rotation = Quaternion.Euler(randomRotation);
 
         rigid.mass = 5f;
     }
