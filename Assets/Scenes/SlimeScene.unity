@@ -233,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 5136154580234872518, guid: 29b85c76d4d25114f899cf2283908d73,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -187.50342
+      value: -205
       objectReference: {fileID: 0}
     - target: {fileID: 5143146242509292903, guid: 29b85c76d4d25114f899cf2283908d73,
         type: 3}
@@ -405,6 +405,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29b85c76d4d25114f899cf2283908d73, type: 3}
+--- !u!114 &92508572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6135857244829302483, guid: 29b85c76d4d25114f899cf2283908d73,
+    type: 3}
+  m_PrefabInstance: {fileID: 92508571}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &135040360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1092,7 @@ MonoBehaviour:
   nowScoreText: {fileID: 932553770}
   hightScroreText: {fileID: 1537987931}
   gameOverPanel: {fileID: 588077094}
+  gameOverScoreText: {fileID: 92508572}
   stage: {fileID: 1417830021}
   textShakeCount: {fileID: 2089803881}
   adPannel: {fileID: 1933324474}
@@ -3109,7 +3122,7 @@ PrefabInstance:
     - target: {fileID: 6443062911818752160, guid: 4e3462ff763fcb043a34da24090b865a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6443062911818752160, guid: 4e3462ff763fcb043a34da24090b865a,
         type: 3}
@@ -3119,7 +3132,7 @@ PrefabInstance:
     - target: {fileID: 6443062911818752160, guid: 4e3462ff763fcb043a34da24090b865a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6443062911818752160, guid: 4e3462ff763fcb043a34da24090b865a,
         type: 3}
@@ -3174,7 +3187,7 @@ PrefabInstance:
     - target: {fileID: 6443062911818752160, guid: 4e3462ff763fcb043a34da24090b865a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 655
+      value: -624
       objectReference: {fileID: 0}
     - target: {fileID: 6443062911818752160, guid: 4e3462ff763fcb043a34da24090b865a,
         type: 3}

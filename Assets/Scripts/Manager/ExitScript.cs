@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,9 @@ public class ExitScript : MonoBehaviour
 {
     [SerializeField]
     SceneNames sceneName;
+
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
 
     // 3개의 GamePlayScene의 Menu_Obj.ButtonGroupExit_Button에서 참조
     public void FromSelectScene()

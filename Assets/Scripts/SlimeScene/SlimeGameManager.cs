@@ -43,6 +43,8 @@ public class SlimeGameManager : MonoBehaviour
     private bool gameoverState = false;
     [SerializeField]
     private GameObject gameOverPanel;
+    [SerializeField]
+    private TextMeshProUGUI gameOverScoreText;
 
     //스테이지 흔들기
     [SerializeField]
@@ -420,6 +422,8 @@ public class SlimeGameManager : MonoBehaviour
             GameObject.Find("Canvas").gameObject.SetActive(false);
             gameOverPanel.SetActive(true);
 
+            gameOverScoreText.text = "Score : " + score;
+
             Camera.main.GetComponent<CameraMoveScript>().GameOverCameraMove();
             UnityAdsManager.Instance.GameOver();
         }
@@ -428,7 +432,7 @@ public class SlimeGameManager : MonoBehaviour
     public void SaveGameOverScore() 
     {
         // PlayGamesPlatform 리더보드에 점수 추가
-        PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
+        PlayGamesPlatform.Instance.ReportScore(score, GPGSIds.leaderboard_slimescore, (bool success) => { });
 
         ScoreDataSave();
     }

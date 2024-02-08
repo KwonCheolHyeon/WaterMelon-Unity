@@ -96,6 +96,6 @@ public class LoginSceneManager : MonoBehaviour
     {
         score += 1;
         // 리더보드 추가
-        GPGSBinderScript.Instance.ReportLeaderboard(GPGSIds.leaderboard_num, score, (bool success) => { });
+        //GPGSBinderScript.Instance.ReportLeaderboard(GPGSIds.leaderboard_num, score, (bool success) => { });
     }
 }
