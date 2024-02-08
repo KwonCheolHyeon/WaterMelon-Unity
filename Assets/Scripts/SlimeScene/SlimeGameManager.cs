@@ -4,7 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+public class GameScoreDatas
+{
+    public int slimeHighScore;
+    public int spaceHighScore;
+}
+
 
 public class SlimeGameManager : MonoBehaviour
 {
@@ -29,6 +37,7 @@ public class SlimeGameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI hightScroreText;
     private int gameScore = 0;
+    private int highScore = 0;
 
     //게임 오버 관련
     private bool gameoverState = false;
@@ -54,9 +63,17 @@ public class SlimeGameManager : MonoBehaviour
     [SerializeField]
     private Button adButton;
     private int rewardType;
-    //광고 허가 버튼
 
-    public int Score // Property
+
+    //easy save
+    private GameScoreDatas scoreDatas;
+    public GameScoreDatas GetSoundDatas() { return scoreDatas; }
+
+    private string datakey = "highScoreDatas";
+    private string saveFileName = "SaveScoreFile.es3";
+
+
+    public int score // Property
     {
         get { return gameScore; } // Get accessor
         set { gameScore = value; } // Set accessor
@@ -120,6 +137,11 @@ public class SlimeGameManager : MonoBehaviour
         adPannel.SetActive(false);
         adButton.onClick.AddListener(UserAllowAd);
         adButton.interactable = true;
+
+        DataLoad(); 
+
+        //시작 시 이벤트를 등록해 줍니다.
+        SceneManager.sceneLoaded += LoadedsceneEvent;
     }
 
     // Update is called once per frame
@@ -139,6 +161,14 @@ public class SlimeGameManager : MonoBehaviour
             }
         }
     }
+
+    // 씬 변경 시 실행
+    private void LoadedsceneEvent(UnityEngine.SceneManagement.Scene _scene, LoadSceneMode _mode)
+    {
+        DataLoad();
+    }
+
+
     public void InitializeSphere(int initCount)// 초기 설정 용
     {
         for (int i = 0; i < initCount; i++)
@@ -358,7 +388,6 @@ public class SlimeGameManager : MonoBehaviour
     {
         adPannel.SetActive(false);
         TongsMove.GetComponent<SlimeTongsMoveScript>().SetChangeCount();
-
     }
 
 
@@ -393,9 +422,6 @@ public class SlimeGameManager : MonoBehaviour
 
             Camera.main.GetComponent<CameraMoveScript>().GameOverCameraMove();
             UnityAdsManager.Instance.GameOver();
-
-
-           
         }
     }
 
@@ -403,5 +429,46 @@ public class SlimeGameManager : MonoBehaviour
     {
         // PlayGamesPlatform 리더보드에 점수 추가
         PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
+
+        ScoreDataSave();
+    }
+
+    private void ScoreDataSave()
+    {
+        if(scoreDatas.slimeHighScore < score)
+        {
+            scoreDatas.slimeHighScore = score;
+            ES3.Save(datakey, scoreDatas, saveFileName);
+            Debug.Log("최고점수 설정 데이터 저장 완료");
+        }
+    }
+
+    private void DataLoad()
+    {
+        if (ES3.FileExists(saveFileName) && ES3.KeyExists(datakey, saveFileName))
+        {
+
+            scoreDatas = ES3.Load<GameScoreDatas>(datakey, saveFileName);
+            highScore = scoreDatas.slimeHighScore;
+
+            hightScroreText.text = highScore.ToString();
+
+            Debug.Log("최고점수 설정 데이터 로드 완료");
+        }
+        else
+        {
+            scoreDatas = new GameScoreDatas();
+
+            InitializeDefaultData();
+            ScoreDataSave();
+
+            scoreDatas = ES3.Load<GameScoreDatas>(datakey, saveFileName);
+            Debug.Log("최고점수 설정 데이터 로드 완료");
+        }
+    }
+
+    private void InitializeDefaultData()
+    {
+        scoreDatas.slimeHighScore = 0;
     }
 }

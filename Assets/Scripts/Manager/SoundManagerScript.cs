@@ -117,16 +117,20 @@ public class SoundManagerScript : MonoBehaviour
     // SFX 재생
     public void PlaySFXSound(string _soundName, float _volume = 1.0f)
     {
-        foreach (var sfx in SFX)
+        if(SFXFromChild.volume != 0)
         {
-            if (sfx.SoundName == _soundName)
+            foreach (var sfx in SFX)
             {
-                SFXFromChild.clip = sfx.audioClip;
-                SFXFromChild.volume = _volume;
-                SFXFromChild.Play();
-                return;
+                if (sfx.SoundName == _soundName)
+                {
+                    SFXFromChild.clip = sfx.audioClip;
+                    SFXFromChild.volume = _volume;
+                    SFXFromChild.Play();
+                    return;
+                }
             }
         }
+
         Debug.Log(_soundName + "사운드를 찾지 못했습니다.");
     }
 
@@ -318,7 +322,7 @@ public class SoundManagerScript : MonoBehaviour
             else if (!isSFXplay)
             {
                 isSFXplay = true;
-                SFXFromChild.volume = soundVolume;
+                SFXFromChild.volume = 1;
                 SFXButton.GetComponent<Image>().sprite = playSFXSprite;
             }
         }
