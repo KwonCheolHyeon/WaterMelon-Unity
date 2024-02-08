@@ -238,7 +238,7 @@ public class SlimeTongsMoveScript : MonoBehaviour
 
     public int GetRandomNumber()//점수에 따른 스폰
     {
-        if (SlimeGameManager.Instance.Score >= 2000)//2천점 이상일 때 
+        if (SlimeGameManager.Instance.score >= 2000)//2천점 이상일 때 
         {
             int randomNumber = random.Next(0, 100); // Random number between 0 and 99
 

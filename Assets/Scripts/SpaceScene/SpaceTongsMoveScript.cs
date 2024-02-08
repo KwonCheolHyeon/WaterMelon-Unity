@@ -54,11 +54,7 @@ public class SpaceTongsMoveScript : MonoBehaviour
         changeCount = 1;
         textChangeCount.text = changeCount + "";
     }
-    //다음 나올 과일을 보여주는 관련
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         changeCount = 2;
@@ -259,7 +255,7 @@ public class SpaceTongsMoveScript : MonoBehaviour
 
     public int GetRandomNumber()//점수에 따른 스폰
     {
-        if (SpaceGameManager.Instance.Score >= 2000)//2천점 이상일 때 
+        if (SpaceGameManager.Instance.score >= 2000)//2천점 이상일 때 
         {
             int randomNumber = random.Next(0, 100); // Random number between 0 and 99
 
