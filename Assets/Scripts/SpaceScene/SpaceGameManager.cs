@@ -16,7 +16,7 @@ public class SpaceGameManager : MonoBehaviour
     [SerializeField]
     private GameObject spaceObjects;
     private Queue<SpaceSphereScript> poolingObjectQueues;
-    private Vector3 initSphereVec3 = new Vector3(0, 16, 0);
+    private Vector3 initSphereVec3 = new Vector3(0, 30, 0);
     //풀링 오브젝트 관련
 
     //오브젝트 세팅 관련
@@ -127,7 +127,7 @@ public class SpaceGameManager : MonoBehaviour
 
         gameOverPanel.SetActive(false);
         cameraScr = Camera.main.GetComponent<SpaceCameraMoveScript>();
-        InitializeSphere(18);
+        InitializeSphere(150);
     }
 
     void Start()

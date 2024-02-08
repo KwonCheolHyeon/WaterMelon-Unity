@@ -10,6 +10,7 @@ public class SpaceTongsMoveScript : MonoBehaviour
     private SpaceCameraMoveScript mCameraScript;
     private bool _isMoving = true;
     private float moveSpeed = 4.0f;
+    private float[] sizeXYZ = new float [5];
     private float minX, maxX, minZ, maxZ;
     private Rigidbody _rigidbody;
     private Transform _transform;
@@ -19,6 +20,7 @@ public class SpaceTongsMoveScript : MonoBehaviour
     private bool isReleasing = false;
     private bool canDropSphere = true;
     //연속 떨구는거 딜레이 주기
+
     //랜덤 시스템관련
     private System.Random random = new System.Random();
     //랜덤 시스템 관련
@@ -41,6 +43,7 @@ public class SpaceTongsMoveScript : MonoBehaviour
     [SerializeField]
     private Image nextPlanetImage;
     private int nextTypeSphere;
+    private int nowTypeSphere;
     [SerializeField]
     private TextMeshProUGUI textChangeCount;
     private int changeCount;
@@ -60,14 +63,20 @@ public class SpaceTongsMoveScript : MonoBehaviour
     {
         changeCount = 2;
         nextTypeSphere = 0;
+        nowTypeSphere = nextTypeSphere;
         mainCamera = Camera.main;
         mCameraScript = mainCamera.GetComponent<SpaceCameraMoveScript>();
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody>();
-        minX = -1.8f;
-        maxX = 1.8f;
-        minZ = -1.8f;
-        maxZ = 1.8f;
+        sizeXYZ[0] = 1.9f;
+        sizeXYZ[1] = 1.81f;
+        sizeXYZ[2] = 1.72f;
+        sizeXYZ[3] = 1.6f;
+        sizeXYZ[4] = 1.5f;
+        minX = -sizeXYZ[nowTypeSphere];
+        maxX = sizeXYZ[nowTypeSphere];
+        minZ = -sizeXYZ[nowTypeSphere];
+        maxZ = sizeXYZ[nowTypeSphere];
         lineRenderer = GetComponent<LineRenderer>();
         FirstSettingSphereMove();
         //SettingSphereMove();
@@ -94,12 +103,19 @@ public class SpaceTongsMoveScript : MonoBehaviour
     }
     void FixedUpdate()
     {
+      
+
         if (_isMoving && mainCamera != null)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             x += variableJoystick.Horizontal;
             z += variableJoystick.Vertical;
+
+            minX = -sizeXYZ[nowTypeSphere];
+            maxX = sizeXYZ[nowTypeSphere];
+            minZ = -sizeXYZ[nowTypeSphere];
+            maxZ = sizeXYZ[nowTypeSphere];
 
             if (x != 0 || z != 0)
             {
@@ -172,6 +188,8 @@ public class SpaceTongsMoveScript : MonoBehaviour
 
     public void DropSphere()
     {
+       
+
         if (heldSphere != null && canDropSphere)
         {
             canDropSphere = false;
@@ -197,6 +215,25 @@ public class SpaceTongsMoveScript : MonoBehaviour
             heldSphere = null; // Clear the reference
         }
     }
+    void AdjustPositionForNextSphereSize()
+    {
+        // Recalculate bounds based on the size of the next sphere.
+        float newMinX = -sizeXYZ[nowTypeSphere];
+        float newMaxX = sizeXYZ[nowTypeSphere];
+        float newMinZ = -sizeXYZ[nowTypeSphere];
+        float newMaxZ = sizeXYZ[nowTypeSphere];
+
+        // Get current position
+        Vector3 currentPosition = _transform.position;
+
+        // Adjust position to stay within new bounds
+        float adjustedX = Mathf.Clamp(currentPosition.x, newMinX, newMaxX);
+        float adjustedZ = Mathf.Clamp(currentPosition.z, newMinZ, newMaxZ);
+
+        // Apply adjusted position
+        _transform.position = new Vector3(adjustedX, currentPosition.y, adjustedZ);
+    }
+
     private IEnumerator ResetDropSphere()
     {
         yield return new WaitForSeconds(0.2f);
@@ -318,11 +355,13 @@ public class SpaceTongsMoveScript : MonoBehaviour
 
     public void NextSphererInforMation() // 다음 구체에 대한 정보
     {
+        nowTypeSphere = nextTypeSphere;
+        AdjustPositionForNextSphereSize();
         SettingSphereMove();
-
         nextTypeSphere = GetRandomNumber();
         // 다음 행성 이미지 설정
         nextPlanetImage.sprite = planetImageList[nextTypeSphere];
+        
     }
 
     public void ChangeNextSphereType() 

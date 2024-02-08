@@ -11,9 +11,12 @@ public class SlimeTongsMoveScript : MonoBehaviour
 
     private bool _isMoving = true;
     private float moveSpeed = 4.0f;
+    private float[] sizeXYZ = new float[5];
     private float minX, maxX, minZ, maxZ;
 
     private SlimePrefabScript heldSlime = null;
+
+    private Transform _transform;
 
     //연속 떨구는거 딜레이 주기 위한 bool값
     private bool isReleasing = false;
@@ -37,7 +40,7 @@ public class SlimeTongsMoveScript : MonoBehaviour
     [SerializeField]
     private Image nextSlimeImage;
     private int nextTypeSlime;
-
+    private int nowTypeSlime;
     [SerializeField]
     private TextMeshProUGUI textChangeCount;
     private int changeCount;
@@ -56,13 +59,19 @@ public class SlimeTongsMoveScript : MonoBehaviour
     {
         changeCount = 2;
         nextTypeSlime = 0;
+        nowTypeSlime = nextTypeSlime;
         mainCamera = Camera.main;
         mCameraScript = mainCamera.GetComponent<CameraMoveScript>();
-        minX = -1.8f;
-        maxX = 1.8f;
-        minZ = -1.8f;
-        maxZ = 1.8f;
-
+        sizeXYZ[0] = 1.81f;
+        sizeXYZ[1] = 1.72f;
+        sizeXYZ[2] = 1.66f;
+        sizeXYZ[3] = 1.53f;
+        sizeXYZ[4] = 1.4f;
+        minX = -sizeXYZ[nowTypeSlime];
+        maxX = sizeXYZ[nowTypeSlime];
+        minZ = -sizeXYZ[nowTypeSlime];
+        maxZ = sizeXYZ[nowTypeSlime];
+        _transform = transform;
         lineRenderer = GetComponent<LineRenderer>();
         FirstSettingSphereMove();
 
@@ -89,12 +98,18 @@ public class SlimeTongsMoveScript : MonoBehaviour
     }
     void FixedUpdate()
     {
+
         if (_isMoving && Camera.main != null)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             x += variableJoystick.Horizontal;
             z += variableJoystick.Vertical;
+
+            minX = -sizeXYZ[nowTypeSlime];
+            maxX = sizeXYZ[nowTypeSlime];
+            minZ = -sizeXYZ[nowTypeSlime];
+            maxZ = sizeXYZ[nowTypeSlime];
 
             if (x != 0 || z != 0)
             {
@@ -175,6 +190,8 @@ public class SlimeTongsMoveScript : MonoBehaviour
     // DropButton.OnClick에서 참조
     public void DropSlime()
     {
+  
+
         if (heldSlime != null)
         {
             float offsetX = (float)(random.NextDouble() * 0.02 - 0.01); // Random value between -0.01 and 0.01
@@ -201,6 +218,7 @@ public class SlimeTongsMoveScript : MonoBehaviour
 
     public void HoldSlime(SlimePrefabScript _slime)
     {
+
         if (heldSlime != null)
         {
             // Optionally, release the currently held sphere
@@ -214,6 +232,7 @@ public class SlimeTongsMoveScript : MonoBehaviour
         {
             rb.isKinematic = true; // Disable gravity (if Rigidbody is used)
         }
+        
     }
 
 
@@ -296,10 +315,13 @@ public class SlimeTongsMoveScript : MonoBehaviour
 
     public void NextSphererInforMation() // 다음 구체에 대한 정보
     {
+        nowTypeSlime = nextTypeSlime;
         SettingSphereMove();
+        AdjustPositionForNextSphereSize();
 
         nextTypeSlime = GetRandomNumber();
         nextSlimeImage.sprite = slimeImageList[nextTypeSlime];
+    
     }
     public void ChangeNextSphereType()
     {
@@ -313,6 +335,26 @@ public class SlimeTongsMoveScript : MonoBehaviour
         }
 
     
+    }
+
+    void AdjustPositionForNextSphereSize()
+    {
+        // Recalculate bounds based on the size of the next sphere.
+        float newMinX = -sizeXYZ[nowTypeSlime];
+        float newMaxX = sizeXYZ[nowTypeSlime];
+        float newMinZ = -sizeXYZ[nowTypeSlime];
+        float newMaxZ = sizeXYZ[nowTypeSlime];
+
+        // Get current position
+        Vector3 currentPosition = _transform.position;
+
+        // Adjust position to stay within new bounds
+        float adjustedX = Mathf.Clamp(currentPosition.x, newMinX, newMaxX);
+        float adjustedZ = Mathf.Clamp(currentPosition.z, newMinZ, newMaxZ);
+
+        // Apply adjusted position
+        _transform.position = new Vector3(adjustedX, currentPosition.y, adjustedZ);
+
     }
 
     public void TriggerChangeCardOn() 
