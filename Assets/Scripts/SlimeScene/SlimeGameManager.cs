@@ -22,7 +22,7 @@ public class SlimeGameManager : MonoBehaviour
     [SerializeField]
     private GameObject slimePrefab;
     Queue<SlimePrefabScript> poolingObjectQueue = new Queue<SlimePrefabScript>();
-    private Vector3 initSphereVec3 = new Vector3(0, 16, 0);
+    private Vector3 initSphereVec3 = new Vector3(0, 30, 0);
     //오브젝트 세팅 관련
     private float[] sizes = new float[11];
 
