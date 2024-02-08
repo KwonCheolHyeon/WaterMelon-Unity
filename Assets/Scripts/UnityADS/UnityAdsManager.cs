@@ -126,9 +126,16 @@ public class UnityAdsManager : MonoBehaviour
 
     public void GameOver()
     {
+        interstitialAd.LoadAd();
+
+        StartCoroutine(ShowInterstitialAdWithDelay(0.5f));
+    }
+    private IEnumerator ShowInterstitialAdWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for the specified delay
+
         interstitialAd.ShowAdOnGameOver();
     }
-
     public void GameScoreSave()
     {
         if (sceneType == 0)//ΩΩ∂Û¿”
