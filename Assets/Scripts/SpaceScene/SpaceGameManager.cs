@@ -368,17 +368,21 @@ public class SpaceGameManager : MonoBehaviour
             gameoverState = true;
             gameOverPanel.SetActive(true);
             cameraScr.GameOverCameraMove();
-            UnityAdsManager.Instance.GameOver();
+
 
             gameOverScoreText.text = "Score : " + score;
+
+            // PlayGamesPlatform 리더보드에 점수 추가
+            PlayGamesPlatform.Instance.ReportScore(score, GPGSIds.leaderboard_spacescore, (bool success) => { });
+            // 최종 점수 저장
+            ScoreDataSave();
+            
+            UnityAdsManager.Instance.GameOver();
         }
     }
     public void SaveGameOverScore()
     {
-        // PlayGamesPlatform 리더보드에 점수 추가
-        PlayGamesPlatform.Instance.ReportScore(score, GPGSIds.leaderboard_spacescore, (bool success) => { });
 
-        ScoreDataSave();
     }
 
     public void CameraShake()

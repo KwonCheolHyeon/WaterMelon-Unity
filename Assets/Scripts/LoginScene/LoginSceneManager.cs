@@ -11,11 +11,11 @@ public class LoginSceneManager : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * 3);
-
-
-        if (GUILayout.Button("ClearLog"))
-            log = "";
+        //GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * 3);
+        //
+        //
+        //if (GUILayout.Button("ClearLog"))
+        //    log = "";
 
         //if (GUILayout.Button("Login"))
         //    GPGSBinderScript.Instance.Login((success, localUser) =>
@@ -89,7 +89,7 @@ public class LoginSceneManager : MonoBehaviour
         //            log += $"{iEvent.Name}, {iEvent.CurrentCount}\n";
         //    });
 
-        GUILayout.Label(log);
+        //GUILayout.Label(log);
     }
 
     public void AddScore()

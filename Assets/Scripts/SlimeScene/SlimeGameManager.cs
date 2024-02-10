@@ -425,16 +425,19 @@ public class SlimeGameManager : MonoBehaviour
             gameOverScoreText.text = "Score : " + score;
 
             Camera.main.GetComponent<CameraMoveScript>().GameOverCameraMove();
+
+            // PlayGamesPlatform 리더보드에 점수 추가
+            PlayGamesPlatform.Instance.ReportScore(score, GPGSIds.leaderboard_slimescore, (bool success) => { });
+            // 최종 점수 저장
+            ScoreDataSave();
+
             UnityAdsManager.Instance.GameOver();
         }
     }
 
     public void SaveGameOverScore() 
     {
-        // PlayGamesPlatform 리더보드에 점수 추가
-        PlayGamesPlatform.Instance.ReportScore(score, GPGSIds.leaderboard_slimescore, (bool success) => { });
 
-        ScoreDataSave();
     }
 
     private void ScoreDataSave()
