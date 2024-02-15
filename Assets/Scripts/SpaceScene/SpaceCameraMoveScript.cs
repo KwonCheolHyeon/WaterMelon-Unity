@@ -56,26 +56,36 @@ public class SpaceCameraMoveScript : MonoBehaviour
     }
     private void Update()
     {
-        //if (!spaceTongsMove.IsTongsMoving())
-        //{ 
-        //    if (Input.touchCount > 0)
-        //    {
-        //        Touch touch = Input.GetTouch(0);
+        if (!spaceTongsMove.IsTongsMoving())
+        {
+            // 모바일
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0); // 첫 번째 터치
 
-        //        if (touch.phase == TouchPhase.Moved)
-        //        {
-        //            Vector2 delta = touch.deltaPosition;
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        // 터치가 시작될 때 초기 위치를 저장
+                        lastTouchPosition = touch.position;
+                        break;
 
-        //            // Update phi and theta based on touch movement
-        //            // Clamp theta to prevent the camera from going below the horizon (Y=0)
-        //            phi -= delta.x * sensitivity;
-        //            theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
+                    case TouchPhase.Moved:
+                        // 터치가 움직일 때, 마지막 터치 위치와 현재 터치 위치의 차이를 사용하여 카메라 이동
+                        Vector2 touchDelta = touch.deltaPosition;
+                        phi -= touchDelta.x * sensitivity;
+                        theta = Mathf.Clamp(theta - touchDelta.y * sensitivity, 0.01f, Mathf.PI / 2);
+                        UpdateCameraPosition();
+                        break;
 
-        //            UpdateCameraPosition();
-        //        }
-        //    }
-        //}
+                    case TouchPhase.Ended:
+                        // 터치가 끝났을 때 처리가 필요한 경우 여기에 로직 추가
+                        break;
+                }
+            }
+        }
 
+        //위에는 모바일용 밑에는 pc용 
         if (!spaceTongsMove.IsTongsMoving())
         {
             if (Input.GetMouseButton(0))
