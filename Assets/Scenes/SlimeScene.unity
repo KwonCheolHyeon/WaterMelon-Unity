@@ -489,7 +489,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 339273210}
-  m_PlaneDistance: 5
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -937,6 +937,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2871c8bd8e784c542aa0d901f6828ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 946786993}
+  radius: 10
+  slimeTongsMove: {fileID: 1605685335}
 --- !u!4 &356468014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1692426679542966863, guid: 1615205e98cd1a14ab9d57a42ed5417a,
@@ -1506,6 +1509,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932553768}
   m_CullTransparentMesh: 1
+--- !u!1 &946786992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 946786993}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &946786993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946786992}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1417830025}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1020135661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1994,6 +2028,7 @@ Transform:
   - {fileID: 154486644}
   - {fileID: 1538630802}
   - {fileID: 710530762}
+  - {fileID: 946786993}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1424186021 stripped
@@ -3422,6 +3457,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 135040364}
     m_Modifications:
+    - target: {fileID: 1660715995384647548, guid: e6999f7d73c17424ea1d32b76192a589,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2427735801326441058, guid: e6999f7d73c17424ea1d32b76192a589,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3436,6 +3476,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MoveUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238911427385727035, guid: e6999f7d73c17424ea1d32b76192a589,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8502615154285734980, guid: e6999f7d73c17424ea1d32b76192a589,
         type: 3}
