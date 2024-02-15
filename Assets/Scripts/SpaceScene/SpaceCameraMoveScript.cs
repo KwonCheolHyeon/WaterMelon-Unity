@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static CartoonFX.CFXR_Effect;
 
 public class SpaceCameraMoveScript : MonoBehaviour
 {
@@ -12,7 +14,17 @@ public class SpaceCameraMoveScript : MonoBehaviour
 
     private int currentIndex = 1;
     private Camera mainCamera;
-
+    //카메라 드래그
+    public Transform target; // The target the camera looks at (the origin)
+    public float radius = 10.0f; // Distance from the target
+    private float theta = Mathf.PI / 4; // Initial polar angle in radians
+    private float phi = Mathf.PI / 4; // Initial azimuthal angle in radians
+    private Vector2 lastTouchPosition;
+    private float sensitivity = 0.01f; // Adjust this value to change rotation sensitivity
+    private Vector3 lastMousePosition;
+    [SerializeField]
+    private SpaceTongsMoveScript spaceTongsMove;
+    //카메라 드래그
     public int GetCurrentCameraIndex()
     {
         return currentIndex;
@@ -42,6 +54,55 @@ public class SpaceCameraMoveScript : MonoBehaviour
         mainCamera.transform.position = vectors[currentIndex];
         mainCamera.transform.rotation = rotates[currentIndex];
     }
+    private void Update()
+    {
+        //if (!spaceTongsMove.IsTongsMoving())
+        //{ 
+        //    if (Input.touchCount > 0)
+        //    {
+        //        Touch touch = Input.GetTouch(0);
+
+        //        if (touch.phase == TouchPhase.Moved)
+        //        {
+        //            Vector2 delta = touch.deltaPosition;
+
+        //            // Update phi and theta based on touch movement
+        //            // Clamp theta to prevent the camera from going below the horizon (Y=0)
+        //            phi -= delta.x * sensitivity;
+        //            theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
+
+        //            UpdateCameraPosition();
+        //        }
+        //    }
+        //}
+
+        if (!spaceTongsMove.IsTongsMoving())
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Vector3 delta = Input.mousePosition - lastMousePosition;
+                phi -= delta.x * sensitivity;
+                theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
+                UpdateCameraPosition();
+
+            }
+            lastMousePosition = Input.mousePosition;
+        }
+       
+
+
+    }
+    void UpdateCameraPosition()
+    {
+        // Convert spherical to Cartesian coordinates
+        float x = radius * Mathf.Sin(theta) * Mathf.Cos(phi);
+        float y = radius * Mathf.Cos(theta);
+        float z = radius * Mathf.Sin(theta) * Mathf.Sin(phi);
+
+        // Update camera position and rotation
+        transform.position = new Vector3(x, y, z) + target.position;
+        transform.LookAt(target);
+    }
 
     public void MoveToNextPosition()
     {
@@ -61,12 +122,14 @@ public class SpaceCameraMoveScript : MonoBehaviour
     }
     public void TriggerCameraShake()
     {
+        
         float duration = 0.2f;
         float magnitude = 0.1f;
         StartCoroutine(CameraShake(duration, magnitude));
     }
     public IEnumerator CameraShake(float duration, float magnitude)
     {
+        
         Vector3 originalPos = mainCamera.transform.position;
         Quaternion originalRot = mainCamera.transform.rotation;
         float elapsed = 0.0f;
