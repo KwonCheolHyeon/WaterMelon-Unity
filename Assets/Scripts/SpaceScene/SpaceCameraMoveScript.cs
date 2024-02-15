@@ -15,12 +15,12 @@ public class SpaceCameraMoveScript : MonoBehaviour
     private int currentIndex = 1;
     private Camera mainCamera;
     //카메라 드래그
-    public Transform target; // The target the camera looks at (the origin)
-    public float radius = 10.0f; // Distance from the target
-    private float theta = Mathf.PI / 4; // Initial polar angle in radians
-    private float phi = Mathf.PI / 4; // Initial azimuthal angle in radians
+    public Transform target; 
+    public float radius = 10.0f; 
+    private float theta = Mathf.PI / 4; 
+    private float phi = Mathf.PI / 4; 
     private Vector2 lastTouchPosition;
-    private float sensitivity = 0.01f; // Adjust this value to change rotation sensitivity
+    private float sensitivity = 0.01f; 
     private Vector3 lastMousePosition;
     [SerializeField]
     private SpaceTongsMoveScript spaceTongsMove;
@@ -33,11 +33,11 @@ public class SpaceCameraMoveScript : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        vectors[0] = new Vector3(0, 15f, 0);  // Set position
-        rotates[0] = Quaternion.Euler(90, 0, 0);  // Set rotation
+        vectors[0] = new Vector3(0, 15f, 0);  
+        rotates[0] = Quaternion.Euler(90, 0, 0); 
 
-        vectors[1] = new Vector3(0, 10, -10);  // Set position
-        rotates[1] = Quaternion.Euler(30, 0, 0);  // Set rotation
+        vectors[1] = new Vector3(0, 10, -10); 
+        rotates[1] = Quaternion.Euler(30, 0, 0);
 
         vectors[2] = new Vector3(-10, 10, 0);
         rotates[2] = Quaternion.Euler(30, 90, 0);
@@ -94,12 +94,12 @@ public class SpaceCameraMoveScript : MonoBehaviour
     }
     void UpdateCameraPosition()
     {
-        // Convert spherical to Cartesian coordinates
+        
         float x = radius * Mathf.Sin(theta) * Mathf.Cos(phi);
         float y = radius * Mathf.Cos(theta);
         float z = radius * Mathf.Sin(theta) * Mathf.Sin(phi);
 
-        // Update camera position and rotation
+        
         transform.position = new Vector3(x, y, z) + target.position;
         transform.LookAt(target);
     }
@@ -109,7 +109,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
         if (vectors.Length == 0 || rotates.Length == 0)
             return;
         currentIndex = (currentIndex + 1) % vectors.Length;
-        // Set camera position and rotation
+
         mainCamera.transform.position = vectors[currentIndex];
         mainCamera.transform.rotation = rotates[currentIndex];
 
