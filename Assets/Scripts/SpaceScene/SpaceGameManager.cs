@@ -47,6 +47,8 @@ public class SpaceGameManager : MonoBehaviour
     private bool gameoverState = false;
     [SerializeField]
     private GameObject gameOverPanel;
+    [SerializeField]
+    private TextMeshProUGUI gameOverScoreText;
 
     //카메라 관련
     private SpaceCameraMoveScript cameraScr;
@@ -366,17 +368,21 @@ public class SpaceGameManager : MonoBehaviour
             gameoverState = true;
             gameOverPanel.SetActive(true);
             cameraScr.GameOverCameraMove();
-            UnityAdsManager.Instance.GameOver();
 
-           
+
+            gameOverScoreText.text = "Score : " + score;
+
+            // PlayGamesPlatform 리더보드에 점수 추가
+            PlayGamesPlatform.Instance.ReportScore(score, GPGSIds.leaderboard_spacescore, (bool success) => { });
+            // 최종 점수 저장
+            ScoreDataSave();
+            
+            UnityAdsManager.Instance.GameOver();
         }
     }
     public void SaveGameOverScore()
     {
-        // PlayGamesPlatform 리더보드에 점수 추가
-        PlayGamesPlatform.Instance.ReportScore(gameScore, GPGSIds.achievement_score, (bool success) => { });
 
-        ScoreDataSave();
     }
 
     public void CameraShake()

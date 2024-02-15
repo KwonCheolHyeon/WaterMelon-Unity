@@ -32,7 +32,7 @@ public class CheckAppUpdate : MonoBehaviour
     IEnumerator CheckForUpdate()
     {
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
 
         appUpdateManager = new AppUpdateManager();
         PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> appUpdateInfoOperation;

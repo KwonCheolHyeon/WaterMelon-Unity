@@ -128,7 +128,7 @@ public class UnityAdsManager : MonoBehaviour
     {
         interstitialAd.LoadAd();
 
-        StartCoroutine(ShowInterstitialAdWithDelay(0.5f));
+        StartCoroutine(ShowInterstitialAdWithDelay(1.0f));
     }
     private IEnumerator ShowInterstitialAdWithDelay(float delay)
     {
@@ -140,6 +140,7 @@ public class UnityAdsManager : MonoBehaviour
     {
         if (sceneType == 0)//슬라임
         {
+            Debug.Log("슬라임 씬 게임 오버");
             SlimeGameManager.Instance.SaveGameOverScore();
         }
         else if (sceneType == 1)
