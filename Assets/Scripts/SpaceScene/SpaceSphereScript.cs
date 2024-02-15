@@ -100,6 +100,15 @@ public class SpaceSphereScript : MonoBehaviour
             SpaceGameManager.Instance.SphereBottomTrue();
         }
 
+        if (targetToFollow != null)//집게를 따라 다니는 상태
+        {
+            if (tagsToCheck.Contains(collision.gameObject.tag))
+            {
+                SpaceGameManager.Instance.GameOver();
+                GameOverState();
+            }
+        }
+
         if (tagsToCheck.Contains(collision.gameObject.tag))
         {
             SpaceSphereScript otherSphere = collision.gameObject.GetComponent<SpaceSphereScript>();
@@ -120,6 +129,8 @@ public class SpaceSphereScript : MonoBehaviour
                 }
             }
         }
+
+       
 
         if ((collision.gameObject.CompareTag("GameOverTag")))
         {

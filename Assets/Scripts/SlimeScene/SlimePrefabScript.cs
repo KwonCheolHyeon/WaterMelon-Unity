@@ -91,7 +91,14 @@ public class SlimePrefabScript : MonoBehaviour
             isBottom = true;
             SlimeGameManager.Instance.SphereBottomTrue();
         }
-
+        if (targetToFollow != null)//집게를 따라다니는 상태
+        {
+            if (tagsToCheck.Contains(collision.gameObject.tag))
+            {
+                SlimeGameManager.Instance.GameOver();
+                GameOverState();
+            }
+        }
         if (tagsToCheck.Contains(collision.gameObject.tag))
         {
             SlimePrefabScript otherSphere = collision.gameObject.GetComponent<SlimePrefabScript>();
@@ -114,6 +121,8 @@ public class SlimePrefabScript : MonoBehaviour
                 }
             }
         }
+
+       
 
         if ((collision.gameObject.CompareTag("GameOverTag")))
         {
