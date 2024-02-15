@@ -181,7 +181,7 @@ public class SlimeTongsMoveScript : MonoBehaviour
         }
         else
         {
-            SlimeGameManager.Instance.GameOver();
+            //SlimeGameManager.Instance.GameOver();
         }
     }
 
