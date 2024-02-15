@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0031053259, g: 0.0028151472, b: 0.003270541, a: 1}
+  m_IndirectSpecularColor: {r: 0.0031053144, g: 0.0028151246, b: 0.00327053, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,7 +195,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 339273210}
-  m_PlaneDistance: 5
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -575,6 +575,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bf14e5a5d2e51419de9fe66edf289c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1383809385}
+  radius: 11
+  spaceTongsMove: {fileID: 1605685335}
 --- !u!1 &341698568
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +717,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7134502426828200372, guid: e6999f7d73c17424ea1d32b76192a589,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8502615154285734980, guid: e6999f7d73c17424ea1d32b76192a589,
         type: 3}
@@ -2058,6 +2066,37 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 434948006}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1383809384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1383809385}
+  m_Layer: 0
+  m_Name: CameraTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1383809385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383809384}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1417830025}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1417830021
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,6 +2212,7 @@ Transform:
   - {fileID: 154486644}
   - {fileID: 1538630802}
   - {fileID: 710530762}
+  - {fileID: 1383809385}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1433071934 stripped

@@ -31,7 +31,8 @@ public class SlimeTongsMoveScript : MonoBehaviour
     private GameObject targetObject;// 오브젝트와 닿을 때 생기는 구체
     //조이스틱 관련
     public VariableJoystick variableJoystick;
-
+    private bool isTongsMoving = false;
+    public bool IsTongsMoving() { return isTongsMoving; }
     //단계별 슬라임 이미지
     [SerializeField]
     private List<Sprite> slimeImageList = new List<Sprite>();
@@ -99,12 +100,21 @@ public class SlimeTongsMoveScript : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (_isMoving && Camera.main != null)
+        if (_isMoving && mainCamera != null)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             x += variableJoystick.Horizontal;
             z += variableJoystick.Vertical;
+
+            if (Mathf.Abs(x) > 0.01f || Mathf.Abs(z) > 0.01f)
+            {
+                isTongsMoving = true;
+            }
+            else
+            {
+                isTongsMoving = false;
+            }
 
             minX = -sizeXYZ[nowTypeSlime];
             maxX = sizeXYZ[nowTypeSlime];
@@ -140,6 +150,7 @@ public class SlimeTongsMoveScript : MonoBehaviour
                     float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
                     transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
                 }
+
             }
         }
     }

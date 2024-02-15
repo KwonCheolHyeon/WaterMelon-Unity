@@ -34,6 +34,9 @@ public class SpaceTongsMoveScript : MonoBehaviour
 
     //조이스틱 관련
     public VariableJoystick variableJoystick;
+    private bool isTongsMoving = false;
+    public bool IsTongsMoving() { return isTongsMoving; }
+    //
 
     //단계별 행성 이미지
     [SerializeField]
@@ -107,6 +110,15 @@ public class SpaceTongsMoveScript : MonoBehaviour
             float z = Input.GetAxis("Vertical");
             x += variableJoystick.Horizontal;
             z += variableJoystick.Vertical;
+
+            if (Mathf.Abs(x) > 0.01f || Mathf.Abs(z) > 0.01f)
+            {
+                isTongsMoving = true;
+            }
+            else
+            {
+                isTongsMoving = false;
+            }
 
             minX = -sizeXYZ[nowTypeSphere];
             maxX = sizeXYZ[nowTypeSphere];
