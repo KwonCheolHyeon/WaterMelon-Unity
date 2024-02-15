@@ -25,6 +25,8 @@ public class SpaceCameraMoveScript : MonoBehaviour
     [SerializeField]
     private SpaceTongsMoveScript spaceTongsMove;
     //카메라 드래그
+    //게임 오버
+    private bool isGameOver = false;
     public int GetCurrentCameraIndex()
     {
         return currentIndex;
@@ -33,6 +35,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
     {
         mainCamera = Camera.main;
 
+        isGameOver = false;
         vectors[0] = new Vector3(0, 15f, 0);  
         rotates[0] = Quaternion.Euler(90, 0, 0); 
 
@@ -56,7 +59,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
     }
     private void Update()
     {
-        if (!spaceTongsMove.IsTongsMoving())
+        if (!spaceTongsMove.IsTongsMoving() && !isGameOver)
         {
             // 모바일
             if (Input.touchCount > 0)
@@ -86,7 +89,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
         }
 
         //위에는 모바일용 밑에는 pc용 
-        if (!spaceTongsMove.IsTongsMoving())
+        if (!spaceTongsMove.IsTongsMoving() && !isGameOver)
         {
             if (Input.GetMouseButton(0))
             {
@@ -127,6 +130,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
 
     public void GameOverCameraMove()
     {
+        isGameOver = true;
         mainCamera.transform.position = gameoverVec;
         mainCamera.transform.rotation = gameoverRot;
     }
