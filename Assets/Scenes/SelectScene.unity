@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 4
+  scoreText: {fileID: 0}
 --- !u!114 &136564140
 MonoBehaviour:
   m_ObjectHideFlags: 0

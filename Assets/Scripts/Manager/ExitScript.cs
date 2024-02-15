@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class ExitScript : MonoBehaviour
 {
     [SerializeField]
@@ -39,4 +40,6 @@ public class ExitScript : MonoBehaviour
     {
         GPGSBinderScript.Instance.ShowAllLeaderboardUI();
     }
+
+
 }
