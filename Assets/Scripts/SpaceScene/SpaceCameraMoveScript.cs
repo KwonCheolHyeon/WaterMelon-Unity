@@ -20,7 +20,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
     private float theta = Mathf.PI / 4; 
     private float phi = Mathf.PI / 4; 
     private Vector2 lastTouchPosition;
-    private float sensitivity = 0.01f; 
+    private float sensitivity = 0.001f; 
     private Vector3 lastMousePosition;
     [SerializeField]
     private SpaceTongsMoveScript spaceTongsMove;
@@ -65,24 +65,19 @@ public class SpaceCameraMoveScript : MonoBehaviour
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0); // 첫 번째 터치
-
+                float adjustedSensitivity = sensitivity * (Screen.width / 1080f);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
-                        // 터치가 시작될 때 초기 위치를 저장
                         lastTouchPosition = touch.position;
                         break;
 
                     case TouchPhase.Moved:
-                        // 터치가 움직일 때, 마지막 터치 위치와 현재 터치 위치의 차이를 사용하여 카메라 이동
                         Vector2 touchDelta = touch.deltaPosition;
-                        phi -= touchDelta.x * sensitivity;
-                        theta = Mathf.Clamp(theta - touchDelta.y * sensitivity, 0.01f, Mathf.PI / 2);
+                        // 정규화된 터치 이동 거리를 사용하여 카메라 회전 각도 조정
+                        phi -= touchDelta.x * adjustedSensitivity;
+                        theta = Mathf.Clamp(theta - touchDelta.y * adjustedSensitivity, 0.01f, Mathf.PI / 2);
                         UpdateCameraPosition();
-                        break;
-
-                    case TouchPhase.Ended:
-                        // 터치가 끝났을 때 처리가 필요한 경우 여기에 로직 추가
                         break;
                 }
             }
@@ -119,6 +114,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
 
     public void MoveToNextPosition()
     {
+        sensitivity *= 0.1f;
         if (vectors.Length == 0 || rotates.Length == 0)
             return;
         currentIndex = (currentIndex + 1) % vectors.Length;
