@@ -40,6 +40,8 @@ public class SpaceGameManager : MonoBehaviour
     private TextMeshProUGUI nowScoreText;
     [SerializeField]
     private TextMeshProUGUI hightScroreText;
+    [SerializeField]
+    private GameObject comboImageObj;
     private int gameScore = 0;
     private int highScore = 0;
 
@@ -59,13 +61,11 @@ public class SpaceGameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textShakeCount;
     private int shakeCount;
-    //스테이지 흔들기
 
     //콤보 시스템 관련
     private float comboTime;
     private int comboCount;
     private bool isComboState;
-    //콤보 시스템 관련
 
     //광고 관련
     [SerializeField]
@@ -272,6 +272,7 @@ public class SpaceGameManager : MonoBehaviour
         if (isComboState)
         {
             comboTime = 3.0f;
+            comboCount += 1;
 
             if (comboCount > 4)
             {
@@ -293,7 +294,12 @@ public class SpaceGameManager : MonoBehaviour
             {
                 Debug.LogError("ComBoCount 가 0입니다.");
             }
-            comboCount += 1;
+
+
+            if (comboImageObj.activeSelf == false)
+                comboImageObj.SetActive(true);
+
+            comboImageObj.GetComponent<ComboScript>().SetComboImage(comboCount);
         }
         else 
         {
@@ -309,6 +315,8 @@ public class SpaceGameManager : MonoBehaviour
 
     private void InItCombo() 
     {
+        comboImageObj.SetActive(false);
+
         isComboState = false;
         comboCount = 1;
         comboTime = 3.0f;
