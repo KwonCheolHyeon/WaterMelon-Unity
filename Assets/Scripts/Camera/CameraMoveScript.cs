@@ -15,11 +15,11 @@ public class CameraMoveScript : MonoBehaviour
     private Camera mainCamera;
     //카메라 드래그
     public Transform target;
-    public float radius = 10.0f;
+    private float radius = 12.0f;
     private float theta = Mathf.PI / 4;
     private float phi = Mathf.PI / 4;
     private Vector2 lastTouchPosition;
-    private float sensitivity = 0.001f;
+    private float sensitivity = 0.003f;
     private Vector3 lastMousePosition;
     [SerializeField]
     private SlimeTongsMoveScript slimeTongsMove;
@@ -33,37 +33,49 @@ public class CameraMoveScript : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        isGameOver = false;
-        vectors[0] = new Vector3(0, 14.0f, 0);  // Set position
-        rotates[0] = Quaternion.Euler(90, 0, 0);  // Set rotation
+        //vectors[0] = new Vector3(0, 14.0f, 0);  // Set position
+        //rotates[0] = Quaternion.Euler(90, 0, 0);  // Set rotation
 
-        vectors[1] = new Vector3(0,10,-10);  // Set position
-        rotates[1] = Quaternion.Euler(30,0,0);  // Set rotation
+        //vectors[1] = new Vector3(0,10,-10);  // Set position
+        //rotates[1] = Quaternion.Euler(30,0,0);  // Set rotation
 
-        vectors[2] = new Vector3(-10, 10, 0);  
-        rotates[2] = Quaternion.Euler(30, 90, 0);
+        //vectors[2] = new Vector3(-10, 10, 0);  
+        //rotates[2] = Quaternion.Euler(30, 90, 0);
 
-        vectors[3] = new Vector3(0, 10, 10);  
-        rotates[3] = Quaternion.Euler(30, 180, 0);
+        //vectors[3] = new Vector3(0, 10, 10);  
+        //rotates[3] = Quaternion.Euler(30, 180, 0);
 
-        vectors[4] = new Vector3(10, 10, 0);  
-        rotates[4] = Quaternion.Euler(30, 270, 0);
+        //vectors[4] = new Vector3(10, 10, 0);  
+        //rotates[4] = Quaternion.Euler(30, 270, 0);
 
-        gameoverVec = new Vector3(0, 1.8f, -12);
-        gameoverRot = Quaternion.Euler(0, 0, 0);
+        //gameoverVec = new Vector3(0, 1.8f, -12);
+        //gameoverRot = Quaternion.Euler(0, 0, 0);
 
-        mainCamera.transform.position = vectors[currentIndex];
-        mainCamera.transform.rotation = rotates[currentIndex];
+        //mainCamera.transform.position = vectors[currentIndex];
+        //mainCamera.transform.rotation = rotates[currentIndex];
+
+
+        UpdateCameraPosition();
     }
     private void Update()
     {
+#if UNITY_EDITOR
+        //위에는 모바일용 밑에는 pc용 
+        if (!slimeTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
+        {
+            Vector3 delta = Input.mousePosition - lastMousePosition;
+            phi -= delta.x * sensitivity;
+            theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
+            UpdateCameraPosition();
+        }
+#else
         if (!slimeTongsMove.IsTongsMoving() && !isGameOver)
         {
             // 모바일
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0); // 첫 번째 터치
-                float adjustedSensitivity = sensitivity * (Screen.width / 1080f);
+                float adjustedSensitivity = sensitivity * (Screen.width / 1440);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
@@ -80,20 +92,8 @@ public class CameraMoveScript : MonoBehaviour
                 }
             }
         }
-
-        //위에는 모바일용 밑에는 pc용 
-        if (!slimeTongsMove.IsTongsMoving() && !isGameOver)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                Vector3 delta = Input.mousePosition - lastMousePosition;
-                phi -= delta.x * sensitivity;
-                theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
-                UpdateCameraPosition();
-
-            }
-            lastMousePosition = Input.mousePosition;
-        }
+#endif
+        lastMousePosition = Input.mousePosition;
     }
     void UpdateCameraPosition()
     {
