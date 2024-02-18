@@ -20,7 +20,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
     private float theta = Mathf.PI / 4; 
     private float phi = Mathf.PI / 4; 
     private Vector2 lastTouchPosition;
-    private float sensitivity = 0.003f; 
+    private float sensitivity = 0.002f; 
     private Vector3 lastMousePosition;
     [SerializeField]
     private SpaceTongsMoveScript spaceTongsMove;
@@ -77,7 +77,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0); // 첫 번째 터치
-                float adjustedSensitivity = sensitivity * (Screen.width / 1440);
+                float adjustedSensitivity = sensitivity * (Screen.width / 1080);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:

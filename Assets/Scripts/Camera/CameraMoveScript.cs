@@ -19,7 +19,7 @@ public class CameraMoveScript : MonoBehaviour
     private float theta = Mathf.PI / 4;
     private float phi = Mathf.PI / 4;
     private Vector2 lastTouchPosition;
-    private float sensitivity = 0.003f;
+    private float sensitivity = 0.002f;
     private Vector3 lastMousePosition;
     [SerializeField]
     private SlimeTongsMoveScript slimeTongsMove;
@@ -57,10 +57,11 @@ public class CameraMoveScript : MonoBehaviour
 
         UpdateCameraPosition();
     }
+
     private void Update()
     {
 #if UNITY_EDITOR
-        //위에는 모바일용 밑에는 pc용 
+
         if (!slimeTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
         {
             Vector3 delta = Input.mousePosition - lastMousePosition;
@@ -68,14 +69,19 @@ public class CameraMoveScript : MonoBehaviour
             theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
             UpdateCameraPosition();
         }
+
 #else
         if (!slimeTongsMove.IsTongsMoving() && !isGameOver)
         {
+            Debug.Log("터치 처음 if문 들어옴");
+            
             // 모바일
             if (Input.touchCount > 0)
             {
+
+                Debug.Log("화면 터치터치");
                 Touch touch = Input.GetTouch(0); // 첫 번째 터치
-                float adjustedSensitivity = sensitivity * (Screen.width / 1440);
+                float adjustedSensitivity = sensitivity * (Screen.width / 1080);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
@@ -102,7 +108,9 @@ public class CameraMoveScript : MonoBehaviour
         float y = radius * Mathf.Cos(theta);
         float z = radius * Mathf.Sin(theta) * Mathf.Sin(phi);
 
-
+        Debug.Log(lastTouchPosition.ToString());
+        Debug.Log(target.position.ToString());
+        Debug.Log("xyx" + x.ToString() + "," + y.ToString() + "," + z.ToString());
         transform.position = new Vector3(x, y, z) + target.position;
         transform.LookAt(target);
     }
