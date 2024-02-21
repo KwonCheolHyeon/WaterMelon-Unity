@@ -22,6 +22,8 @@ public class SlimePrefabScript : MonoBehaviour
     [SerializeField]
     private GameObject collEffect;
 
+    private Vector3 resetPos = new Vector3(0, 30, 0);
+
     private bool gameOverRun = false;
     private bool _isMerge = false;
     private bool isBottom = false;
@@ -68,6 +70,9 @@ public class SlimePrefabScript : MonoBehaviour
     {
         isBottom = false;
         targetToFollow = null;
+
+        // 충돌 후 사라지는 슬라임 위치값 초기화
+        this.transform.position = resetPos;
     }
 
     void FixedUpdate()
