@@ -23,7 +23,7 @@ public class CameraMoveScript : MonoBehaviour
     private Vector3 lastMousePosition;
     [SerializeField]
     private SlimeTongsMoveScript slimeTongsMove;
-    //카메라 드래그
+
     //게임 오버
     private bool isGameOver = false;
     public int GetCurrentCameraIndex() 

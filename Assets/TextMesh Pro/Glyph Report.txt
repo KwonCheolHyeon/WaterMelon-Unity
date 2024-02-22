@@ -1,0 +1,12 @@
+Font: CookieRunOTF  Style: Black
+Point Size: 78   SP/PD Ratio: 6.4%
+
+Characters included: 2487/2487
+Missing characters: 0
+Excluded characters: 0
+
+Characters missing from font file:
+----------------------------------------
+
+Characters excluded from packing:
+----------------------------------------
