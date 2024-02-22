@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static CartoonFX.CFXR_Effect;
 
 public class SpaceCameraMoveScript : MonoBehaviour
@@ -28,15 +29,11 @@ public class SpaceCameraMoveScript : MonoBehaviour
     //게임 오버
     private bool isGameOver = false;
 
-    public void SetRadius(float _userRadius) 
-    {
-        radius = _userRadius;
-    }
+    [SerializeField]
+    private Slider cameraRadius;
+    [SerializeField]
+    private Slider cameraSensitivity;
 
-    public void SetSensitivity(float _userSensitivity)
-    {
-        sensitivity = _userSensitivity;
-    }
     public int GetCurrentCameraIndex()
     {
         return currentIndex;
@@ -45,33 +42,23 @@ public class SpaceCameraMoveScript : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        //isGameOver = false;
-        //vectors[0] = new Vector3(0, 15f, 0);  
-        //rotates[0] = Quaternion.Euler(90, 0, 0); 
-
-        //vectors[1] = new Vector3(0, 10, -10); 
-        //rotates[1] = Quaternion.Euler(30, 0, 0);
-
-        //vectors[2] = new Vector3(-10, 10, 0);
-        //rotates[2] = Quaternion.Euler(30, 90, 0);
-
-        //vectors[3] = new Vector3(0, 10, 10);
-        //rotates[3] = Quaternion.Euler(30, 180, 0);
-
-        //vectors[4] = new Vector3(10, 10, 0);
-        //rotates[4] = Quaternion.Euler(30, 270, 0);
-
         gameoverVec = new Vector3(12, 2.0f, 0);
         gameoverRot = Quaternion.Euler(0, 270, 0);
 
-        //mainCamera.transform.position = vectors[currentIndex];
-        //mainCamera.transform.rotation = rotates[currentIndex];
         sensitivity = 0.002f;
         radius = 12.0f;
+
+        cameraSensitivity.value = sensitivity;
+        cameraRadius.value = radius;
+
         UpdateCameraPosition();
     }
     private void Update()
     {
+
+        sensitivity = cameraSensitivity.value;
+        radius = cameraRadius.value;
+
 #if UNITY_EDITOR
         //위에는 모바일용 밑에는 pc용 
         if (!spaceTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
