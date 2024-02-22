@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class CameraMoveScript : MonoBehaviour
@@ -28,9 +29,9 @@ public class CameraMoveScript : MonoBehaviour
     private bool isGameOver = false;
 
     [SerializeField]
-    private Slider cameraRadius;
+    private UnityEngine.UI.Slider cameraRadius;
     [SerializeField]
-    private Slider cameraSensitivity;
+    private UnityEngine.UI.Slider cameraSensitivity;
 
 
     public int GetCurrentCameraIndex() 
