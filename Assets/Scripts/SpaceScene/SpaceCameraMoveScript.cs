@@ -61,8 +61,8 @@ public class SpaceCameraMoveScript : MonoBehaviour
         //vectors[4] = new Vector3(10, 10, 0);
         //rotates[4] = Quaternion.Euler(30, 270, 0);
 
-        //gameoverVec = new Vector3(12, 2.0f, 0);
-        //gameoverRot = Quaternion.Euler(0, 270, 0);
+        gameoverVec = new Vector3(12, 2.0f, 0);
+        gameoverRot = Quaternion.Euler(0, 270, 0);
 
         //mainCamera.transform.position = vectors[currentIndex];
         //mainCamera.transform.rotation = rotates[currentIndex];
