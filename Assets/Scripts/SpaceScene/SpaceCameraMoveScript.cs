@@ -16,17 +16,27 @@ public class SpaceCameraMoveScript : MonoBehaviour
     private Camera mainCamera;
     //카메라 드래그
     public Transform target;
-    private float radius = 12.0f; 
+    private float radius;
     private float theta = Mathf.PI / 4; 
     private float phi = Mathf.PI / 4; 
     private Vector2 lastTouchPosition;
-    private float sensitivity = 0.002f; 
+    private float sensitivity;
     private Vector3 lastMousePosition;
     [SerializeField]
     private SpaceTongsMoveScript spaceTongsMove;
     //카메라 드래그
     //게임 오버
     private bool isGameOver = false;
+
+    public void SetRadius(float _userRadius) 
+    {
+        radius = _userRadius;
+    }
+
+    public void SetSensitivity(float _userSensitivity)
+    {
+        sensitivity = _userSensitivity;
+    }
     public int GetCurrentCameraIndex()
     {
         return currentIndex;
@@ -56,7 +66,8 @@ public class SpaceCameraMoveScript : MonoBehaviour
 
         //mainCamera.transform.position = vectors[currentIndex];
         //mainCamera.transform.rotation = rotates[currentIndex];
-
+        sensitivity = 0.002f;
+        radius = 12.0f;
         UpdateCameraPosition();
     }
     private void Update()
