@@ -68,41 +68,44 @@ public class CameraMoveScript : MonoBehaviour
         cameraDatas.sensitivity = cameraSensitivity.value;
         cameraDatas.radius = cameraRadius.value;
 
-
-        // 터치한 부분이 UI일 경우 true 반환
-        if (EventSystem.current.IsPointerOverGameObject() == false)
-        {
 #if UNITY_EDITOR
+        // 터치한 부분이 UI일 경우 true 반환
+        if (EventSystem.current.IsPointerOverGameObject(-1) == false)
+        {
             if (!slimeTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
             {
                 Vector3 delta = Input.mousePosition - lastMousePosition;
                 phi -= delta.x * cameraDatas.sensitivity;
                 theta = Mathf.Clamp(theta - delta.y * cameraDatas.sensitivity, 0.01f, Mathf.PI / 2);
             }
+        }
 #else
-        if (!slimeTongsMove.IsTongsMoving() && !isGameOver)
+        // 터치한 부분이 UI일 경우 true 반환
+        if (EventSystem.current.IsPointerOverGameObject(0) == false)
         {
-            if (Input.touchCount > 0)
+            if (!slimeTongsMove.IsTongsMoving() && !isGameOver)
             {
-                Touch touch = Input.GetTouch(0); // 첫 번째 터치
-                float adjustedSensitivity = cameraDatas.sensitivity * (Screen.width / 1080);
-                switch (touch.phase)
+                if (Input.touchCount > 0)
                 {
-                    case TouchPhase.Began:
-                        lastTouchPosition = touch.position;
-                        break;
+                    Touch touch = Input.GetTouch(0); // 첫 번째 터치
+                    float adjustedSensitivity = cameraDatas.sensitivity * (Screen.width / 1080);
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began:
+                            lastTouchPosition = touch.position;
+                            break;
 
-                    case TouchPhase.Moved:
-                        Vector2 touchDelta = touch.deltaPosition;
-                        // 정규화된 터치 이동 거리를 사용하여 카메라 회전 각도 조정
-                        phi -= touchDelta.x * adjustedSensitivity;
-                        theta = Mathf.Clamp(theta - touchDelta.y * adjustedSensitivity, 0.01f, Mathf.PI / 2);
-                        break;
+                        case TouchPhase.Moved:
+                            Vector2 touchDelta = touch.deltaPosition;
+                            // 정규화된 터치 이동 거리를 사용하여 카메라 회전 각도 조정
+                            phi -= touchDelta.x * adjustedSensitivity;
+                            theta = Mathf.Clamp(theta - touchDelta.y * adjustedSensitivity, 0.01f, Mathf.PI / 2);
+                            break;
+                    }
                 }
             }
         }
 #endif
-        }
         // radius의 설정 값을 바로바로 적용
         UpdateCameraPosition();
         lastMousePosition = Input.mousePosition;
