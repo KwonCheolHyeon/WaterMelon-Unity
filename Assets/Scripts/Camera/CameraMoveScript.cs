@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -61,26 +62,22 @@ public class CameraMoveScript : MonoBehaviour
         radius = cameraRadius.value;
 
 
+        // 터치한 부분이 UI일 경우 true 반환
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+        {
 #if UNITY_EDITOR
 
-        if (!slimeTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
-        {
-            Vector3 delta = Input.mousePosition - lastMousePosition;
-            phi -= delta.x * sensitivity;
-            theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
-            UpdateCameraPosition();
-        }
-
+            if (!slimeTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
+            {
+                Vector3 delta = Input.mousePosition - lastMousePosition;
+                phi -= delta.x * sensitivity;
+                theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
+            }
 #else
         if (!slimeTongsMove.IsTongsMoving() && !isGameOver)
         {
-            Debug.Log("터치 처음 if문 들어옴");
-            
-            // 모바일
             if (Input.touchCount > 0)
             {
-
-                Debug.Log("화면 터치터치");
                 Touch touch = Input.GetTouch(0); // 첫 번째 터치
                 float adjustedSensitivity = sensitivity * (Screen.width / 1080);
                 switch (touch.phase)
@@ -94,24 +91,23 @@ public class CameraMoveScript : MonoBehaviour
                         // 정규화된 터치 이동 거리를 사용하여 카메라 회전 각도 조정
                         phi -= touchDelta.x * adjustedSensitivity;
                         theta = Mathf.Clamp(theta - touchDelta.y * adjustedSensitivity, 0.01f, Mathf.PI / 2);
-                        UpdateCameraPosition();
                         break;
                 }
             }
         }
 #endif
+        }
+        // radius의 설정 값을 바로바로 적용
+        UpdateCameraPosition();
         lastMousePosition = Input.mousePosition;
     }
+
     void UpdateCameraPosition()
     {
-
         float x = radius * Mathf.Sin(theta) * Mathf.Cos(phi);
         float y = radius * Mathf.Cos(theta);
         float z = radius * Mathf.Sin(theta) * Mathf.Sin(phi);
 
-        Debug.Log(lastTouchPosition.ToString());
-        Debug.Log(target.position.ToString());
-        Debug.Log("xyx" + x.ToString() + "," + y.ToString() + "," + z.ToString());
         transform.position = new Vector3(x, y, z) + target.position;
         transform.LookAt(target);
     }

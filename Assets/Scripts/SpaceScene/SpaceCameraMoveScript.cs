@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static CartoonFX.CFXR_Effect;
 
@@ -55,23 +56,22 @@ public class SpaceCameraMoveScript : MonoBehaviour
     }
     private void Update()
     {
-
         sensitivity = cameraSensitivity.value;
         radius = cameraRadius.value;
 
-#if UNITY_EDITOR
-        //위에는 모바일용 밑에는 pc용 
-        if (!spaceTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
+        // 터치한 부분이 UI일 경우 true 반환
+        if (EventSystem.current.IsPointerOverGameObject() == false)
         {
-            Vector3 delta = Input.mousePosition - lastMousePosition;
-            phi -= delta.x * sensitivity;
-            theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
-            UpdateCameraPosition();
-        }
+#if UNITY_EDITOR
+            if (!spaceTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
+            {
+                Vector3 delta = Input.mousePosition - lastMousePosition;
+                phi -= delta.x * sensitivity;
+                theta = Mathf.Clamp(theta - delta.y * sensitivity, 0.01f, Mathf.PI / 2);
+            }
 #else
         if (!spaceTongsMove.IsTongsMoving() && !isGameOver)
         {
-            // 모바일
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0); // 첫 번째 터치
@@ -87,12 +87,13 @@ public class SpaceCameraMoveScript : MonoBehaviour
                         // 정규화된 터치 이동 거리를 사용하여 카메라 회전 각도 조정
                         phi -= touchDelta.x * adjustedSensitivity;
                         theta = Mathf.Clamp(theta - touchDelta.y * adjustedSensitivity, 0.01f, Mathf.PI / 2);
-                        UpdateCameraPosition();
                         break;
                 }
             }
         }
 #endif
+        }
+        UpdateCameraPosition();
         lastMousePosition = Input.mousePosition;
     }
 
