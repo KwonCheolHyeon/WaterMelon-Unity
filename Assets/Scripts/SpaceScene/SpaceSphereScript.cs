@@ -16,7 +16,6 @@ public class SpaceSphereScript : MonoBehaviour
     private SphereCollider sphereCol;
     private float originalRadius;
     private MeshFilter thisMesh;
-    private bool gameOverRun = false;
 
     [SerializeField]
     private Mesh[] meshes;

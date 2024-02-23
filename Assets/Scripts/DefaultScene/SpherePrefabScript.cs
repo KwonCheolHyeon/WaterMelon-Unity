@@ -16,7 +16,6 @@ public class SpherePrefabScript : MonoBehaviour
     private Vector3 nextScale = new Vector3(0.2f,0.2f,0.2f);
     private Rigidbody rigid;
     private SphereCollider sphereCol;
-    private bool gameOverRun = false;
 
     public bool isMerge
     {

@@ -24,7 +24,6 @@ public class ComboScript : MonoBehaviour
     private Vector3 velocity = Vector3.one; // 보간에 사용될 초기 속도
 
     private bool scalingUp = false;      // 증가 중 여부
-    private bool isBlinking = false;
 
     private float blinkSpeed = 2.0f;
 
