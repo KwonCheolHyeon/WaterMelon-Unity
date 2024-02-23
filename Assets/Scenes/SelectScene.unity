@@ -2445,8 +2445,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultAmplitude: 0
   vibrationOptionButton: {fileID: 685073977}
-  vibTrueSprite: {fileID: 21300000, guid: f6de2a7823f2e4282b6a118ee77c977e, type: 3}
-  vibFalseSprite: {fileID: 21300000, guid: 1c4cc3242e0544967b6eb69d898a306c, type: 3}
+  vibTrueSprite: {fileID: 21300000, guid: f60fcac4119532c4a884b86ebb63d668, type: 3}
+  vibFalseSprite: {fileID: 21300000, guid: dcf4104f2bb15c9418ea653a097dbf1b, type: 3}
 --- !u!4 &1459021556
 Transform:
   m_ObjectHideFlags: 0
