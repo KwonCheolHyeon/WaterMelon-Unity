@@ -472,7 +472,6 @@ public class SlimeGameManager : MonoBehaviour
             scoreDatas = new GameScoreDatas();
 
             InitializeDefaultData();
-            ScoreDataSave();
 
             scoreDatas = ES3.Load<GameScoreDatas>(datakey, saveFileName);
             Debug.Log("최고점수 설정 데이터 로드 완료");
@@ -482,5 +481,6 @@ public class SlimeGameManager : MonoBehaviour
     private void InitializeDefaultData()
     {
         scoreDatas.slimeHighScore = 0;
+        ES3.Save(datakey, scoreDatas, saveFileName);
     }
 }

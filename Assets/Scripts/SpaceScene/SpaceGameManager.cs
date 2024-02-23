@@ -20,7 +20,6 @@ public class SpaceGameManager : MonoBehaviour
     private GameObject spaceObjects;
     private Queue<SpaceSphereScript> poolingObjectQueues;
     private Vector3 initSphereVec3 = new Vector3(0, 30, 0);
-    //풀링 오브젝트 관련
 
     //오브젝트 세팅 관련
     private float[] sizes = new float[11];

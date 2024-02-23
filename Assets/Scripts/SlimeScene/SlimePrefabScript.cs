@@ -24,7 +24,6 @@ public class SlimePrefabScript : MonoBehaviour
 
     private Vector3 resetPos = new Vector3(0, 30, 0);
 
-    private bool gameOverRun = false;
     private bool _isMerge = false;
     private bool isBottom = false;
 

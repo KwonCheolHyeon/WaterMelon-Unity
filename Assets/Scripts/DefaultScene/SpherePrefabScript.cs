@@ -12,10 +12,10 @@ public class SpherePrefabScript : MonoBehaviour
     private Transform targetToFollow;
     private bool _isMerge = false;
 
+    private Vector3 resetPos = new Vector3(0, 30, 0);
     private Vector3 nextScale = new Vector3(0.2f,0.2f,0.2f);
     private Rigidbody rigid;
     private SphereCollider sphereCol;
-    private bool gameOverRun = false;
 
     public bool isMerge
     {
@@ -53,6 +53,8 @@ public class SpherePrefabScript : MonoBehaviour
     {
         isBottom = false;
         targetToFollow = null;
+
+        this.transform.position = resetPos;
     }
     private void OnEnable()
     {
@@ -177,7 +179,6 @@ public class SpherePrefabScript : MonoBehaviour
                 Debug.LogError("SettingSphere type ¿À·ù");
                 break;
         }
-
     }
 
     public void SettingChangeSphere() 
@@ -259,7 +260,4 @@ public class SpherePrefabScript : MonoBehaviour
         rigid.isKinematic = true;
         sphereCol.enabled = false;
     }
-
-
-
 }

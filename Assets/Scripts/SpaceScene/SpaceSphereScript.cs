@@ -10,19 +10,18 @@ public class SpaceSphereScript : MonoBehaviour
     private Transform targetToFollow;
     private bool _isMerge = false;
 
+    private Vector3 resetPos = new Vector3(0, 30, 0);
     private Vector3 nextScale = new Vector3(0.0225f, 0.0225f, 0.0225f);
     private Rigidbody rigid;
     private SphereCollider sphereCol;
     private float originalRadius;
     private MeshFilter thisMesh;
-    private bool gameOverRun = false;
 
     [SerializeField]
     private Mesh[] meshes;
 
     private GameObject collEffect;
     public void SetCollEffect(GameObject _effect) { collEffect = _effect; }
-
 
 
     public void SpaceMeshSetting() 
@@ -69,6 +68,9 @@ public class SpaceSphereScript : MonoBehaviour
     {
         isBottom = false;
         targetToFollow = null;
+
+        // 충돌 후 사라지는 슬라임 위치값 초기화
+        this.transform.position = resetPos;
     }
     private void OnEnable()
     {

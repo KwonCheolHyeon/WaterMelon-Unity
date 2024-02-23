@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0031053144, g: 0.0028151246, b: 0.00327053, a: 1}
+  m_IndirectSpecularColor: {r: 0.0031053259, g: 0.0028151472, b: 0.003270541, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -224,10 +224,10 @@ RectTransform:
   - {fileID: 1537987930}
   - {fileID: 341698569}
   - {fileID: 961121528}
-  - {fileID: 1179898129}
   - {fileID: 1298851468}
-  - {fileID: 1831438444}
   - {fileID: 1566915549}
+  - {fileID: 1179898129}
+  - {fileID: 1831438444}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1410,8 +1410,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2827,6 +2827,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Combo_Image
       objectReference: {fileID: 0}
+    - target: {fileID: 1749042958123373617, guid: 66ece44bf87b8b54db9ca4fab71fa573,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7196191994300256943, guid: 66ece44bf87b8b54db9ca4fab71fa573,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2910,7 +2915,7 @@ PrefabInstance:
     - target: {fileID: 7196191994300256943, guid: 66ece44bf87b8b54db9ca4fab71fa573,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -735
+      value: -790
       objectReference: {fileID: 0}
     - target: {fileID: 7196191994300256943, guid: 66ece44bf87b8b54db9ca4fab71fa573,
         type: 3}
@@ -3010,7 +3015,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3080,7 +3085,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1b7ab69c763f5854d875e8fc8d1d4fac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3111,8 +3116,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.9857143
-        value: 0.12941241
+        time: 0.9030422
+        value: 0.10068011
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -3155,7 +3160,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -3347,8 +3352,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Next
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 225122dfbc460ff498b803fc7bacc0bc, type: 2}
+  m_sharedMaterial: {fileID: 5213474549540991068, guid: 225122dfbc460ff498b803fc7bacc0bc,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3378,7 +3384,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 17
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
