@@ -24,7 +24,6 @@ public class SpaceSphereScript : MonoBehaviour
     public void SetCollEffect(GameObject _effect) { collEffect = _effect; }
 
 
-
     public void SpaceMeshSetting() 
     {
         Mesh[] masterMesh = SpaceGameManager.Instance.GetSapceMesh();
