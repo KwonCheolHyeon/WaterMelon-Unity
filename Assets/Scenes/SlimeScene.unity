@@ -747,6 +747,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 946786993}
   slimeTongsMove: {fileID: 1605685335}
+  cameraRadius: {fileID: 2823699967708476482}
+  cameraSensitivity: {fileID: 2823699967708476481}
 --- !u!4 &356468014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1692426679542966863, guid: 1615205e98cd1a14ab9d57a42ed5417a,
@@ -3721,6 +3723,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8427b1aa1854eba44b5185613a98d9e3, type: 3}
+--- !u!114 &2823699967708476481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511666551772354160, guid: 8427b1aa1854eba44b5185613a98d9e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2823699967708476480}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2823699967708476482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7038409587795857469, guid: 8427b1aa1854eba44b5185613a98d9e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2823699967708476480}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6950889773158055037
 PrefabInstance:
   m_ObjectHideFlags: 0

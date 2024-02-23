@@ -151,6 +151,6 @@ public class UnityAdsManager : MonoBehaviour
     }
     public void BannerAdOn()
     {
-        bannerAd.OnAdButtonClicked();
+        //bannerAd.OnAdButtonClicked();
     }
 }

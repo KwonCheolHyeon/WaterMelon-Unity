@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class CameraMoveScript : MonoBehaviour
@@ -26,6 +27,13 @@ public class CameraMoveScript : MonoBehaviour
 
     //게임 오버
     private bool isGameOver = false;
+
+    [SerializeField]
+    private UnityEngine.UI.Slider cameraRadius;
+    [SerializeField]
+    private UnityEngine.UI.Slider cameraSensitivity;
+
+
     public int GetCurrentCameraIndex() 
     {
         return currentIndex;
@@ -33,26 +41,15 @@ public class CameraMoveScript : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        //vectors[0] = new Vector3(0, 14.0f, 0);  // Set position
-        //rotates[0] = Quaternion.Euler(90, 0, 0);  // Set rotation
-
-        //vectors[1] = new Vector3(0,10,-10);  // Set position
-        //rotates[1] = Quaternion.Euler(30,0,0);  // Set rotation
-
-        //vectors[2] = new Vector3(-10, 10, 0);  
-        //rotates[2] = Quaternion.Euler(30, 90, 0);
-
-        //vectors[3] = new Vector3(0, 10, 10);  
-        //rotates[3] = Quaternion.Euler(30, 180, 0);
-
-        //vectors[4] = new Vector3(10, 10, 0);  
-        //rotates[4] = Quaternion.Euler(30, 270, 0);
-
+       
         gameoverVec = new Vector3(0, 1.8f, -12);
         gameoverRot = Quaternion.Euler(0, 0, 0);
 
-        //mainCamera.transform.position = vectors[currentIndex];
-        //mainCamera.transform.rotation = rotates[currentIndex];
+        sensitivity = 0.002f;
+        radius = 12.0f;
+
+        cameraSensitivity.value = sensitivity;
+        cameraRadius.value = radius;
 
 
         UpdateCameraPosition();
@@ -60,6 +57,10 @@ public class CameraMoveScript : MonoBehaviour
 
     private void Update()
     {
+        sensitivity = cameraSensitivity.value;
+        radius = cameraRadius.value;
+
+
 #if UNITY_EDITOR
 
         if (!slimeTongsMove.IsTongsMoving() && !isGameOver && Input.GetMouseButton(0))
