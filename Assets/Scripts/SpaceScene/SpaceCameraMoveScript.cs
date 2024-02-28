@@ -44,6 +44,7 @@ public class SpaceCameraMoveScript : MonoBehaviour
     //게임 오버
     private bool isGameOver = false;
 
+
     [SerializeField]
     private Slider cameraRadius;
     [SerializeField]
@@ -69,13 +70,12 @@ public class SpaceCameraMoveScript : MonoBehaviour
     }
     private void Update()
     {
-        if(cameraSensitivity.value != cameraDatas.sensitivity || cameraRadius.value != cameraDatas.radius)
+        if (cameraSensitivity.value != cameraDatas.sensitivity || cameraRadius.value != cameraDatas.radius)
         {
             CameraDataSave();
         }
         cameraDatas.sensitivity = cameraSensitivity.value;
         cameraDatas.radius = cameraRadius.value;
-
 #if UNITY_EDITOR
         // 터치한 부분이 UI일 경우 true 반환
         if (EventSystem.current.IsPointerOverGameObject(-1) == false)
@@ -88,44 +88,63 @@ public class SpaceCameraMoveScript : MonoBehaviour
             }
         }
 #else
-        // 터치한 부분이 UI일 경우 true 반환
-        if (EventSystem.current.IsPointerOverGameObject(0) == false)
+    // 터치한 부분이 UI일 경우 true 반환
+    if (EventSystem.current.IsPointerOverGameObject(0) == false)
+    {
+        if (!spaceTongsMove.IsTongsMoving() && !isGameOver)
         {
-            if (!spaceTongsMove.IsTongsMoving() && !isGameOver)
+            if (Input.touchCount == 2) // 두 손가락으로 터치하는 경우
             {
-                if (Input.touchCount > 0)
-                {
-                    Touch touch = Input.GetTouch(0); // 첫 번째 터치
-                    float adjustedSensitivity = cameraDatas.sensitivity * (Screen.width / 1080);
-                    switch (touch.phase)
-                    {
-                        case TouchPhase.Began:
-                            lastTouchPosition = touch.position;
-                            break;
+                Touch touchZero = Input.GetTouch(0);
+                Touch touchOne = Input.GetTouch(1);
 
-                        case TouchPhase.Moved:
-                            Vector2 touchDelta = touch.deltaPosition;
-                            // 정규화된 터치 이동 거리를 사용하여 카메라 회전 각도 조정
-                            phi -= touchDelta.x * adjustedSensitivity;
-                            theta = Mathf.Clamp(theta - touchDelta.y * adjustedSensitivity, 0.01f, Mathf.PI / 2);
-                            break;
-                    }
+                Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+                Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+                float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+
+                float difference = currentMagnitude - prevMagnitude;
+
+                Zoom(difference * 0.01f); // 줌 인 및 줌 아웃에 대한 보정 값
+            }
+            else if (Input.touchCount == 1) // 한 손가락으로 터치하는 경우
+            {
+                Touch touch = Input.GetTouch(0);
+                float adjustedSensitivity = cameraDatas.sensitivity * (Screen.width / 1080);
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        lastTouchPosition = touch.position;
+                        break;
+
+                    case TouchPhase.Moved:
+                        Vector2 touchDelta = touch.deltaPosition;
+                        // 정규화된 터치 이동 거리를 사용하여 카메라 회전 각도 조정
+                        phi -= touchDelta.x * adjustedSensitivity;
+                        theta = Mathf.Clamp(theta - touchDelta.y * adjustedSensitivity, 0.01f, Mathf.PI / 2);
+                        break;
                 }
             }
         }
+    }
 #endif
+        // radius의 설정 값을 바로바로 적용
         UpdateCameraPosition();
         lastMousePosition = Input.mousePosition;
     }
 
+    void Zoom(float increment)
+    {
+        cameraRadius.value = Mathf.Clamp(cameraDatas.radius - increment, cameraRadius.minValue, cameraRadius.maxValue); // 최소 및 최대 줌 값 적용
+    }
+
     void UpdateCameraPosition()
     {
-        
         float x = cameraDatas.radius * Mathf.Sin(theta) * Mathf.Cos(phi);
         float y = cameraDatas.radius * Mathf.Cos(theta);
         float z = cameraDatas.radius * Mathf.Sin(theta) * Mathf.Sin(phi);
 
-        
         transform.position = new Vector3(x, y, z) + target.position;
         transform.LookAt(target);
     }
@@ -184,7 +203,6 @@ public class SpaceCameraMoveScript : MonoBehaviour
         {
 
             cameraDatas = ES3.Load<CameraSettingDatas>(datakey, saveFileName);
-            cameraRadius.value = cameraDatas.radius;
             cameraSensitivity.value = cameraDatas.sensitivity;
 
         }
@@ -200,7 +218,6 @@ public class SpaceCameraMoveScript : MonoBehaviour
 
     public void CameraDataSave()
     {
-        cameraDatas.radius = cameraRadius.value;
         cameraDatas.sensitivity = cameraSensitivity.value;
 
         ES3.Save(datakey, cameraDatas, saveFileName);
