@@ -75,14 +75,15 @@ public class UnityAdsManager : MonoBehaviour
     }
     private void LoadAndShowBannerAd()
     {
-        if (bannerAd != null)
-        {
+        //if (bannerAd != null)
+        //{
 
-        }
-        else
-        {
-            Debug.LogError("BannerAd 컴포넌트가 할당되지 않았습니다.");
-        }
+        //}
+        //else
+        //{
+        //    Debug.LogError("BannerAd 컴포넌트가 할당되지 않았습니다.");
+        //}
+        interstitialAd.LoadAd();
     }
 
     public void Request()
@@ -126,9 +127,9 @@ public class UnityAdsManager : MonoBehaviour
 
     public void GameOver()
     {
-        interstitialAd.LoadAd();
-
-        StartCoroutine(ShowInterstitialAdWithDelay(1.0f));
+        //interstitialAd.LoadAd();
+        //StartCoroutine(ShowInterstitialAdWithDelay(1.0f));
+        interstitialAd.ShowAdOnGameOver();
     }
     private IEnumerator ShowInterstitialAdWithDelay(float delay)
     {
