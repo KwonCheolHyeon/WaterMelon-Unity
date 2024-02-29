@@ -331,12 +331,12 @@ public class SpaceTongsMoveScript : MonoBehaviour
 
             targetObject.transform.position = hitPoint;
 
-            SetLineRendererGradientAtPoint(hit.distance / rayLength);
+            //SetLineRendererGradientAtPoint(hit.distance / rayLength);
             lineRenderer.SetPosition(1, hit.point);
         }
         else
         {
-            ResetLineRendererGradient();
+            //ResetLineRendererGradient();
             lineRenderer.SetPosition(1, start + direction * rayLength);
         }
     }
