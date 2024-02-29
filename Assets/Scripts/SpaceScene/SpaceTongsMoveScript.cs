@@ -178,7 +178,7 @@ public class SpaceTongsMoveScript : MonoBehaviour
         }
         else
         {
-            
+            //SpaceGameManager.Instance.GameOver();
         }
     }
 
